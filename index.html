@@ -497,7 +497,7 @@ for(let i = 0; i < 220; i++){
   const s = document.createElement('div');
   s.className = 'star';
   const sz = Math.random() * 2.5 + 0.4;
-  s.style.cssText = left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;--d:${Math.random()*5+2}s;--o:${Math.random()*.65+.1};animation-delay:${Math.random()*7}s;;
+  s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;--d:${Math.random()*5+2}s;--o:${Math.random()*.65+.1};animation-delay:${Math.random()*7}s;`;
   sc.appendChild(s);
 }
 
@@ -570,7 +570,7 @@ function joinWaitlist(){
     // Generate referral code
     const code = 'TRIBE' + Math.floor(1000 + Math.random() * 9000);
     document.getElementById('ref-code').textContent = code;
-    document.getElementById('position-badge').textContent = 🏆 Waitlist Position #${position.toLocaleString()};
+    document.getElementById('position-badge').textContent = `🏆 Waitlist Position #${position.toLocaleString()}`;
 
     // Show success
     document.getElementById('form-section').style.display = 'none';
@@ -584,10 +584,10 @@ function joinWaitlist(){
 // ── SHARE REFERRAL ──
 function shareReferral(){
   const code = document.getElementById('ref-code').textContent;
-  const text = I just joined the Million Tribe waitlist! $1/month for a chance to win $1,000,000 every month 🏆 Join using my referral code ${code} and we both move up the list → milliontribe.com;
+  const text = `I just joined the Million Tribe waitlist! $1/month for a chance to win $1,000,000 every month 🏆 Join using my referral code ${code} and we both move up the list → milliontribe.com`;
 
   if(navigator.share){
-    navigator.share({ title: 'Million Tribe', text, url: https://milliontribe.com?ref=${code} });
+    navigator.share({ title: 'Million Tribe', text, url: `https://milliontribe.com?ref=${code}` });
   } else {
     navigator.clipboard.writeText(text).then(() => {
       const btn = document.querySelector('.success-wrap .form-btn');
@@ -616,7 +616,7 @@ const tickerEl = document.getElementById('ticker');
 [...tickerItems, ...tickerItems].forEach(item => {
   const div = document.createElement('div');
   div.className = 'ticker-item';
-  div.innerHTML = <span>${item.icon}</span><span>${item.text}</span>;
+  div.innerHTML = `<span>${item.icon}</span><span>${item.text}</span>`;
   tickerEl.appendChild(div);
 });
 </script>

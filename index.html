@@ -247,7 +247,7 @@ nav a:hover { color: var(--gold); }
   border: 2px solid var(--gold); border-radius: 28px; padding: 56px;
   max-width: 520px; margin: 0 auto; text-align: center; position: relative; overflow: hidden;
 }
-.pricing-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(201,168,76,.04) 0%, transparent 60%); animation: rotateBg 20s linear infinite; }
+.pricing-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(201,168,76,.04) 0%, transparent 60%); animation: rotateBg 20s linear infinite; pointer-events: none; z-index: 0; }
 @keyframes rotateBg { from{transform:rotate(0)} to{transform:rotate(360deg)} }
 .p-badge { background: var(--gold); color: var(--navy); padding: 5px 18px; border-radius: 50px; font-size: .72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; display: inline-block; margin-bottom: 26px; position: relative; z-index: 1; }
 .p-price { font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 900; color: var(--gold); line-height: 1; position: relative; z-index: 1; }
@@ -602,7 +602,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,
       <li><span class="p-check">✦</span> iOS & Android mobile app</li>
       <li><span class="p-check">✦</span> No purchase necessary alternative</li>
     </ul>
-    <button class="btn-primary" style="width:100%;font-size:1.05rem;" onclick="window.location.href='waitlist.html'">Join Million Tribe Now →</button>
+    <button class="btn-primary" style="width:100%;font-size:1.05rem;position:relative;z-index:2;" onclick="window.location.href='waitlist.html'">Join Million Tribe Now →</button>
     <p style="color:var(--gray2);font-size:.75rem;margin-top:14px;position:relative;z-index:1;">🔒 Stripe secured · SSL encrypted · Cancel anytime · TRIBE tokens are utility tokens, not investments</p>
   </div>
 </section>
@@ -611,17 +611,17 @@ footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,
 <footer>
   <div class="footer-logo">Million Tribe</div>
   <div class="footer-links">
-    <a href="#">How It Works</a>
-    <a href="#">TRIBE Token</a>
-    <a href="#">Badges</a>
-    <a href="#">Winners</a>
-    <a href="#">Community</a>
-    <a href="#">Privacy Policy</a>
-    <a href="#">Terms of Service</a>
-    <a href="#">Token Terms</a>
-    <a href="#">Official Rules</a>
-    <a href="#">No Purchase Necessary</a>
-    <a href="#">Contact</a>
+    <a href="#how">How It Works</a>
+    <a href="#token">TRIBE Token</a>
+    <a href="#badges">Badges</a>
+    <a href="#winners">Winners</a>
+    <a href="#community">Community</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="token-terms.html">Token Terms</a>
+    <a href="rules.html">Official Rules</a>
+    <a href="no-purchase.html">No Purchase Necessary</a>
+    <a href="mailto:support@milliontribe.com">Contact</a>
   </div>
   <div class="footer-legal">
     Million Tribe is a sweepstakes platform. No purchase necessary to enter or win. A purchase does not improve your chances of winning. Open to legal residents of eligible countries, 18+. See Official Rules for complete details. Void where prohibited. Prize funded and insured by Million Tribe Inc. TRIBE Tokens are utility tokens for use within the Million Tribe platform only. TRIBE Tokens are not securities, investments, or financial instruments. Token values are not guaranteed. © 2026 Million Tribe Inc. All rights reserved.
@@ -692,8 +692,10 @@ obs.observe(document.querySelector('.stats-bar'));
 // SMOOTH SCROLL
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
+    const href = a.getAttribute('href');
+    if(!href || href === '#') return; // skip empty anchors
     e.preventDefault();
-    const el=document.querySelector(a.getAttribute('href'));
+    const el=document.querySelector(href);
     if(el)el.scrollIntoView({behavior:'smooth'});
   });
 });

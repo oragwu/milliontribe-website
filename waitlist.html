@@ -366,6 +366,22 @@ h1 .gold{
       Launching January 1, 2027 · <span style="color:var(--white)">225 TRIBE Welcome Bonus</span>
     </div>
 
+    <!-- REFERRAL WELCOME BANNER — shows only when arriving via referral link -->
+    <div id="ref-banner" style="display:none;width:100%;max-width:520px;margin-bottom:20px;
+      background:linear-gradient(135deg,rgba(72,187,120,.12),rgba(72,187,120,.05));
+      border:1px solid rgba(72,187,120,.3);border-radius:16px;padding:16px 20px;text-align:center;
+      animation:fadeUp .6s ease both;">
+      <div style="font-size:1.4rem;margin-bottom:6px;">🎁</div>
+      <div style="font-weight:700;color:var(--green);font-size:.95rem;margin-bottom:4px;">You were invited to Million Tribe!</div>
+      <div id="ref-banner-text" style="color:var(--gray);font-size:.82rem;line-height:1.6;">
+        Your friend shared their referral link with you. Join below and you both earn bonus TRIBE tokens!
+      </div>
+      <div style="margin-top:10px;background:rgba(72,187,120,.1);border-radius:8px;padding:8px 12px;
+        font-size:.78rem;color:var(--green);font-weight:700;">
+        🪙 You get 250 TRIBE tokens on launch day (25 bonus for joining via referral)
+      </div>
+    </div>
+
     <h1>
       One Dollar.<br>
       <span class="gold">One Million.</span><br>
@@ -397,8 +413,11 @@ h1 .gold{
     <!-- FORM -->
     <div class="waitlist-form" id="form-section">
       <div class="form-row">
-        <input class="form-input" type="text" placeholder="Your Name" id="inp-name" autocomplete="name">
-        <input class="form-input" type="email" placeholder="Your Email" id="inp-email" autocomplete="email" onkeydown="if(event.key==='Enter')handleJoin()">
+        <input class="form-input" type="text" placeholder="First & Last Name" id="inp-name"
+          autocomplete="name" style="flex:1;min-width:180px;">
+        <input class="form-input" type="email" placeholder="Email Address" id="inp-email"
+          autocomplete="email" style="flex:1;min-width:180px;"
+          onkeydown="if(event.key==='Enter')handleJoin()">
       </div>
       <div style="margin-top:10px;">
         <button class="form-btn" style="width:100%;font-size:1rem;" onclick="handleJoin()" id="join-btn">
@@ -406,7 +425,7 @@ h1 .gold{
         </button>
       </div>
       <div class="form-error" id="form-error"></div>
-      <p class="form-note">🔒 No spam. No credit card. No obligation. Cancel anytime after launch.</p>
+      <p class="form-note" id="form-note-text">🔒 No spam. No credit card. No obligation. Cancel anytime after launch.</p>
     </div>
 
     <!-- SUCCESS -->
@@ -684,6 +703,25 @@ function getRefLink(code) {
 // ══════════════════════════════════
 const urlParams = new URLSearchParams(window.location.search);
 const refFromUrl = urlParams.get('ref');
+
+// Show referral banner if arrived via referral link
+if(refFromUrl) {
+  document.getElementById('ref-banner').style.display = 'block';
+  // Try to look up referrer name for personalized message
+  if(isConfigured) {
+    DB.select('waitlist', `ref_code=eq.${encodeURIComponent(refFromUrl)}&select=name&limit=1`)
+      .then(({ data }) => {
+        if(data && data.length > 0) {
+          const firstName = data[0].name?.split(' ')[0] || 'A friend';
+          document.getElementById('ref-banner-text').textContent =
+            `${firstName} invited you to Million Tribe! Join below and you both earn bonus TRIBE tokens.`;
+        }
+      }).catch(()=>{});
+  }
+  // Update form note
+  document.getElementById('form-note-text').innerHTML =
+    '🎁 Joining via referral link — you get <strong style="color:var(--green);">250 TRIBE tokens</strong> instead of 225!';
+}
 
 // ══════════════════════════════════
 // WAITLIST COUNT

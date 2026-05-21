@@ -9,8 +9,7 @@
 <meta property="og:description" content="Join the waitlist and earn 225 TRIBE tokens on Day 1. Refer friends to move up the list.">
 <meta property="og:url" content="https://milliontribe.com/waitlist">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<!-- Supabase CDN -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- No external CDN needed - uses fetch() API directly -->
 <style>
 :root {
   --navy:   #040C1E;
@@ -581,13 +580,67 @@ const SUPABASE_URL = 'https://mkcrexrulbwyyewvkmqj.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rY3JleHJ1bGJ3eXlld3ZrbXFqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzODEyNzAsImV4cCI6MjA5NDk1NzI3MH0.UvAe1GHSS_JNusJ2AICOoQCVb-Xf2J4k-3Si3-9IrrE';
 const SITE_URL = 'https://milliontribe.com';
 
-// Initialize Supabase
-let supabase = null;
-try {
-  if (SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// ══════════════════════════════════
+// SUPABASE REST API — No CDN needed
+// Works on ALL browsers including Brave
+// ══════════════════════════════════
+const DB = {
+  headers: {
+    'Content-Type': 'application/json',
+    'apikey': SUPABASE_ANON_KEY,
+    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+    'Prefer': 'return=representation'
+  },
+
+  async select(table, query='') {
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?${query}`, {
+        method: 'GET', headers: this.headers
+      });
+      if(!res.ok) throw new Error(await res.text());
+      return { data: await res.json(), error: null };
+    } catch(e) { return { data: null, error: e.message }; }
+  },
+
+  async insert(table, body) {
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+        method: 'POST',
+        headers: this.headers,
+        body: JSON.stringify(body)
+      });
+      if(!res.ok) {
+        const err = await res.text();
+        return { data: null, error: err };
+      }
+      return { data: await res.json(), error: null };
+    } catch(e) { return { data: null, error: e.message }; }
+  },
+
+  async count(table) {
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?select=id`, {
+        method: 'GET',
+        headers: { ...this.headers, 'Prefer': 'count=exact', 'Range': '0-0' }
+      });
+      const range = res.headers.get('content-range') || '0/0';
+      return parseInt(range.split('/')[1]) || 0;
+    } catch(e) { return 0; }
+  },
+
+  async rpc(fn, params) {
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${fn}`, {
+        method: 'POST',
+        headers: this.headers,
+        body: JSON.stringify(params)
+      });
+      return { error: res.ok ? null : await res.text() };
+    } catch(e) { return { error: e.message }; }
   }
-} catch(e) {}
+};
+
+const isConfigured = SUPABASE_URL !== 'YOUR_SUPABASE_URL';
 
 // ══════════════════════════════════
 // STARS
@@ -638,13 +691,13 @@ const refFromUrl = urlParams.get('ref');
 let currentCount = 12847;
 
 async function loadCount() {
-  if(!supabase) {
+  if(!isConfigured) {
     animCount(document.getElementById('wl-num'), currentCount);
     return;
   }
   try {
-    const { count } = await supabase.from('waitlist').select('*', { count:'exact', head:true });
-    currentCount = (count || 0) + 12000;
+    const total = await DB.count('waitlist');
+    currentCount = total + 12000;
     animCount(document.getElementById('wl-num'), currentCount);
   } catch(e) {
     animCount(document.getElementById('wl-num'), currentCount);
@@ -694,55 +747,66 @@ async function handleJoin() {
 
   const refCode = genRefCode();
   const position = currentCount + 1;
-  const tribeTokens = 225 + (refFromUrl ? 25 : 0); // Bonus if came via referral
+  const tribeTokens = 225 + (refFromUrl ? 25 : 0);
 
-  if(supabase) {
+  if(isConfigured) {
     try {
       // Check if already registered
-      const { data: existing } = await supabase
-        .from('waitlist')
-        .select('ref_code, position, ref_count, tribe_tokens, name')
-        .eq('email', email)
-        .single();
+      const { data: existing } = await DB.select('waitlist',
+        `email=eq.${encodeURIComponent(email)}&select=ref_code,position,ref_count,tribe_tokens,name&limit=1`
+      );
 
-      if(existing) {
-        // Already registered — show their info
-        showSuccess(existing.name || name, email, existing.ref_code,
-                    existing.position || position, existing.tribe_tokens || 225,
-                    existing.ref_count || 0);
-        btn.textContent = 'Join the Waitlist → Get My Spot';
+      if(existing && existing.length > 0) {
+        const ex = existing[0];
+        showSuccess(ex.name || name, email, ex.ref_code,
+                    ex.position || position, ex.tribe_tokens || 225,
+                    ex.ref_count || 0);
+        btn.textContent = 'Join the Waitlist — Get My Spot →';
         btn.disabled = false;
         return;
       }
 
       // Insert new signup
-      const { error } = await supabase.from('waitlist').insert({
+      const { data, error } = await DB.insert('waitlist', {
         name, email,
         ref_code: refCode,
         referred_by: refFromUrl || null,
         ref_count: 0,
         tribe_tokens: tribeTokens,
-        position,
       });
 
-      if(error) throw error;
-
-      // Update referrer's count if applicable
-      if(refFromUrl) {
-        await supabase.rpc('increment_ref_count', { ref_code_param: refFromUrl })
-          .catch(()=>{}); // Silent fail if RPC not set up
+      if(error) {
+        // Check if duplicate email error
+        if(error.includes('duplicate') || error.includes('unique')) {
+          showError('This email is already on the waitlist! Check your position in the "My Position" tab.');
+        } else {
+          console.error('Insert error:', error);
+          showError('Something went wrong. Please try again.');
+        }
+        btn.textContent = 'Join the Waitlist — Get My Spot →';
+        btn.disabled = false;
+        return;
       }
 
-      showSuccess(name, email, refCode, position, tribeTokens, 0);
+      // Update referrer count if applicable
+      if(refFromUrl) {
+        await DB.rpc('increment_ref_count', { ref_code_param: refFromUrl });
+      }
+
+      const actualPosition = data && data[0]?.position || position;
+      showSuccess(name, email, refCode, actualPosition, tribeTokens, 0);
       currentCount++;
       document.getElementById('wl-num').textContent = currentCount.toLocaleString();
 
     } catch(e) {
-      // Fallback to demo mode if Supabase not configured
-      showSuccess(name, email, refCode, position, tribeTokens, 0);
+      console.error('Join error:', e);
+      showError('Something went wrong. Please try again.');
+      btn.textContent = 'Join the Waitlist — Get My Spot →';
+      btn.disabled = false;
+      return;
     }
   } else {
-    // Demo mode — no Supabase configured yet
+    // Demo mode — Supabase not configured
     showSuccess(name, email, refCode, position, tribeTokens, 0);
   }
 
@@ -811,13 +875,11 @@ function shareXfromCard() {
 // LEADERBOARD
 // ══════════════════════════════════
 async function loadLeaderboard() {
-  // Days to launch
   const launch = new Date('2027-01-01');
   const days = Math.ceil((launch - new Date()) / 86400000);
   document.getElementById('days-left').textContent = days;
 
-  if(!supabase) {
-    // Demo data
+  if(!isConfigured) {
     renderLeaderboard([
       {name:'James T.', ref_count:47, tribe_tokens:4925, created_at:new Date()},
       {name:'Lisa M.', ref_count:38, tribe_tokens:4025, created_at:new Date()},
@@ -829,21 +891,15 @@ async function loadLeaderboard() {
   }
 
   try {
-    const { data, count } = await supabase
-      .from('waitlist')
-      .select('name, ref_count, tribe_tokens, created_at', { count:'exact' })
-      .order('ref_count', { ascending:false })
-      .limit(20);
-
-    const { data: refData } = await supabase
-      .from('waitlist')
-      .select('ref_count')
-      .gt('ref_count', 0);
-
-    const totalRefs = refData?.reduce((s,r)=>s+(r.ref_count||0),0) || 0;
-    renderLeaderboard(data||[], (count||0)+12000, totalRefs);
+    const { data } = await DB.select('waitlist',
+      'select=name,ref_count,tribe_tokens,created_at&order=ref_count.desc&limit=20'
+    );
+    const total = await DB.count('waitlist');
+    const totalRefs = (data||[]).reduce((s,r)=>s+(r.ref_count||0),0);
+    renderLeaderboard(data||[], total+12000, totalRefs);
   } catch(e) {
-    document.getElementById('lb-table').innerHTML = '<div style="padding:30px;text-align:center;color:var(--gray);">Unable to load leaderboard.</div>';
+    document.getElementById('lb-table').innerHTML =
+      '<div style="padding:30px;text-align:center;color:var(--gray);">Unable to load leaderboard.</div>';
   }
 }
 
@@ -888,37 +944,36 @@ async function lookupPosition() {
   errEl.style.display='none';
 
   if(!email || !email.includes('@')) {
-    errEl.textContent='Please enter a valid email'; errEl.style.display='block'; return;
+    errEl.textContent='Please enter a valid email';
+    errEl.style.display='block'; return;
   }
 
   const btn = document.getElementById('lookup-btn');
   btn.textContent = 'Looking...'; btn.disabled = true;
 
-  if(!supabase) {
-    // Demo mode
+  if(!isConfigured) {
     setTimeout(()=>{
-      showPosCard({name:'Demo User', position:4281, ref_count:3, tribe_tokens:525, ref_code:'TRIBE12345', created_at:new Date()});
+      showPosCard({name:'Demo User', position:4281, ref_count:3,
+                   tribe_tokens:525, ref_code:'TRIBE12345', created_at:new Date()});
       btn.textContent='Find Me →'; btn.disabled=false;
     },800);
     return;
   }
 
   try {
-    const { data, error } = await supabase
-      .from('waitlist')
-      .select('name, position, ref_count, tribe_tokens, ref_code, created_at')
-      .eq('email', email)
-      .single();
+    const { data, error } = await DB.select('waitlist',
+      `email=eq.${encodeURIComponent(email)}&select=name,position,ref_count,tribe_tokens,ref_code,created_at&limit=1`
+    );
 
-    if(error || !data) {
-      errEl.textContent="Email not found. Join the waitlist above!";
-      errEl.style.display='block';
+    if(error || !data || data.length === 0) {
+      errEl.textContent = "Email not found. Join the waitlist above!";
+      errEl.style.display = 'block';
     } else {
-      showPosCard(data);
+      showPosCard(data[0]);
     }
   } catch(e) {
-    errEl.textContent="Something went wrong. Please try again.";
-    errEl.style.display='block';
+    errEl.textContent = "Something went wrong. Please try again.";
+    errEl.style.display = 'block';
   }
 
   btn.textContent='Find Me →'; btn.disabled=false;

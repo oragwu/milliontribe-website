@@ -177,11 +177,14 @@ h1 .gold{
 
 /* SUCCESS CARD */
 .success-card{
-  display:none;
+  display:none !important;
   width:100%;max-width:520px;
   background:rgba(11,26,56,.9);border:1px solid rgba(201,168,76,.25);
   border-radius:22px;padding:32px;text-align:center;
   animation:fadeUp .5s ease both;
+}
+.success-card.visible{
+  display:block !important;
 }
 .success-icon{font-size:3.5rem;margin-bottom:14px;}
 .success-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--gold);margin-bottom:8px;}
@@ -702,6 +705,24 @@ function getRefLink(code) {
 const urlParams = new URLSearchParams(window.location.search);
 const refFromUrl = urlParams.get('ref');
 
+// ══════════════════════════════════
+// ALWAYS RESET FORM ON PAGE LOAD
+// This ensures the form always shows
+// correctly — especially via referral links
+// ══════════════════════════════════
+window.addEventListener('load', () => {
+  // Always show the form — never the success card on fresh load
+  const formSection = document.getElementById('form-section');
+  const successCard = document.getElementById('success-card');
+  if(formSection) formSection.style.display = 'block';
+  if(successCard) successCard.classList.remove('visible');
+  // Clear any leftover input values
+  const nameInput = document.getElementById('inp-name');
+  const emailInput = document.getElementById('inp-email');
+  if(nameInput) nameInput.value = '';
+  if(emailInput) emailInput.value = '';
+});
+
 // Show referral banner if arrived via referral link
 if(refFromUrl) {
   document.getElementById('ref-banner').style.display = 'block';
@@ -861,7 +882,7 @@ function showSuccess(name, email, refCode, position, tokens, refCount) {
   userRefLink = getRefLink(refCode);
 
   document.getElementById('form-section').style.display = 'none';
-  document.getElementById('success-card').style.display = 'block';
+  document.getElementById('success-card').classList.add('visible');
   document.getElementById('pos-pill').textContent = `🏆 Waitlist Position #${position.toLocaleString()}`;
   document.getElementById('ref-link-display').textContent = userRefLink;
 

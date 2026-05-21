@@ -149,14 +149,15 @@ h1 .gold{
   width:100%;max-width:520px;
   animation:fadeUp .8s ease .4s both;
 }
-.form-row{display:flex;gap:10px;flex-wrap:wrap;}
+.form-row{display:flex;flex-direction:column;gap:10px;width:100%;}
 .form-input{
-  flex:1;min-width:200px;
+  width:100%;
   background:rgba(255,255,255,.06);
   border:1px solid rgba(255,255,255,.12);
   border-radius:14px;padding:15px 20px;
   color:var(--white);font-size:.95rem;font-family:'DM Sans',sans-serif;
   outline:none;transition:border-color .3s;
+  box-sizing:border-box;
 }
 .form-input::placeholder{color:var(--gray2);}
 .form-input:focus{border-color:var(--gold);}
@@ -328,7 +329,6 @@ h1 .gold{
 
 @media(max-width:600px){
   nav{padding:12px 16px;}
-  .form-row{flex-direction:column;}
   .form-btn{width:100%;}
   .hero{padding:50px 16px 80px;}
   .lb-wrap,.pos-wrap{padding:24px 16px;}
@@ -414,12 +414,10 @@ h1 .gold{
     <div class="waitlist-form" id="form-section">
       <div class="form-row">
         <input class="form-input" type="text" placeholder="First & Last Name" id="inp-name"
-          autocomplete="name" style="flex:1;min-width:180px;">
+          autocomplete="name">
         <input class="form-input" type="email" placeholder="Email Address" id="inp-email"
-          autocomplete="email" style="flex:1;min-width:180px;"
+          autocomplete="email"
           onkeydown="if(event.key==='Enter')handleJoin()">
-      </div>
-      <div style="margin-top:10px;">
         <button class="form-btn" style="width:100%;font-size:1rem;" onclick="handleJoin()" id="join-btn">
           Join the Waitlist — Get My Spot →
         </button>

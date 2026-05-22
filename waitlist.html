@@ -326,16 +326,25 @@ async function doJoin(){
   const pos=memberCount+1;
   if(isReady){
     const{data:existing}=await DB.get('waitlist',`email=eq.${encodeURIComponent(email)}&select=name,ref_code,position,tribe_tokens&limit=1`);
-    if(existing&&existing.length>0){const ex=existing[0];showSuccess(ex.name||name,ex.ref_code,ex.position||pos,ex.tribe_tokens||225);btn.textContent='Join the Waitlist — Get My Spot →';btn.disabled=false;return;}
+    if(existing&&existing.length>0){
+      const ex=existing[0];
+      // Still send email even for existing users
+      await triggerEmail(ex.name||name, email, ex.ref_code, ex.position||pos, ex.tribe_tokens||225, refFromUrl);
+      showSuccess(ex.name||name,ex.ref_code,ex.position||pos,ex.tribe_tokens||225);
+      btn.textContent='Join the Waitlist — Get My Spot →';btn.disabled=false;return;
+    }
     const{data,ok,status}=await DB.post('waitlist',{name,email,ref_code:code,referred_by:refFromUrl||null,ref_count:0,tribe_tokens:tokens});
     if(!ok){errEl.textContent=(status===409||JSON.stringify(data).includes('duplicate'))?'This email is already on the waitlist. Check "My Position" tab.':'Something went wrong. Please try again.';errEl.style.display='block';btn.textContent='Join the Waitlist — Get My Spot →';btn.disabled=false;return;}
     if(refFromUrl){const{data:ref}=await DB.get('waitlist',`ref_code=eq.${encodeURIComponent(refFromUrl)}&select=ref_count,tribe_tokens&limit=1`);if(ref&&ref.length>0){await DB.patch('waitlist',`ref_code=eq.${encodeURIComponent(refFromUrl)}`,{ref_count:(ref[0].ref_count||0)+1,tribe_tokens:(ref[0].tribe_tokens||225)+100});}}
     const actualPos = (data&&data[0]?.position)||pos;
-    // Trigger welcome email directly
     await triggerEmail(name, email, code, actualPos, tokens, refFromUrl);
     showSuccess(name,code,actualPos,tokens);
     memberCount++;document.getElementById('wl-num').textContent=memberCount.toLocaleString();
-  }else{showSuccess(name,code,pos,tokens);}
+  }else{
+    // Demo mode — still trigger email
+    await triggerEmail(name, email, code, pos, tokens, refFromUrl);
+    showSuccess(name,code,pos,tokens);
+  }
   btn.textContent='Join the Waitlist — Get My Spot →';btn.disabled=false;
 }
 

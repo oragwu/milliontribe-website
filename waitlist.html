@@ -327,10 +327,36 @@ async function doJoin(){
     const{data,ok,status}=await DB.post('waitlist',{name,email,ref_code:code,referred_by:refFromUrl||null,ref_count:0,tribe_tokens:tokens});
     if(!ok){errEl.textContent=(status===409||JSON.stringify(data).includes('duplicate'))?'This email is already on the waitlist. Check "My Position" tab.':'Something went wrong. Please try again.';errEl.style.display='block';btn.textContent='Join the Waitlist — Get My Spot →';btn.disabled=false;return;}
     if(refFromUrl){const{data:ref}=await DB.get('waitlist',`ref_code=eq.${encodeURIComponent(refFromUrl)}&select=ref_count,tribe_tokens&limit=1`);if(ref&&ref.length>0){await DB.patch('waitlist',`ref_code=eq.${encodeURIComponent(refFromUrl)}`,{ref_count:(ref[0].ref_count||0)+1,tribe_tokens:(ref[0].tribe_tokens||225)+100});}}
-    showSuccess(name,code,(data&&data[0]?.position)||pos,tokens);
+    const actualPos = (data&&data[0]?.position)||pos;
+    // Trigger welcome email directly
+    await triggerEmail(name, email, code, actualPos, tokens, refFromUrl);
+    showSuccess(name,code,actualPos,tokens);
     memberCount++;document.getElementById('wl-num').textContent=memberCount.toLocaleString();
   }else{showSuccess(name,code,pos,tokens);}
   btn.textContent='Join the Waitlist — Get My Spot →';btn.disabled=false;
+}
+
+// ══════════════════════════════════════
+// TRIGGER EMAIL — calls edge function directly
+// ══════════════════════════════════════
+async function triggerEmail(name, email, refCode, position, tokens, referredBy) {
+  try {
+    await fetch('https://mkcrexrulbwyyewvkmqj.supabase.co/functions/v1/send-welcome-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rY3JleHJ1bGJ3eXlld3ZrbXFqIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3OTM4MTI3MCwiZXhwIjoyMDk0OTU3MjcwfQ.Y1FqaWLROhZUoZ6xmPzJPPMT1apUer283d3v5KO-yZw'
+      },
+      body: JSON.stringify({
+        type: 'INSERT',
+        record: { name, email, ref_code: refCode, position, tribe_tokens: tokens, referred_by: referredBy || null }
+      })
+    });
+    console.log('Email triggered successfully');
+  } catch(e) {
+    console.log('Email trigger error:', e);
+    // Silent fail — signup still works even if email fails
+  }
 }
 
 function showSuccess(name,code,position,tokens){

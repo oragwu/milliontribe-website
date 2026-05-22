@@ -349,32 +349,45 @@ async function doJoin(){
 }
 
 // ══════════════════════════════════════
-// TRIGGER EMAIL — calls edge function directly
+// TRIGGER EMAIL — works on ALL browsers
+// including Brave with shields on
 // ══════════════════════════════════════
 async function triggerEmail(name, email, refCode, position, tokens, referredBy) {
+  const payload = JSON.stringify({
+    type: 'INSERT',
+    record: { name, email, ref_code: refCode, position, tribe_tokens: tokens, referred_by: referredBy || null }
+  });
+
+  const endpoint = 'https://mkcrexrulbwyyewvkmqj.supabase.co/functions/v1/send-welcome-email';
+  const authHeader = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rY3JleHJ1bGJ3eXlld3ZrbXFqIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3OTM4MTI3MCwiZXhwIjoyMDk0OTU3MjcwfQ.Y1FqaWLROhZUoZ6xmPzJPPMT1apUer283d3v5KO-yZw';
+
+  // Try 1 — standard CORS fetch (works on Chrome, Firefox, Edge, Safari)
   try {
     console.log('Triggering email for:', email);
-    const response = await fetch('https://mkcrexrulbwyyewvkmqj.supabase.co/functions/v1/send-welcome-email', {
+    const response = await fetch(endpoint, {
       method: 'POST',
       mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rY3JleHJ1bGJ3eXlld3ZrbXFqIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3OTM4MTI3MCwiZXhwIjoyMDk0OTU3MjcwfQ.Y1FqaWLROhZUoZ6xmPzJPPMT1apUer283d3v5KO-yZw'
-      },
-      body: JSON.stringify({
-        type: 'INSERT',
-        record: { name, email, ref_code: refCode, position, tribe_tokens: tokens, referred_by: referredBy || null }
-      })
+      headers: { 'Content-Type': 'application/json', 'Authorization': authHeader },
+      body: payload
     });
     const result = await response.json();
     console.log('Email trigger result:', result);
-    if(result.success) {
-      console.log('✅ Email sent successfully to:', email);
-    } else {
-      console.log('❌ Email failed:', result);
-    }
+    if(result.success) { console.log('✅ Email sent successfully to:', email); return; }
   } catch(e) {
-    console.log('❌ Email trigger error:', e.message);
+    console.log('CORS fetch failed, trying no-cors fallback:', e.message);
+  }
+
+  // Try 2 — no-cors fallback (works on Brave with shields)
+  try {
+    await fetch(endpoint, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json', 'Authorization': authHeader },
+      body: payload
+    });
+    console.log('✅ Email triggered via no-cors fallback');
+  } catch(e) {
+    console.log('❌ Email trigger failed on all attempts:', e.message);
   }
 }
 

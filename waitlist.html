@@ -344,8 +344,10 @@ async function doJoin(){
 // ══════════════════════════════════════
 async function triggerEmail(name, email, refCode, position, tokens, referredBy) {
   try {
-    await fetch('https://mkcrexrulbwyyewvkmqj.supabase.co/functions/v1/send-welcome-email', {
+    console.log('Triggering email for:', email);
+    const response = await fetch('https://mkcrexrulbwyyewvkmqj.supabase.co/functions/v1/send-welcome-email', {
       method: 'POST',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rY3JleHJ1bGJ3eXlld3ZrbXFqIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3OTM4MTI3MCwiZXhwIjoyMDk0OTU3MjcwfQ.Y1FqaWLROhZUoZ6xmPzJPPMT1apUer283d3v5KO-yZw'
@@ -355,10 +357,15 @@ async function triggerEmail(name, email, refCode, position, tokens, referredBy) 
         record: { name, email, ref_code: refCode, position, tribe_tokens: tokens, referred_by: referredBy || null }
       })
     });
-    console.log('Email triggered successfully');
+    const result = await response.json();
+    console.log('Email trigger result:', result);
+    if(result.success) {
+      console.log('✅ Email sent successfully to:', email);
+    } else {
+      console.log('❌ Email failed:', result);
+    }
   } catch(e) {
-    console.log('Email trigger error:', e);
-    // Silent fail — signup still works even if email fails
+    console.log('❌ Email trigger error:', e.message);
   }
 }
 

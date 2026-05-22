@@ -3,702 +3,406 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Million Tribe — $1 a Month. $1,000,000 to Win. Join the Tribe.</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Million Tribe — Join the Waitlist</title>
+<meta name="description" content="Join the Million Tribe waitlist. $1/month. $1,000,000 to win every month. Get your referral link and earn 225 TRIBE tokens on launch day.">
+<meta property="og:title" content="Million Tribe — $1 a Month. $1,000,000 to Win.">
+<meta property="og:description" content="Join the waitlist. Refer friends. Earn 225 TRIBE tokens on Day 1.">
+<meta property="og:url" content="https://milliontribe.com/waitlist.html">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --navy:    #040C1E;
-  --navy2:   #081428;
-  --navy3:   #0C1E3A;
-  --gold:    #C9A84C;
-  --gold2:   #F0D080;
-  --gold3:   #7A5C1E;
-  --white:   #F5F0E8;
-  --gray:    #8A99B3;
-  --gray2:   #4B5E7A;
-  --green:   #48BB78;
-  --red:     #E84040;
-  --purple:  #7C5CFC;
-  --blue:    #3B82F6;
-  --tribe:   #C9A84C;
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { background: var(--navy); color: var(--white); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
-
-/* ── STARS ── */
-#stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-.star { position: absolute; border-radius: 50%; background: white; animation: twinkle var(--d) ease-in-out infinite alternate; opacity: 0; }
-@keyframes twinkle { to { opacity: var(--o); transform: scale(1.5); } }
-
-/* ── NAV ── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 18px 60px;
-  background: linear-gradient(to bottom, rgba(4,12,30,0.97), transparent);
-  backdrop-filter: blur(6px);
-}
-.logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--gold); letter-spacing: 0.5px; }
-.logo em { color: var(--white); font-style: normal; }
-nav ul { display: flex; gap: 36px; list-style: none; }
-nav a { color: var(--gray); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color .3s; }
-nav a:hover { color: var(--gold); }
-.nav-cta { background: var(--gold); color: var(--navy) !important; padding: 9px 22px; border-radius: 50px; font-weight: 700 !important; }
-.nav-cta:hover { background: var(--gold2) !important; }
-
-/* ── HERO ── */
-.hero {
-  position: relative; min-height: 100vh;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; padding: 130px 40px 80px; z-index: 1;
-}
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(201,168,76,.12); border: 1px solid rgba(201,168,76,.35);
-  color: var(--gold); padding: 7px 18px; border-radius: 50px;
-  font-size: .78rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-  margin-bottom: 28px; animation: fadeUp 1s ease both;
-}
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.8rem, 7.5vw, 6.5rem);
-  font-weight: 900; line-height: 1.06; margin-bottom: 28px;
-  animation: fadeUp 1s ease .2s both;
-}
-.hero h1 .gold { color: var(--gold); }
-.hero h1 .outline { -webkit-text-stroke: 2px var(--gold); color: transparent; }
-.hero-sub { font-size: 1.1rem; color: var(--gray); max-width: 540px; line-height: 1.75; margin-bottom: 44px; animation: fadeUp 1s ease .4s both; }
-.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; animation: fadeUp 1s ease .6s both; }
-.btn-primary {
-  background: linear-gradient(135deg, var(--gold), var(--gold2));
-  color: var(--navy); padding: 16px 40px; border-radius: 50px; font-size: .95rem;
-  font-weight: 700; border: none; cursor: pointer; text-decoration: none;
-  display: inline-block; box-shadow: 0 8px 30px rgba(201,168,76,.35);
-  transition: transform .2s, box-shadow .2s; font-family: 'DM Sans', sans-serif;
-}
-.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(201,168,76,.55); }
-.btn-outline {
-  background: transparent; color: var(--white); padding: 16px 40px; border-radius: 50px;
-  font-size: .95rem; font-weight: 600; border: 1px solid rgba(255,255,255,.18);
-  cursor: pointer; text-decoration: none; display: inline-block;
-  transition: border-color .3s, background .3s; font-family: 'DM Sans', sans-serif;
-}
-.btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,.08); }
-.prize-display { margin-top: 64px; animation: fadeUp 1s ease .8s both; }
-.prize-amount {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(4rem, 11vw, 9.5rem); font-weight: 900; line-height: 1;
-  background: linear-gradient(135deg, var(--gold3), var(--gold), var(--gold2), var(--gold));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  animation: pulseGlow 3s ease-in-out infinite;
-}
-@keyframes pulseGlow { 0%,100%{filter:drop-shadow(0 0 30px rgba(201,168,76,.3))} 50%{filter:drop-shadow(0 0 70px rgba(201,168,76,.65))} }
-.prize-label { color: var(--gray); font-size: .8rem; letter-spacing: 3px; text-transform: uppercase; margin-top: 8px; }
-
-/* ── COUNTDOWN ── */
-.countdown-wrap {
-  position: relative; z-index: 1;
-  padding: 70px 40px; text-align: center;
-  background: linear-gradient(to bottom, transparent, rgba(8,20,40,.6), transparent);
-}
-.cd-label { color: var(--gold); font-size: .72rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 28px; }
-.cd-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-.cd-block {
-  background: rgba(255,255,255,.04); border: 1px solid rgba(201,168,76,.2);
-  border-radius: 16px; padding: 26px 36px; min-width: 110px;
-  backdrop-filter: blur(8px);
-}
-.cd-num { font-family: 'Playfair Display', serif; font-size: 3.2rem; font-weight: 900; color: var(--gold); line-height: 1; display: block; }
-.cd-unit { font-size: .65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-top: 6px; display: block; }
-
-/* ── SECTIONS ── */
-.section { position: relative; z-index: 1; padding: 100px 60px; max-width: 1200px; margin: 0 auto; }
-.sec-tag { color: var(--gold); font-size: .72rem; letter-spacing: 3px; text-transform: uppercase; display: block; margin-bottom: 14px; }
-.sec-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 3.2rem); font-weight: 900; line-height: 1.15; margin-bottom: 50px; }
-.sec-title em { color: var(--gold); font-style: normal; }
-
-/* ── CARDS ── */
-.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 20px; }
-.card {
-  background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07);
-  border-radius: 20px; padding: 32px; position: relative; overflow: hidden;
-  transition: border-color .3s, transform .3s;
-}
-.card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  opacity: 0; transition: opacity .3s;
-}
-.card:hover { border-color: rgba(201,168,76,.3); transform: translateY(-4px); }
-.card:hover::before { opacity: 1; }
-.card-num { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; color: rgba(201,168,76,.12); line-height: 1; margin-bottom: 14px; }
-.card-icon { font-size: 2.2rem; margin-bottom: 12px; }
-.card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
-.card-desc { color: var(--gray); line-height: 1.7; font-size: .9rem; }
-
-/* ── TRIBE TOKEN SECTION ── */
-.token-section {
-  background: linear-gradient(135deg, rgba(201,168,76,.06), rgba(201,168,76,.02));
-  border-top: 1px solid rgba(201,168,76,.15);
-  border-bottom: 1px solid rgba(201,168,76,.15);
-  padding: 100px 60px;
-}
-.token-inner { max-width: 1200px; margin: 0 auto; }
-.token-header { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 60px; }
-.token-coin {
-  width: 160px; height: 160px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--gold3), var(--gold), var(--gold2));
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900;
-  color: var(--navy); box-shadow: 0 0 60px rgba(201,168,76,.4);
-  animation: coinSpin 8s linear infinite; margin: 0 auto;
-}
-@keyframes coinSpin { 0%,100% { box-shadow: 0 0 40px rgba(201,168,76,.4); } 50% { box-shadow: 0 0 80px rgba(201,168,76,.7); } }
-.token-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 30px; }
-.token-stat {
-  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07);
-  border-radius: 12px; padding: 16px;
-}
-.ts-val { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: var(--gold); }
-.ts-lbl { font-size: .7rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-top: 3px; }
-.earn-spend-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-.earn-card, .spend-card {
-  background: rgba(255,255,255,.03); border-radius: 20px; padding: 28px;
-  border: 1px solid rgba(255,255,255,.07);
-}
-.earn-card { border-top: 3px solid var(--green); }
-.spend-card { border-top: 3px solid var(--gold); }
-.es-title { font-size: 1rem; font-weight: 700; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
-.es-row {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,.05); font-size: .85rem;
-}
-.es-row:last-child { border-bottom: none; }
-.es-action { color: var(--gray); }
-.es-amount { font-weight: 700; }
-.earn-card .es-amount { color: var(--green); }
-.spend-card .es-amount { color: var(--gold); }
-
-/* ── CHAINS ── */
-.chains-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 40px; }
-.chain-badge {
-  display: flex; align-items: center; gap: 10px;
-  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
-  border-radius: 50px; padding: 10px 20px; font-size: .85rem; font-weight: 600;
-}
-.chain-dot { width: 10px; height: 10px; border-radius: 50%; }
-.chain-badge.base .chain-dot { background: #0052FF; }
-.chain-badge.pulse .chain-dot { background: #9945FF; }
-.chain-badge.solana .chain-dot { background: #14F195; }
-.chain-badge.eth .chain-dot { background: #627EEA; }
-.chain-phase { font-size: .7rem; color: var(--gray); margin-left: 4px; }
-
-/* ── BADGES ── */
-.badges-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-.badge-card {
-  border-radius: 20px; padding: 28px; text-align: center;
-  position: relative; overflow: hidden; transition: transform .3s;
-}
-.badge-card:hover { transform: translateY(-6px); }
-.badge-card.silver { background: linear-gradient(135deg, rgba(192,192,192,.1), rgba(192,192,192,.04)); border: 1px solid rgba(192,192,192,.3); }
-.badge-card.gold-badge { background: linear-gradient(135deg, rgba(201,168,76,.15), rgba(201,168,76,.04)); border: 1px solid rgba(201,168,76,.4); }
-.badge-card.diamond { background: linear-gradient(135deg, rgba(100,180,255,.12), rgba(100,180,255,.04)); border: 1px solid rgba(100,180,255,.35); }
-.badge-card.legend { background: linear-gradient(135deg, rgba(124,92,252,.15), rgba(124,92,252,.04)); border: 1px solid rgba(124,92,252,.4); }
-.badge-card.alumni { background: linear-gradient(135deg, rgba(232,64,64,.12), rgba(232,64,64,.04)); border: 1px solid rgba(232,64,64,.3); }
-.badge-icon { font-size: 3rem; margin-bottom: 12px; display: block; }
-.badge-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 900; margin-bottom: 6px; }
-.badge-name.silver { color: #C0C0C0; }
-.badge-name.gold-badge { color: var(--gold); }
-.badge-name.diamond { color: #64B4FF; }
-.badge-name.legend { color: #9B7CFC; }
-.badge-name.alumni { color: #FF6B6B; }
-.badge-cost { font-size: .75rem; color: var(--gray); margin-bottom: 12px; }
-.badge-perks { list-style: none; text-align: left; }
-.badge-perks li { font-size: .78rem; color: var(--gray); padding: 3px 0; display: flex; align-items: center; gap: 6px; }
-.badge-perks li::before { content: '✦'; font-size: .6rem; color: var(--gold); }
-
-/* ── WINNERS ── */
-.winners-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 20px; }
-.winner-card { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07); border-radius: 20px; padding: 28px; transition: transform .3s; }
-.winner-card:hover { transform: translateY(-4px); }
-.w-av { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .9rem; color: var(--navy); margin-bottom: 14px; }
-.w-name { font-weight: 700; font-size: 1rem; }
-.w-loc { color: var(--gray); font-size: .8rem; margin: 3px 0 12px; }
-.w-prize { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); font-weight: 900; margin-bottom: 10px; }
-.w-quote { color: var(--gray); font-size: .85rem; line-height: 1.6; font-style: italic; }
-.w-badge { display: inline-flex; align-items: center; gap: 4px; font-size: .65rem; padding: 2px 10px; border-radius: 20px; margin-bottom: 8px; font-weight: 700; }
-
-/* ── SOCIAL ── */
-.social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 700px; margin: 0 auto; }
-.post-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); border-radius: 16px; padding: 18px; }
-.post-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.post-av { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .78rem; font-weight: 700; flex-shrink: 0; }
-.post-user { font-size: .82rem; font-weight: 600; }
-.post-time { font-size: .68rem; color: var(--gray); }
-.post-body { font-size: .85rem; color: #CBD5E0; line-height: 1.5; }
-.post-footer { display: flex; gap: 16px; margin-top: 10px; font-size: .75rem; color: var(--gray); }
-.post-token { color: var(--gold); font-weight: 700; font-size: .72rem; margin-top: 6px; }
-
-/* ── PRICING ── */
-.pricing-card {
-  background: linear-gradient(135deg, rgba(201,168,76,.1), rgba(201,168,76,.04));
-  border: 2px solid var(--gold); border-radius: 28px; padding: 56px;
-  max-width: 520px; margin: 0 auto; text-align: center; position: relative; overflow: hidden;
-}
-.pricing-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(201,168,76,.04) 0%, transparent 60%); animation: rotateBg 20s linear infinite; pointer-events: none; z-index: 0; }
-@keyframes rotateBg { from{transform:rotate(0)} to{transform:rotate(360deg)} }
-.p-badge { background: var(--gold); color: var(--navy); padding: 5px 18px; border-radius: 50px; font-size: .72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; display: inline-block; margin-bottom: 26px; position: relative; z-index: 1; }
-.p-price { font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 900; color: var(--gold); line-height: 1; position: relative; z-index: 1; }
-.p-period { color: var(--gray); font-size: .95rem; margin-bottom: 28px; position: relative; z-index: 1; }
-.p-features { list-style: none; margin-bottom: 36px; position: relative; z-index: 1; }
-.p-features li { padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,.05); color: var(--gray); font-size: .9rem; display: flex; align-items: center; gap: 10px; text-align: left; }
-.p-features li:last-child { border-bottom: none; }
-.p-check { color: var(--gold); }
-.p-token-bonus { background: rgba(201,168,76,.1); border: 1px solid rgba(201,168,76,.25); border-radius: 10px; padding: 12px 16px; margin-bottom: 20px; font-size: .82rem; color: var(--gold); position: relative; z-index: 1; }
-
-/* ── STATS BAR ── */
-.stats-bar { background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.03)); border-top: 1px solid rgba(201,168,76,.18); border-bottom: 1px solid rgba(201,168,76,.18); padding: 56px 40px; position: relative; z-index: 1; }
-.stats-inner { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 40px; text-align: center; }
-.s-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--gold); display: block; }
-.s-lbl { color: var(--gray); font-size: .82rem; letter-spacing: 1px; margin-top: 5px; }
-
-/* ── MODAL ── */
-/* modal removed — signup redirects to waitlist.html */
-.modal { background: var(--navy2); border: 1px solid rgba(201,168,76,.28); border-radius: 26px; padding: 44px; max-width: 460px; width: 100%; position: relative; animation: modalIn .4s ease; max-height: 90vh; overflow-y: auto; }
-@keyframes modalIn { from{opacity:0;transform:translateY(24px) scale(.96)} to{opacity:1;transform:none} }
-.modal-x { position: absolute; top: 16px; right: 20px; background: none; border: none; color: var(--gray); font-size: 1.5rem; cursor: pointer; }
-.modal-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; margin-bottom: 6px; }
-.modal-sub { color: var(--gray); font-size: .88rem; margin-bottom: 26px; }
-.form-input { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 14px 18px; color: var(--white); font-size: .95rem; font-family: 'DM Sans', sans-serif; outline: none; width: 100%; margin-bottom: 12px; transition: border-color .3s; }
-.form-input::placeholder { color: var(--gray2); }
-.form-input:focus { border-color: var(--gold); }
-.modal-success { text-align: center; padding: 20px 0; display: none; }
-.success-icon { font-size: 4rem; margin-bottom: 16px; }
-.ticket-display { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); font-weight: 900; letter-spacing: 4px; margin: 12px 0; }
-.token-bonus-msg { background: rgba(72,187,120,.1); border: 1px solid rgba(72,187,120,.25); border-radius: 10px; padding: 12px; font-size: .82rem; color: var(--green); margin-top: 12px; }
-
-/* ── FOOTER ── */
-footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,.06); padding: 56px 60px; text-align: center; }
-.footer-logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--gold); margin-bottom: 20px; }
-.footer-links { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
-.footer-links a { color: var(--gray); text-decoration: none; font-size: .82rem; transition: color .3s; }
-.footer-links a:hover { color: var(--gold); }
-.footer-legal { color: var(--gray2); font-size: .75rem; line-height: 1.75; max-width: 700px; margin: 0 auto; }
-
-@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
-
-@media(max-width:768px){
-  nav{padding:14px 20px;} nav ul{display:none;}
-  .section{padding:60px 20px;}
-  .token-header{grid-template-columns:1fr;}
-  .earn-spend-grid{grid-template-columns:1fr;}
-  .social-grid{grid-template-columns:1fr;}
-  .pricing-card{padding:36px 20px;}
-  footer{padding:40px 20px;}
-}
+:root{--navy:#040C1E;--navy2:#0B1A38;--navy3:#0F2040;--gold:#C9A84C;--gold2:#F0D080;--white:#F5F0E8;--gray:#8A99B3;--gray2:#4B5E7A;--green:#48BB78;--red:#E84040;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
+#stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.star{position:absolute;border-radius:50%;background:white;animation:twinkle var(--d) ease-in-out infinite alternate;opacity:0;}
+@keyframes twinkle{to{opacity:var(--o);transform:scale(1.5);}}
+.glow{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(201,168,76,.07) 0%,transparent 70%);pointer-events:none;z-index:0;animation:breathe 6s ease-in-out infinite;}
+@keyframes breathe{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.15)}}
+.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(201,168,76,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.04) 1px,transparent 1px);background-size:60px 60px;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:rgba(4,12,30,.95);border-bottom:1px solid rgba(201,168,76,.1);backdrop-filter:blur(8px);}
+.logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:var(--gold);}
+.logo em{color:var(--white);font-style:normal;}
+.nav-home{color:var(--gray);text-decoration:none;font-size:.82rem;font-weight:500;}
+.nav-home:hover{color:var(--gold);}
+.page-tabs{position:relative;z-index:1;display:flex;justify-content:center;background:rgba(11,26,56,.8);border-bottom:1px solid rgba(201,168,76,.15);padding-top:68px;}
+.ptab{padding:14px 32px;font-size:.85rem;font-weight:600;color:var(--gray);cursor:pointer;border:none;background:none;font-family:'DM Sans',sans-serif;border-bottom:2px solid transparent;transition:all .25s;}
+.ptab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.page{display:none;position:relative;z-index:1;}
+.page.active{display:block;}
+.hero{min-height:calc(100vh - 110px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px 80px;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--gold);padding:7px 18px;border-radius:50px;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:24px;}
+.badge-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:blink 1.5s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.ref-banner{display:none;width:100%;max-width:560px;margin-bottom:20px;background:linear-gradient(135deg,rgba(72,187,120,.12),rgba(72,187,120,.05));border:1px solid rgba(72,187,120,.3);border-radius:16px;padding:18px 22px;text-align:center;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,6vw,4.8rem);font-weight:900;line-height:1.08;margin-bottom:20px;}
+h1 .gold{background:linear-gradient(135deg,#7a5c1e,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{color:var(--gray);font-size:1rem;line-height:1.75;max-width:500px;margin-bottom:28px;}
+.prize-num{font-family:'Playfair Display',serif;font-size:clamp(3rem,9vw,6rem);font-weight:900;line-height:1;background:linear-gradient(135deg,#7a5c1e,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;animation:prizeGlow 3s ease-in-out infinite;}
+@keyframes prizeGlow{0%,100%{filter:drop-shadow(0 0 20px rgba(201,168,76,.3))}50%{filter:drop-shadow(0 0 55px rgba(201,168,76,.65))}}
+.prize-label{color:var(--gray);font-size:.68rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:28px;}
+.wl-count{display:flex;align-items:center;gap:10px;margin-bottom:24px;}
+.wl-avatars{display:flex;}
+.wl-av{width:26px;height:26px;border-radius:50%;border:2px solid var(--navy);margin-left:-7px;font-size:.6rem;display:flex;align-items:center;justify-content:center;font-weight:700;}
+.wl-av:first-child{margin-left:0;}
+.wl-text{font-size:.82rem;color:var(--gray);}
+.wl-text strong{color:var(--gold);}
+.signup-form{width:100%;max-width:560px;}
+.form-field{width:100%;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:14px;padding:15px 20px;color:var(--white);font-size:.95rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .3s;margin-bottom:10px;display:block;}
+.form-field::placeholder{color:var(--gray2);}
+.form-field:focus{border-color:var(--gold);}
+.form-field.error{border-color:var(--red);}
+.submit-btn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);padding:16px;border-radius:14px;font-size:1rem;font-weight:700;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;box-shadow:0 6px 24px rgba(201,168,76,.3);transition:transform .2s,box-shadow .2s;display:block;position:relative;z-index:2;}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(201,168,76,.5);}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+.form-error{color:var(--red);font-size:.78rem;margin-top:8px;text-align:center;display:none;}
+.form-note{color:var(--gray2);font-size:.72rem;margin-top:10px;text-align:center;}
+.success-card{display:none;width:100%;max-width:560px;background:rgba(11,26,56,.95);border:1px solid rgba(201,168,76,.25);border-radius:22px;padding:32px;text-align:center;}
+.success-card.visible{display:block;animation:fadeUp .5s ease both;}
+.pos-pill{display:inline-block;margin-bottom:14px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);color:var(--gold);padding:8px 22px;border-radius:50px;font-size:.82rem;font-weight:700;}
+.tribe-bonus{background:rgba(72,187,120,.08);border:1px solid rgba(72,187,120,.2);border-radius:12px;padding:12px;margin-bottom:16px;font-size:.82rem;color:var(--green);}
+.ref-box{background:var(--navy3);border:1px solid rgba(201,168,76,.2);border-radius:14px;padding:16px;margin-bottom:16px;text-align:left;}
+.ref-lbl{font-size:.65rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.ref-link-row{display:flex;gap:8px;align-items:center;}
+.ref-link-text{flex:1;background:rgba(255,255,255,.05);border-radius:10px;padding:10px 14px;color:var(--gold);font-family:'DM Mono',monospace;font-size:.78rem;word-break:break-all;}
+.copy-btn{background:rgba(201,168,76,.15);color:var(--gold);padding:10px 16px;border-radius:10px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;border:1px solid rgba(201,168,76,.3);}
+.ref-tip{font-size:.7rem;color:var(--gray);margin-top:8px;}
+.share-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:8px;}
+.share-btn{display:flex;align-items:center;gap:6px;padding:9px 16px;border-radius:50px;border:none;font-size:.75rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:transform .2s;}
+.share-btn:hover{transform:translateY(-2px);}
+.s-wa{background:#25D366;color:white;}
+.s-x{background:#000;color:white;}
+.s-fb{background:#1877F2;color:white;}
+.s-tg{background:#26A5E4;color:white;}
+.features-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:24px;}
+.feat{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:50px;padding:7px 14px;font-size:.75rem;color:var(--gray);}
+.lb-wrap{max-width:700px;margin:0 auto;padding:40px 24px 80px;}
+.lb-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--gold);text-align:center;margin-bottom:8px;}
+.lb-sub{color:var(--gray);font-size:.88rem;text-align:center;margin-bottom:28px;}
+.lb-stats{display:flex;gap:12px;justify-content:center;margin-bottom:28px;flex-wrap:wrap;}
+.lb-stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px 24px;text-align:center;}
+.lb-stat-num{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--gold);display:block;}
+.lb-stat-lbl{font-size:.65rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px;}
+.lb-table{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:18px;overflow:hidden;}
+.lb-row{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.05);}
+.lb-row:last-child{border-bottom:none;}
+.lb-row:hover{background:rgba(255,255,255,.03);}
+.lb-rank{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem;flex-shrink:0;}
+.r1{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);}
+.r2{background:rgba(192,192,192,.2);color:#C0C0C0;}
+.r3{background:rgba(205,127,50,.2);color:#CD7F32;}
+.rn{background:rgba(255,255,255,.08);color:var(--gray);}
+.lb-info{flex:1;}
+.lb-name{font-weight:600;font-size:.9rem;}
+.lb-date{font-size:.7rem;color:var(--gray);margin-top:2px;}
+.lb-refs{font-weight:700;font-size:.9rem;color:var(--gold);}
+.tribe-badge{font-size:.65rem;padding:2px 10px;border-radius:20px;background:rgba(201,168,76,.12);color:var(--gold);font-weight:700;margin-left:6px;}
+.pos-wrap{max-width:560px;margin:0 auto;padding:40px 24px 80px;}
+.pos-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;text-align:center;margin-bottom:8px;}
+.pos-sub{color:var(--gray);font-size:.88rem;text-align:center;margin-bottom:24px;}
+.pos-result{display:none;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:28px;text-align:center;margin-top:20px;}
+.pos-result.visible{display:block;animation:fadeUp .4s ease both;}
+.pos-num{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:900;color:var(--gold);line-height:1;}
+.pos-lbl{color:var(--gray);font-size:.78rem;margin-bottom:20px;}
+.pos-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.pos-stat{background:rgba(255,255,255,.04);border-radius:12px;padding:12px;}
+.ps-val{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:var(--gold);}
+.ps-lbl{font-size:.65rem;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;}
+.ticker-wrap{position:fixed;bottom:0;left:0;right:0;z-index:10;background:rgba(4,12,30,.95);border-top:1px solid rgba(201,168,76,.12);padding:9px 0;overflow:hidden;}
+.ticker-inner{display:flex;gap:60px;white-space:nowrap;animation:ticker 30s linear infinite;}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.t-item{display:flex;align-items:center;gap:7px;font-size:.76rem;color:var(--gray);flex-shrink:0;}
+.t-item strong{color:var(--gold);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@media(max-width:600px){nav{padding:12px 16px;}.hero{padding:50px 16px 80px;}.lb-wrap,.pos-wrap{padding:24px 16px 80px;}.ptab{padding:12px 18px;font-size:.78rem;}}
 </style>
 </head>
 <body>
-
 <div id="stars"></div>
+<div class="grid-bg"></div>
+<div class="glow"></div>
 
-<!-- NAV -->
 <nav>
   <div class="logo">Million<em>Tribe</em></div>
-  <ul>
-    <li><a href="#how">How It Works</a></li>
-    <li><a href="#token">TRIBE Token</a></li>
-    <li><a href="#badges">Badges</a></li>
-    <li><a href="#winners">Winners</a></li>
-    <li><a href="waitlist.html" class="nav-cta">Join $1/mo</a></li>
-  </ul>
+  <a href="/" class="nav-home">← Home</a>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-badge">🚀 Launching in <span id="hero-days">—</span> · <span style="color:var(--white)">January 1, 2027</span> 🏆</div>
-  <h1>One Dollar.<br><span class="gold">One Million.</span><br><span class="outline">Every Month.</span></h1>
-  <p class="hero-sub">Subscribe for $1/month, enter the monthly $1,000,000 draw, earn TRIBE Tokens, unlock badges, and join a global community of dreamers.</p>
-  <div class="hero-btns">
-    <button class="btn-primary" onclick="window.location.href='waitlist.html'">Join the Tribe — $1/Month →</button>
-    <a href="#token" class="btn-outline">🪙 Earn TRIBE Tokens</a>
-  </div>
-  <div class="prize-display">
-    <div class="prize-amount" id="prize-counter">$1,000,000</div>
-    <div class="prize-label">Monthly Prize Pool</div>
-  </div>
-</section>
-
-<!-- COUNTDOWN -->
-<div class="countdown-wrap">
-  <div class="cd-label">⏳ Countdown to Official Launch — January 1, 2027</div>
-  <div class="cd-row">
-    <div class="cd-block"><span class="cd-num" id="cd-d">00</span><span class="cd-unit">Days</span></div>
-    <div class="cd-block"><span class="cd-num" id="cd-h">00</span><span class="cd-unit">Hours</span></div>
-    <div class="cd-block"><span class="cd-num" id="cd-m">00</span><span class="cd-unit">Mins</span></div>
-    <div class="cd-block"><span class="cd-num" id="cd-s">00</span><span class="cd-unit">Secs</span></div>
-  </div>
+<div class="page-tabs">
+  <button class="ptab active" onclick="showPage('join',this)">🏆 Join Waitlist</button>
+  <button class="ptab" onclick="showPage('leaderboard',this)">📊 Leaderboard</button>
+  <button class="ptab" onclick="showPage('myspot',this)">🎫 My Position</button>
 </div>
 
-<!-- HOW IT WORKS -->
-<section class="section" id="how">
-  <span class="sec-tag">Simple as 1, 2, 3</span>
-  <h2 class="sec-title">How <em>Million Tribe</em> Works</h2>
-  <div class="card-grid">
-    <div class="card"><div class="card-num">01</div><div class="card-icon">✍️</div><div class="card-title">Subscribe for $1/Month</div><div class="card-desc">Create your verified account and subscribe. No hidden fees. Cancel anytime. You're automatically entered in every monthly draw.</div></div>
-    <div class="card"><div class="card-num">02</div><div class="card-icon">🎟️</div><div class="card-title">Get Your Ticket</div><div class="card-desc">Receive a unique ticket number each month. Earn bonus entries by referring friends. One draw, one million dollars.</div></div>
-    <div class="card"><div class="card-num">03</div><div class="card-icon">🪙</div><div class="card-title">Earn TRIBE Tokens</div><div class="card-desc">Every action earns you TRIBE — subscribing, referring, posting, streaks. Spend tokens on bonus entries, badges, and community features.</div></div>
-    <div class="card"><div class="card-num">04</div><div class="card-icon">🏆</div><div class="card-title">Win $1,000,000</div><div class="card-desc">Last day of every month, one verified member wins one million dollars. Live draw. Independent audit. Transparent and fair.</div></div>
-    <div class="card"><div class="card-num">05</div><div class="card-icon">🌍</div><div class="card-title">Join the Community</div><div class="card-desc">Connect with millions of Tribe members. Share your story, celebrate winners, tip each other in TRIBE tokens, and unlock exclusive badges.</div></div>
-    <div class="card"><div class="card-num">06</div><div class="card-icon">👑</div><div class="card-title">Win Once — Alumni Forever</div><div class="card-desc">Winners step aside so others get their chance. Former winners become Tribe Alumni — free lifetime community access and a legacy badge.</div></div>
-  </div>
-</section>
+<!-- JOIN PAGE -->
+<div class="page active" id="page-join">
+<div class="hero">
+  <div class="hero-badge"><div class="badge-dot"></div>Launching January 1, 2027 &nbsp;·&nbsp; <span style="color:var(--white)">225 TRIBE Welcome Bonus</span></div>
 
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stats-inner">
-    <div><span class="s-num" id="member-count">0</span><div class="s-lbl">Tribe Members</div></div>
-    <div><span class="s-num">$12M+</span><div class="s-lbl">Prizes Paid Out</div></div>
-    <div><span class="s-num">12</span><div class="s-lbl">Millionaires Made</div></div>
-    <div><span class="s-num" id="token-count">0</span><div class="s-lbl">TRIBE Tokens Earned</div></div>
-    <div><span class="s-num">183</span><div class="s-lbl">Countries</div></div>
+  <div class="ref-banner" id="ref-banner">
+    <div style="font-size:1.6rem;margin-bottom:8px;">🎁</div>
+    <div style="font-weight:700;color:var(--green);font-size:.95rem;margin-bottom:6px;">You were invited to Million Tribe!</div>
+    <div style="color:var(--gray);font-size:.82rem;line-height:1.6;margin-bottom:10px;" id="ref-banner-text">A friend shared their referral link. Join below and you both earn bonus TRIBE tokens!</div>
+    <div style="background:rgba(72,187,120,.1);border-radius:8px;padding:8px 12px;font-size:.78rem;color:var(--green);font-weight:700;">🪙 You get 250 TRIBE tokens — 25 bonus for joining via referral</div>
+  </div>
+
+  <h1>One Dollar.<br><span class="gold">One Million.</span><br>Every Month.</h1>
+  <p class="hero-sub">Join the waitlist. Refer friends. Earn your spot.<br>225 TRIBE tokens reserved for you on launch day.</p>
+
+  <div class="prize-num">$1,000,000</div>
+  <div class="prize-label">Monthly Prize Pool · Every Single Month</div>
+
+  <div class="wl-count">
+    <div class="wl-avatars">
+      <div class="wl-av" style="background:linear-gradient(135deg,#C9A84C,#F0D080);color:#040C1E;">JT</div>
+      <div class="wl-av" style="background:linear-gradient(135deg,#7b68ee,#4a90e2);">AM</div>
+      <div class="wl-av" style="background:linear-gradient(135deg,#48BB78,#38A169);">SK</div>
+      <div class="wl-av" style="background:linear-gradient(135deg,#E84040,#ff6b6b);">RJ</div>
+      <div class="wl-av" style="background:linear-gradient(135deg,#F6AD55,#ed8936);color:#040C1E;">+</div>
+    </div>
+    <div class="wl-text"><strong id="wl-num">—</strong> people already on the waitlist</div>
+  </div>
+
+  <div class="signup-form" id="form-wrap">
+    <input class="form-field" type="text" id="inp-name" placeholder="First & Last Name" autocomplete="name">
+    <input class="form-field" type="email" id="inp-email" placeholder="Email Address" autocomplete="email" onkeydown="if(event.key==='Enter')doJoin()">
+    <button class="submit-btn" id="join-btn" onclick="doJoin()">Join the Waitlist — Get My Spot →</button>
+    <div class="form-error" id="form-err"></div>
+    <p class="form-note" id="form-note">🔒 No spam. No credit card. No obligation. Cancel anytime after launch.</p>
+  </div>
+
+  <div class="success-card" id="success-card">
+    <div style="font-size:3rem;margin-bottom:12px;">🎉</div>
+    <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--gold);margin-bottom:8px;">You're in the Tribe!</div>
+    <div style="color:var(--gray);font-size:.88rem;line-height:1.6;margin-bottom:16px;">Welcome to Million Tribe. Your TRIBE Token bonus is already reserved for launch day.</div>
+    <div class="pos-pill" id="succ-pos">🏆 Waitlist Position #—</div>
+    <div class="tribe-bonus" id="succ-tokens">🪙 <strong>225 TRIBE Tokens</strong> reserved — credited on January 1, 2027</div>
+    <div class="ref-box">
+      <div class="ref-lbl">🔗 Your Unique Referral Link — Share to Move Up</div>
+      <div class="ref-link-row">
+        <div class="ref-link-text" id="succ-ref-link">loading...</div>
+        <button class="copy-btn" onclick="copyLink('succ-ref-link',this)">📋 Copy</button>
+      </div>
+      <p class="ref-tip">Every referral = <strong style="color:var(--gold);">100 TRIBE tokens</strong> + moves you up the leaderboard</p>
+    </div>
+    <div class="share-row">
+      <button class="share-btn s-wa" onclick="doShare('wa')">WhatsApp</button>
+      <button class="share-btn s-x" onclick="doShare('x')">Post on X</button>
+      <button class="share-btn s-fb" onclick="doShare('fb')">Facebook</button>
+      <button class="share-btn s-tg" onclick="doShare('tg')">Telegram</button>
+    </div>
+  </div>
+
+  <div class="features-row">
+    <div class="feat">🎟️ $1M Monthly Draw</div>
+    <div class="feat">🪙 TRIBE Tokens</div>
+    <div class="feat">🏅 Badge System</div>
+    <div class="feat">🌍 183 Countries</div>
+    <div class="feat">👑 One-Time Winner Rule</div>
+    <div class="feat">🔐 Identity Verified</div>
   </div>
 </div>
+</div>
 
-<!-- TRIBE TOKEN -->
-<div class="token-section" id="token">
-  <div class="token-inner">
-    <span class="sec-tag">Official Platform Currency</span>
-    <h2 class="sec-title" style="margin-bottom:16px;">🪙 The <em>TRIBE Token</em></h2>
-    <p style="color:var(--gray);max-width:560px;line-height:1.75;margin-bottom:50px;font-size:.95rem;">Every action on Million Tribe earns you TRIBE — our official utility token. Earn tokens by participating, spend them on platform features, and hold them as the community grows. Available on BASE, PulseChain, Solana and Ethereum.</p>
+<!-- LEADERBOARD PAGE -->
+<div class="page" id="page-leaderboard">
+<div class="lb-wrap">
+  <div class="lb-title">👑 Referral Leaderboard</div>
+  <div class="lb-sub">Top Tribe members ranked by referrals. Every referral = 100 TRIBE tokens on launch day.</div>
+  <div class="lb-stats">
+    <div class="lb-stat"><span class="lb-stat-num" id="lb-total">—</span><span class="lb-stat-lbl">Total Members</span></div>
+    <div class="lb-stat"><span class="lb-stat-num" id="lb-refs">—</span><span class="lb-stat-lbl">Total Referrals</span></div>
+    <div class="lb-stat"><span class="lb-stat-num" id="lb-days">—</span><span class="lb-stat-lbl">Days to Launch</span></div>
+  </div>
+  <div class="lb-table" id="lb-table"><div style="padding:40px;text-align:center;color:var(--gray);">Loading leaderboard...</div></div>
+</div>
+</div>
 
-    <div class="token-header">
-      <div>
-        <div class="token-coin">T</div>
-        <div class="token-stats">
-          <div class="token-stat"><div class="ts-val">TRIBE</div><div class="ts-lbl">Symbol</div></div>
-          <div class="token-stat"><div class="ts-val">1B</div><div class="ts-lbl">Fixed Supply</div></div>
-          <div class="token-stat"><div class="ts-val">$0.001</div><div class="ts-lbl">Launch Price</div></div>
-          <div class="token-stat"><div class="ts-val">4 Chains</div><div class="ts-lbl">Multi-Chain</div></div>
-        </div>
-        <div class="chains-row" style="margin-top:20px;">
-          <div class="chain-badge base"><div class="chain-dot"></div>BASE <span class="chain-phase">Phase 1</span></div>
-          <div class="chain-badge pulse"><div class="chain-dot"></div>PulseChain <span class="chain-phase">Phase 2</span></div>
-          <div class="chain-badge solana"><div class="chain-dot"></div>Solana <span class="chain-phase">Phase 3</span></div>
-          <div class="chain-badge eth"><div class="chain-dot"></div>Ethereum <span class="chain-phase">Phase 4</span></div>
-        </div>
-      </div>
-      <div>
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;margin-bottom:14px;">Why Hold TRIBE?</h3>
-        <div style="display:flex;flex-direction:column;gap:12px;">
-          <div class="card" style="padding:16px 20px;"><strong style="color:var(--gold);">🎟️ Buy Bonus Entries</strong><br><span style="color:var(--gray);font-size:.85rem;">500 TRIBE = 1 extra draw entry per month</span></div>
-          <div class="card" style="padding:16px 20px;"><strong style="color:var(--gold);">🏅 Unlock Badges</strong><br><span style="color:var(--gray);font-size:.85rem;">Spend TRIBE to mint exclusive community badges</span></div>
-          <div class="card" style="padding:16px 20px;"><strong style="color:var(--gold);">🗳️ Governance Votes</strong><br><span style="color:var(--gray);font-size:.85rem;">1,000+ TRIBE holders vote on platform decisions</span></div>
-          <div class="card" style="padding:16px 20px;"><strong style="color:var(--gold);">💸 Tip Members</strong><br><span style="color:var(--gray);font-size:.85rem;">Send TRIBE to anyone in the Tribe community</span></div>
-          <div class="card" style="padding:16px 20px;"><strong style="color:var(--gold);">📈 Grow With Us</strong><br><span style="color:var(--gray);font-size:.85rem;">Fixed 1B supply — more members = more demand</span></div>
-        </div>
+<!-- MY POSITION PAGE -->
+<div class="page" id="page-myspot">
+<div class="pos-wrap">
+  <div class="pos-title">Find Your Spot 🎫</div>
+  <div class="pos-sub">Enter your email to see your waitlist position, referrals, and TRIBE token balance.</div>
+  <input class="form-field" type="email" id="lookup-email" placeholder="Your email address" onkeydown="if(event.key==='Enter')doLookup()">
+  <button class="submit-btn" onclick="doLookup()" id="lookup-btn">Find My Position →</button>
+  <div class="form-error" id="lookup-err" style="display:none;margin-top:10px;"></div>
+  <div class="pos-result" id="pos-result">
+    <div style="font-size:2rem;margin-bottom:8px;">🎫</div>
+    <div class="pos-num" id="pr-pos">#—</div>
+    <div class="pos-lbl">Your Waitlist Position</div>
+    <div class="pos-grid">
+      <div class="pos-stat"><div class="ps-val" id="pr-refs">0</div><div class="ps-lbl">Referrals Made</div></div>
+      <div class="pos-stat"><div class="ps-val" id="pr-tribe">225</div><div class="ps-lbl">TRIBE Earned</div></div>
+      <div class="pos-stat"><div class="ps-val" id="pr-name">—</div><div class="ps-lbl">Name</div></div>
+      <div class="pos-stat"><div class="ps-val" id="pr-joined">—</div><div class="ps-lbl">Joined</div></div>
+    </div>
+    <div class="ref-box" style="text-align:left;">
+      <div class="ref-lbl">Your Referral Link</div>
+      <div class="ref-link-row">
+        <div class="ref-link-text" id="pr-ref-link">—</div>
+        <button class="copy-btn" onclick="copyLink('pr-ref-link',this)">📋 Copy</button>
       </div>
     </div>
-
-    <div class="earn-spend-grid">
-      <div class="earn-card">
-        <div class="es-title"><span>✅</span> How to Earn TRIBE</div>
-        <div class="es-row"><span class="es-action">Create verified account</span><span class="es-amount">+50 TRIBE</span></div>
-        <div class="es-row"><span class="es-action">First subscription payment</span><span class="es-amount">+100 TRIBE</span></div>
-        <div class="es-row"><span class="es-action">Each month subscribed</span><span class="es-amount">+10 TRIBE</span></div>
-        <div class="es-row"><span class="es-action">6-month streak bonus</span><span class="es-amount">+150 TRIBE</span></div>
-        <div class="es-row"><span class="es-action">12-month streak bonus</span><span class="es-amount">+500 TRIBE</span></div>
-        <div class="es-row"><span class="es-action">Each verified referral</span><span class="es-amount">+100 TRIBE</span></div>
-        <div class="es-row"><span class="es-action">10 referrals in a month</span><span class="es-amount">+500 TRIBE</span></div>
-        <div class="es-row"><span class="es-action">Daily community post</span><span class="es-amount">+1 TRIBE</span></div>
-        <div class="es-row"><span class="es-action">Post gets 100+ likes</span><span class="es-amount">+25 TRIBE</span></div>
-        <div class="es-row"><span class="es-action">Draw winner bonus</span><span class="es-amount">+10,000 TRIBE</span></div>
-      </div>
-      <div class="spend-card">
-        <div class="es-title"><span>🪙</span> How to Spend TRIBE</div>
-        <div class="es-row"><span class="es-action">1 bonus draw entry</span><span class="es-amount">500 TRIBE</span></div>
-        <div class="es-row"><span class="es-action">3 bonus entries bundle</span><span class="es-amount">1,200 TRIBE</span></div>
-        <div class="es-row"><span class="es-action">Silver Member badge</span><span class="es-amount">1,000 TRIBE</span></div>
-        <div class="es-row"><span class="es-action">Gold Elder badge</span><span class="es-amount">5,000 TRIBE</span></div>
-        <div class="es-row"><span class="es-action">Diamond badge</span><span class="es-amount">25,000 TRIBE</span></div>
-        <div class="es-row"><span class="es-action">Pin a post (24hrs)</span><span class="es-amount">200 TRIBE</span></div>
-        <div class="es-row"><span class="es-action">Submit governance vote</span><span class="es-amount">100 TRIBE</span></div>
-        <div class="es-row"><span class="es-action">Tip a Tribe member</span><span class="es-amount">Any amount</span></div>
-        <div class="es-row"><span class="es-action">1 month subscription</span><span class="es-amount">1,500 TRIBE</span></div>
-        <div class="es-row"><span class="es-action">Sponsor a community contest</span><span class="es-amount">5,000 TRIBE</span></div>
-      </div>
+    <div class="share-row">
+      <button class="share-btn s-wa" onclick="doShareCard('wa')">WhatsApp</button>
+      <button class="share-btn s-x" onclick="doShareCard('x')">Share on X</button>
+      <button class="share-btn s-tg" onclick="doShareCard('tg')">Telegram</button>
     </div>
   </div>
 </div>
+</div>
 
-<!-- BADGES -->
-<section class="section" id="badges">
-  <span class="sec-tag">Community Status</span>
-  <h2 class="sec-title">Earn Your <em>Tribe Badge</em></h2>
-  <p style="color:var(--gray);max-width:560px;line-height:1.75;margin-bottom:50px;">Badges are earned with TRIBE Tokens and displayed proudly on your profile. Each badge unlocks exclusive perks, bonus entries, and community privileges.</p>
-  <div class="badges-grid">
-    <div class="badge-card silver">
-      <span class="badge-icon">🥈</span>
-      <div class="badge-name silver">Tribe Member</div>
-      <div class="badge-cost">1,000 TRIBE</div>
-      <ul class="badge-perks">
-        <li>Silver profile border</li>
-        <li>Member community tag</li>
-        <li>+1 bonus entry/month</li>
-        <li>Priority support</li>
-      </ul>
-    </div>
-    <div class="badge-card gold-badge">
-      <span class="badge-icon">🥇</span>
-      <div class="badge-name gold-badge">Tribe Elder</div>
-      <div class="badge-cost">5,000 TRIBE</div>
-      <ul class="badge-perks">
-        <li>Gold animated border</li>
-        <li>Elder community tag</li>
-        <li>+2 bonus entries/month</li>
-        <li>Pin 3 posts/month free</li>
-        <li>Early feature access</li>
-      </ul>
-    </div>
-    <div class="badge-card diamond">
-      <span class="badge-icon">💎</span>
-      <div class="badge-name diamond">Tribe Diamond</div>
-      <div class="badge-cost">25,000 TRIBE</div>
-      <ul class="badge-perks">
-        <li>Diamond animated border</li>
-        <li>Diamond community tag</li>
-        <li>+3 bonus entries/month</li>
-        <li>Verified community status</li>
-        <li>Governance proposal rights</li>
-        <li>Exclusive Diamond lounge</li>
-      </ul>
-    </div>
-    <div class="badge-card legend">
-      <span class="badge-icon">👑</span>
-      <div class="badge-name legend">Tribe Legend</div>
-      <div class="badge-cost">100 referrals</div>
-      <ul class="badge-perks">
-        <li>Crown animated border</li>
-        <li>Legend community tag</li>
-        <li>+5 bonus entries/month</li>
-        <li>25,000 TRIBE bonus</li>
-        <li>DAO council seat</li>
-        <li>VIP draw night access</li>
-        <li>Direct founder access</li>
-      </ul>
-    </div>
-    <div class="badge-card alumni">
-      <span class="badge-icon">🏆</span>
-      <div class="badge-name alumni">Tribe Alumni</div>
-      <div class="badge-cost">Grand Prize Winners Only</div>
-      <ul class="badge-perks">
-        <li>Gold trophy border</li>
-        <li>Winner community tag</li>
-        <li>Free lifetime access</li>
-        <li>Featured in Hall of Fame</li>
-        <li>Inspire the community</li>
-        <li>Cannot re-enter draws</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- WINNERS -->
-<section class="section" id="winners">
-  <span class="sec-tag">Real People. Real Money.</span>
-  <h2 class="sec-title">Recent <em>Winners</em></h2>
-  <div class="winners-grid">
-    <div class="winner-card">
-      <div class="w-badge" style="background:rgba(232,64,64,.15);color:#FF6B6B;">🏆 Alumni</div>
-      <div class="w-av" style="background:linear-gradient(135deg,#C9A84C,#F0D080);">JT</div>
-      <div class="w-name">James T.</div>
-      <div class="w-loc">📍 Houston, Texas</div>
-      <div class="w-prize">$1,000,000</div>
-      <div class="w-quote">"I was having breakfast when I got the call. I literally dropped my coffee. Month 8 as a member!"</div>
-    </div>
-    <div class="winner-card">
-      <div class="w-badge" style="background:rgba(232,64,64,.15);color:#FF6B6B;">🏆 Alumni</div>
-      <div class="w-av" style="background:linear-gradient(135deg,#7b68ee,#4a90e2);">AM</div>
-      <div class="w-name">Amara M.</div>
-      <div class="w-loc">📍 Lagos, Nigeria</div>
-      <div class="w-prize">$1,000,000</div>
-      <div class="w-quote">"I used it to build a school in my hometown. Million Tribe didn't just change my life — it changed my community."</div>
-    </div>
-    <div class="winner-card">
-      <div class="w-badge" style="background:rgba(232,64,64,.15);color:#FF6B6B;">🏆 Alumni</div>
-      <div class="w-av" style="background:linear-gradient(135deg,#E84040,#ff6b6b);">SK</div>
-      <div class="w-name">Sarah K.</div>
-      <div class="w-loc">📍 London, UK</div>
-      <div class="w-prize">$1,000,000</div>
-      <div class="w-quote">"Paid off my mortgage, set up college funds for my kids, donated 10% to charity. Best $1 I ever spent."</div>
-    </div>
-  </div>
-</section>
-
-<!-- COMMUNITY -->
-<section class="section" id="community">
-  <span class="sec-tag">The Tribe is Alive</span>
-  <h2 class="sec-title" style="text-align:center;">What the <em>Community</em> is Saying</h2>
-  <div class="social-grid">
-    <div class="post-card">
-      <div class="post-head">
-        <div class="post-av" style="background:linear-gradient(135deg,#C9A84C,#F0D080);color:#050D1F;">JT</div>
-        <div><div class="post-user">@jamest 🏆 Alumni</div><div class="post-time">2 days ago</div></div>
-      </div>
-      <div class="post-body">Still can't believe it. Month 8 and I won $1M. The tribe is REAL. Thank you all 🙏</div>
-      <div class="post-token">💰 Tipped 5,000 TRIBE to community</div>
-      <div class="post-footer"><span>❤️ 2,841</span><span>💬 394</span></div>
-    </div>
-    <div class="post-card">
-      <div class="post-head">
-        <div class="post-av" style="background:linear-gradient(135deg,#7b68ee,#4a90e2);">RJ</div>
-        <div><div class="post-user">@rickj 💎 Diamond</div><div class="post-time">3 hours ago</div></div>
-      </div>
-      <div class="post-body">Just used 500 TRIBE for a bonus entry tonight 🎟️ Who else is watching the live draw?!</div>
-      <div class="post-footer"><span>❤️ 214</span><span>💬 38</span></div>
-    </div>
-    <div class="post-card">
-      <div class="post-head">
-        <div class="post-av" style="background:linear-gradient(135deg,#48BB78,#38A169);">LM</div>
-        <div><div class="post-user">@lisamw 👑 Legend</div><div class="post-time">1 day ago</div></div>
-      </div>
-      <div class="post-body">100 referrals hit! Just got my Tribe Legend badge 👑 This community is everything!</div>
-      <div class="post-token">🪙 Earned 25,000 TRIBE Legend bonus</div>
-      <div class="post-footer"><span>❤️ 891</span><span>💬 122</span></div>
-    </div>
-    <div class="post-card">
-      <div class="post-head">
-        <div class="post-av" style="background:linear-gradient(135deg,#F6AD55,#ed8936);color:#050D1F;">CN</div>
-        <div><div class="post-user">@chloenyc 🥇 Elder</div><div class="post-time">5 days ago</div></div>
-      </div>
-      <div class="post-body">12 month streak! 500 TRIBE bonus + my annual loyalty reward 🔥 Never missing a month!</div>
-      <div class="post-footer"><span>❤️ 302</span><span>💬 51</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section class="section" id="join" style="text-align:center;">
-  <span class="sec-tag">Get Started Today</span>
-  <h2 class="sec-title">One Dollar. <em>Unlimited</em> Dreams.</h2>
-  <div class="pricing-card">
-    <div class="p-badge">Most Popular</div>
-    <div class="p-price">$1</div>
-    <div class="p-period">per month — cancel anytime</div>
-    <div class="p-token-bonus">🪙 Join today and earn <strong>225 TRIBE Tokens</strong> in welcome bonuses</div>
-    <ul class="p-features">
-      <li><span class="p-check">✦</span> Monthly entry into $1,000,000 draw</li>
-      <li><span class="p-check">✦</span> Unique ticket number every month</li>
-      <li><span class="p-check">✦</span> 100 TRIBE welcome bonus</li>
-      <li><span class="p-check">✦</span> 10 TRIBE every month you stay</li>
-      <li><span class="p-check">✦</span> 100 TRIBE per verified referral</li>
-      <li><span class="p-check">✦</span> Spend TRIBE on bonus draw entries</li>
-      <li><span class="p-check">✦</span> Unlock Silver, Gold, Diamond & Legend badges</li>
-      <li><span class="p-check">✦</span> Exclusive social community access</li>
-      <li><span class="p-check">✦</span> Designate a beneficiary for your prize</li>
-      <li><span class="p-check">✦</span> Governance voting rights (1,000+ TRIBE)</li>
-      <li><span class="p-check">✦</span> iOS & Android mobile app</li>
-      <li><span class="p-check">✦</span> No purchase necessary alternative</li>
-    </ul>
-    <button class="btn-primary" style="width:100%;font-size:1.05rem;position:relative;z-index:2;" onclick="window.location.href='waitlist.html'">Join Million Tribe Now →</button>
-    <p style="color:var(--gray2);font-size:.75rem;margin-top:14px;position:relative;z-index:1;">🔒 Stripe secured · SSL encrypted · Cancel anytime · TRIBE tokens are utility tokens, not investments</p>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">Million Tribe</div>
-  <div class="footer-links">
-    <a href="#how">How It Works</a>
-    <a href="#token">TRIBE Token</a>
-    <a href="#badges">Badges</a>
-    <a href="#winners">Winners</a>
-    <a href="#community">Community</a>
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="terms.html">Terms of Service</a>
-    <a href="token-terms.html">Token Terms</a>
-    <a href="rules.html">Official Rules</a>
-    <a href="no-purchase.html">No Purchase Necessary</a>
-    <a href="mailto:support@milliontribe.com">Contact</a>
-  </div>
-  <div class="footer-legal">
-    Million Tribe is a sweepstakes platform. No purchase necessary to enter or win. A purchase does not improve your chances of winning. Open to legal residents of eligible countries, 18+. See Official Rules for complete details. Void where prohibited. Prize funded and insured by Million Tribe Inc. TRIBE Tokens are utility tokens for use within the Million Tribe platform only. TRIBE Tokens are not securities, investments, or financial instruments. Token values are not guaranteed. © 2026 Million Tribe Inc. All rights reserved.
-  </div>
-</footer>
-
+<div class="ticker-wrap"><div class="ticker-inner" id="ticker"></div></div>
 
 <script>
+// ══════════════════════════════════════
+// ⚙️  UPDATE THESE TWO VALUES
+// ══════════════════════════════════════
+const SUPABASE_URL = 'https://mkcrexrulbwyyewvkmqj.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rY3JleHJ1bGJ3eXlld3ZrbXFqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzODEyNzAsImV4cCI6MjA5NDk1NzI3MH0.UvAe1GHSS_JNusJ2AICOoQCVb-Xf2J4k-3Si3-9IrrE';
+const SITE_URL     = 'https://milliontribe.com/waitlist.html';
+const isReady      = SUPABASE_URL !== 'YOUR_SUPABASE_URL';
+
+// Pure fetch() REST API — no CDN, no limits, works on every browser
+const DB = {
+  h:{ 'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Prefer':'return=representation' },
+  async get(t,q=''){try{const r=await fetch(`${SUPABASE_URL}/rest/v1/${t}?${q}`,{headers:this.h});return{data:r.ok?await r.json():null,ok:r.ok};}catch(e){return{data:null,ok:false};}},
+  async post(t,b){try{const r=await fetch(`${SUPABASE_URL}/rest/v1/${t}`,{method:'POST',headers:this.h,body:JSON.stringify(b)});const d=await r.json();return{data:d,ok:r.ok,status:r.status};}catch(e){return{data:null,ok:false};}},
+  async patch(t,q,b){try{const h={...this.h,'Prefer':'return=minimal'};const r=await fetch(`${SUPABASE_URL}/rest/v1/${t}?${q}`,{method:'PATCH',headers:h,body:JSON.stringify(b)});return{ok:r.ok};}catch(e){return{ok:false};}},
+  async count(t){try{const r=await fetch(`${SUPABASE_URL}/rest/v1/${t}?select=id`,{headers:{...this.h,'Prefer':'count=exact','Range':'0-0'}});const cr=r.headers.get('content-range')||'0/0';return parseInt(cr.split('/')[1])||0;}catch(e){return 0;}}
+};
+
+function genCode(){const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let s='TRIBE';for(let i=0;i<5;i++)s+=c[Math.floor(Math.random()*c.length)];return s;}
+function refLink(code){return`${SITE_URL}?ref=${code}`;}
+function esc(s){return s?.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')||'';}
+const urlParams=new URLSearchParams(window.location.search);
+const refFromUrl=urlParams.get('ref')||'';
+
 // STARS
-const sc = document.getElementById('stars');
-for(let i=0;i<200;i++){
-  const s=document.createElement('div'); s.className='star';
-  const sz=Math.random()*2.5+.4;
-  s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;--d:${Math.random()*5+2}s;--o:${Math.random()*.7+.1};animation-delay:${Math.random()*6}s;`;
-  sc.appendChild(s);
-}
+const sc=document.getElementById('stars');
+for(let i=0;i<160;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2+.4;s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;--d:${Math.random()*5+2}s;--o:${Math.random()*.5+.1};animation-delay:${Math.random()*6}s;`;sc.appendChild(s);}
 
-// COUNTDOWN
-function updateCD(){
-  const now = new Date();
-  const launch = new Date('2027-01-01T00:00:00');
-  let diff = launch - now;
-  if(diff <= 0){
-    ['cd-d','cd-h','cd-m','cd-s'].forEach(id=>{
-      const el = document.getElementById(id);
-      if(el) el.textContent='00';
-    });
-    const hd = document.getElementById('hero-days');
-    if(hd) hd.textContent='0 days';
-    return;
-  }
-  const d=Math.floor(diff/86400000); diff%=86400000;
-  const h=Math.floor(diff/3600000);  diff%=3600000;
-  const m=Math.floor(diff/60000);    diff%=60000;
-  const s=Math.floor(diff/1000);
-  const p=v=>String(v).padStart(2,'0');
-  document.getElementById('cd-d').textContent=p(d);
-  document.getElementById('cd-h').textContent=p(h);
-  document.getElementById('cd-m').textContent=p(m);
-  document.getElementById('cd-s').textContent=p(s);
-  const hd = document.getElementById('hero-days');
-  if(hd) hd.textContent=d+' days';
-}
-// Run immediately then every second
-updateCD();
-setInterval(updateCD,1000);
-// Also run on DOMContentLoaded as backup
-document.addEventListener('DOMContentLoaded', updateCD);
-
-// ANIMATED COUNTERS
-function animCount(el,target,suffix=''){
-  let n=0; const step=target/120;
-  const t=setInterval(()=>{
-    n+=step;
-    if(n>=target){n=target;clearInterval(t);}
-    el.textContent=Math.floor(n).toLocaleString()+suffix;
-  },16);
-}
-const obs=new IntersectionObserver(entries=>{
-  if(entries[0].isIntersecting){
-    animCount(document.getElementById('member-count'),847293);
-    animCount(document.getElementById('token-count'),284000000,'');
-    obs.disconnect();
+// INIT ON LOAD
+window.addEventListener('load',async()=>{
+  document.getElementById('form-wrap').style.display='block';
+  document.getElementById('success-card').classList.remove('visible');
+  document.getElementById('inp-name').value='';
+  document.getElementById('inp-email').value='';
+  if(refFromUrl){
+    document.getElementById('ref-banner').style.display='block';
+    document.getElementById('form-note').innerHTML='🎁 Joining via referral — you get <strong style="color:var(--green)">250 TRIBE tokens</strong> instead of 225!';
+    if(isReady){
+      const{data}=await DB.get('waitlist',`ref_code=eq.${encodeURIComponent(refFromUrl)}&select=name&limit=1`);
+      if(data&&data.length>0){const fn=data[0].name?.split(' ')[0]||'A friend';document.getElementById('ref-banner-text').textContent=`${fn} invited you to Million Tribe! Join below and you both earn bonus TRIBE tokens.`;}
+    }
   }
 });
-obs.observe(document.querySelector('.stats-bar'));
 
-// SMOOTH SCROLL
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const href = a.getAttribute('href');
-    if(!href || href === '#') return; // skip empty anchors
-    e.preventDefault();
-    const el=document.querySelector(href);
-    if(el)el.scrollIntoView({behavior:'smooth'});
-  });
-});
+// LIVE COUNT
+let memberCount=12847;
+async function loadCount(){
+  if(isReady){const n=await DB.count('waitlist');memberCount=n+12000;}
+  const el=document.getElementById('wl-num');
+  let n=0;const step=memberCount/80;
+  const t=setInterval(()=>{n+=step;if(n>=memberCount){n=memberCount;clearInterval(t);}el.textContent=Math.floor(n).toLocaleString();},16);
+}
+loadCount();
+
+// JOIN
+async function doJoin(){
+  const name=document.getElementById('inp-name').value.trim();
+  const email=document.getElementById('inp-email').value.trim();
+  const errEl=document.getElementById('form-err');
+  errEl.style.display='none';
+  ['inp-name','inp-email'].forEach(id=>document.getElementById(id).classList.remove('error'));
+  if(!name){document.getElementById('inp-name').classList.add('error');errEl.textContent='Please enter your name.';errEl.style.display='block';return;}
+  if(!email||!email.includes('@')||!email.includes('.')){document.getElementById('inp-email').classList.add('error');errEl.textContent='Please enter a valid email address.';errEl.style.display='block';return;}
+  const btn=document.getElementById('join-btn');
+  btn.textContent='Joining...';btn.disabled=true;
+  const code=genCode();
+  const tokens=225+(refFromUrl?25:0);
+  const pos=memberCount+1;
+  if(isReady){
+    const{data:existing}=await DB.get('waitlist',`email=eq.${encodeURIComponent(email)}&select=name,ref_code,position,tribe_tokens&limit=1`);
+    if(existing&&existing.length>0){const ex=existing[0];showSuccess(ex.name||name,ex.ref_code,ex.position||pos,ex.tribe_tokens||225);btn.textContent='Join the Waitlist — Get My Spot →';btn.disabled=false;return;}
+    const{data,ok,status}=await DB.post('waitlist',{name,email,ref_code:code,referred_by:refFromUrl||null,ref_count:0,tribe_tokens:tokens});
+    if(!ok){errEl.textContent=(status===409||JSON.stringify(data).includes('duplicate'))?'This email is already on the waitlist. Check "My Position" tab.':'Something went wrong. Please try again.';errEl.style.display='block';btn.textContent='Join the Waitlist — Get My Spot →';btn.disabled=false;return;}
+    if(refFromUrl){const{data:ref}=await DB.get('waitlist',`ref_code=eq.${encodeURIComponent(refFromUrl)}&select=ref_count,tribe_tokens&limit=1`);if(ref&&ref.length>0){await DB.patch('waitlist',`ref_code=eq.${encodeURIComponent(refFromUrl)}`,{ref_count:(ref[0].ref_count||0)+1,tribe_tokens:(ref[0].tribe_tokens||225)+100});}}
+    showSuccess(name,code,(data&&data[0]?.position)||pos,tokens);
+    memberCount++;document.getElementById('wl-num').textContent=memberCount.toLocaleString();
+  }else{showSuccess(name,code,pos,tokens);}
+  btn.textContent='Join the Waitlist — Get My Spot →';btn.disabled=false;
+}
+
+function showSuccess(name,code,position,tokens){
+  document.getElementById('form-wrap').style.display='none';
+  document.getElementById('succ-pos').textContent=`🏆 Waitlist Position #${Number(position).toLocaleString()}`;
+  document.getElementById('succ-tokens').innerHTML=`🪙 <strong>${tokens} TRIBE Tokens</strong> reserved — credited on launch day January 1, 2027`;
+  document.getElementById('succ-ref-link').textContent=refLink(code);
+  document.getElementById('success-card').classList.add('visible');
+  document.getElementById('success-card').scrollIntoView({behavior:'smooth',block:'center'});
+  window._link=refLink(code);
+}
+
+function copyLink(elId,btn){navigator.clipboard.writeText(document.getElementById(elId).textContent).then(()=>{btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy',2000);});}
+
+function shareText(link){return`I just joined the Million Tribe waitlist! 🏆\n\n$1/month for a chance to win $1,000,000 every month.\n\nJoin using my referral link — we both earn 100 TRIBE tokens:\n${link}`;}
+function doShare(type){const link=window._link||SITE_URL;const text=shareText(link);const urls={wa:`https://wa.me/?text=${encodeURIComponent(text)}`,x:`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`,fb:`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`,tg:`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(text)}`};window.open(urls[type],'_blank');}
+function doShareCard(type){const link=document.getElementById('pr-ref-link').textContent;const text=shareText(link);const urls={wa:`https://wa.me/?text=${encodeURIComponent(text)}`,x:`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`,tg:`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(text)}`};window.open(urls[type],'_blank');}
+
+// TABS
+function showPage(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));document.getElementById('page-'+id).classList.add('active');if(btn)btn.classList.add('active');if(id==='leaderboard')loadLeaderboard();window.scrollTo(0,0);}
+
+// LEADERBOARD
+async function loadLeaderboard(){
+  const days=Math.ceil((new Date('2027-01-01')-new Date())/86400000);
+  document.getElementById('lb-days').textContent=days;
+  if(!isReady){renderLB([{name:'James T.',ref_count:47,tribe_tokens:4925,created_at:new Date()},{name:'Lisa M.',ref_count:38,tribe_tokens:4025,created_at:new Date()},{name:'Marcus R.',ref_count:29,tribe_tokens:3125,created_at:new Date()},{name:'Sarah K.',ref_count:21,tribe_tokens:2325,created_at:new Date()},{name:'Daniel O.',ref_count:15,tribe_tokens:1725,created_at:new Date()}],127,215);return;}
+  const{data}=await DB.get('waitlist','select=name,ref_count,tribe_tokens,created_at&order=ref_count.desc&limit=20');
+  const total=await DB.count('waitlist');
+  const totalRef=(data||[]).reduce((s,r)=>s+(r.ref_count||0),0);
+  renderLB(data||[],total+12000,totalRef);
+}
+function renderLB(data,total,totalRef){
+  document.getElementById('lb-total').textContent=Number(total).toLocaleString();
+  document.getElementById('lb-refs').textContent=Number(totalRef).toLocaleString();
+  if(!data.length){document.getElementById('lb-table').innerHTML='<div style="padding:40px;text-align:center;color:var(--gray);">Be the first to refer someone and claim #1! 👑</div>';return;}
+  const medals=['r1','r2','r3'];const icons=['🥇','🥈','🥉'];
+  document.getElementById('lb-table').innerHTML=data.map((r,i)=>{
+    const cls=medals[i]||'rn';const label=i<3?icons[i]:i+1;
+    const tok=r.tribe_tokens||(225+(r.ref_count||0)*100);
+    const dt=new Date(r.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    const fn=(r.name||'Member').split(' ');const disp=fn[0]+(fn[1]?' '+fn[1][0]+'.':'');
+    return`<div class="lb-row"><div class="lb-rank ${cls}">${label}</div><div class="lb-info"><div class="lb-name">${esc(disp)}</div><div class="lb-date">Joined ${dt}</div></div><div class="lb-refs">${r.ref_count||0} refs<span class="tribe-badge">${tok.toLocaleString()} TRIBE</span></div></div>`;
+  }).join('');
+}
+
+// LOOKUP
+async function doLookup(){
+  const email=document.getElementById('lookup-email').value.trim();
+  const errEl=document.getElementById('lookup-err');errEl.style.display='none';
+  if(!email||!email.includes('@')){errEl.textContent='Please enter a valid email.';errEl.style.display='block';return;}
+  const btn=document.getElementById('lookup-btn');btn.textContent='Looking...';btn.disabled=true;
+  if(!isReady){showPosResult({name:'Demo User',position:4281,ref_count:3,tribe_tokens:525,ref_code:'TRIBE12345',created_at:new Date()});btn.textContent='Find My Position →';btn.disabled=false;return;}
+  const{data}=await DB.get('waitlist',`email=eq.${encodeURIComponent(email)}&select=name,position,ref_count,tribe_tokens,ref_code,created_at&limit=1`);
+  if(!data||!data.length){errEl.textContent='Email not found. Join the waitlist above!';errEl.style.display='block';}
+  else{showPosResult(data[0]);}
+  btn.textContent='Find My Position →';btn.disabled=false;
+}
+function showPosResult(d){
+  document.getElementById('pr-pos').textContent='#'+Number(d.position||1).toLocaleString();
+  document.getElementById('pr-refs').textContent=d.ref_count||0;
+  document.getElementById('pr-tribe').textContent=Number(d.tribe_tokens||225).toLocaleString();
+  document.getElementById('pr-name').textContent=(d.name||'—').split(' ')[0];
+  document.getElementById('pr-joined').textContent=new Date(d.created_at).toLocaleDateString('en-US',{month:'short',year:'numeric'});
+  document.getElementById('pr-ref-link').textContent=refLink(d.ref_code);
+  document.getElementById('pos-result').classList.add('visible');
+  document.getElementById('pos-result').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+// TICKER
+const tItems=[{icon:'🏆',text:'<strong>$1,000,000</strong> prize every single month'},{icon:'🪙',text:'<strong>284M TRIBE Tokens</strong> reserved for waitlist members'},{icon:'👥',text:'Members joining from <strong>183 countries</strong>'},{icon:'🎟️',text:'First draw launches <strong>January 1, 2027</strong>'},{icon:'💎',text:'TRIBE Token on <strong>BASE · PulseChain · Solana · Ethereum</strong>'},{icon:'👑',text:'<strong>One-Time Winner Rule</strong> — every winner steps aside for you'},{icon:'🔐',text:'<strong>Identity verified</strong> — one account per person, fair for everyone'},{icon:'🎁',text:'Founding members earn <strong>225 TRIBE Tokens</strong> on launch day'}];
+const tk=document.getElementById('ticker');
+[...tItems,...tItems].forEach(item=>{const d=document.createElement('div');d.className='t-item';d.innerHTML=`<span>${item.icon}</span><span>${item.text}</span>`;tk.appendChild(d);});
 </script>
 </body>
 </html>

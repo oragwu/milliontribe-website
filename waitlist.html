@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Million Tribe — Join the Waitlist</title>
+<title>Million Tribe — Build Wealth. Win Big. Belong.</title>
 <meta name="description" content="Join the Million Tribe waitlist. $1/month. $1,000,000 to win every month. Get your referral link and earn 225 TRIBE tokens on launch day.">
-<meta property="og:title" content="Million Tribe — $1 a Month. $1,000,000 to Win.">
-<meta property="og:description" content="Join the waitlist. Refer friends. Earn 225 TRIBE tokens on Day 1.">
+<meta property="og:title" content="Million Tribe — Build Wealth. Win Big. Belong.">
+<meta property="og:description" content="The world's most rewarding $1/month membership. Financial empowerment, TRIBE tokens, global community + monthly $1M sweepstakes draw.">
 <meta property="og:url" content="https://milliontribe.com/waitlist.html">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -154,7 +154,7 @@ h1 .gold{background:linear-gradient(135deg,#7a5c1e,var(--gold),var(--gold2));-we
 <!-- JOIN PAGE -->
 <div class="page active" id="page-join">
 <div class="hero">
-  <div class="hero-badge"><div class="badge-dot"></div>Launching January 1, 2027 &nbsp;·&nbsp; <span style="color:var(--white)">225 TRIBE Welcome Bonus</span></div>
+  <div class="hero-badge"><div class="badge-dot"></div>Build Wealth. Win Big. Belong. &nbsp;·&nbsp; <span style="color:var(--white)">225 TRIBE Welcome Bonus</span></div>
 
   <div class="ref-banner" id="ref-banner">
     <div style="font-size:1.6rem;margin-bottom:8px;">🎁</div>
@@ -163,11 +163,11 @@ h1 .gold{background:linear-gradient(135deg,#7a5c1e,var(--gold),var(--gold2));-we
     <div style="background:rgba(72,187,120,.1);border-radius:8px;padding:8px 12px;font-size:.78rem;color:var(--green);font-weight:700;">🪙 You get 250 TRIBE tokens — 25 bonus for joining via referral</div>
   </div>
 
-  <h1>One Dollar.<br><span class="gold">One Million.</span><br>Every Month.</h1>
-  <p class="hero-sub">Join the waitlist. Refer friends. Earn your spot.<br>225 TRIBE tokens reserved for you on launch day.</p>
+  <h1>Build Wealth.<br><span class="gold">Win Big.</span><br>Belong.</h1>
+  <p class="hero-sub">The world's most rewarding $1/month membership.<br>Financial empowerment · TRIBE tokens · Global community · Monthly $1M sweepstakes draw.</p>
 
   <div class="prize-num">$1,000,000</div>
-  <div class="prize-label">Monthly Prize Pool · Every Single Month</div>
+  <div class="prize-label">Monthly Member Sweepstakes Draw · Launching January 1, 2027</div>
 
   <div class="wl-count">
     <div class="wl-avatars">
@@ -298,8 +298,8 @@ h1 .gold{background:linear-gradient(135deg,#7a5c1e,var(--gold),var(--gold2));-we
 // ══════════════════════════════════════
 // ⚙️  UPDATE THESE TWO VALUES
 // ══════════════════════════════════════
-const SUPABASE_URL = 'https://mkcrexrulbwyyewvkmqj.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rY3JleHJ1bGJ3eXlld3ZrbXFqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzODEyNzAsImV4cCI6MjA5NDk1NzI3MH0.UvAe1GHSS_JNusJ2AICOoQCVb-Xf2J4k-3Si3-9IrrE';
+const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+const SUPABASE_KEY = 'YOUR_SUPABASE_ANON_KEY';
 const SITE_URL     = 'https://milliontribe.com/waitlist.html';
 const isReady      = SUPABASE_URL !== 'YOUR_SUPABASE_URL';
 
@@ -496,7 +496,7 @@ function showPosResult(d){
 }
 
 // TICKER
-const tItems=[{icon:'🏆',text:'<strong>$1,000,000</strong> prize every single month'},{icon:'🪙',text:'<strong>284M TRIBE Tokens</strong> reserved for waitlist members'},{icon:'👥',text:'Members joining from <strong>183 countries</strong>'},{icon:'🎟️',text:'First draw launches <strong>January 1, 2027</strong>'},{icon:'💎',text:'TRIBE Token on <strong>BASE · PulseChain · Solana · Ethereum</strong>'},{icon:'👑',text:'<strong>One-Time Winner Rule</strong> — every winner steps aside for you'},{icon:'🔐',text:'<strong>Identity verified</strong> — one account per person, fair for everyone'},{icon:'🎁',text:'Founding members earn <strong>225 TRIBE Tokens</strong> on launch day'}];
+const tItems=[{icon:'🏆',text:'Monthly <strong>$1,000,000</strong> member sweepstakes draw'},{icon:'🪙',text:'<strong>284M TRIBE Tokens</strong> reserved for waitlist members'},{icon:'👥',text:'Members joining from <strong>183 countries</strong>'},{icon:'🎟️',text:'First draw launches <strong>January 1, 2027</strong>'},{icon:'💎',text:'TRIBE Token on <strong>BASE · PulseChain · Solana · Ethereum</strong>'},{icon:'👑',text:'<strong>One-Time Winner Rule</strong> — every winner steps aside for you'},{icon:'🔐',text:'<strong>Identity verified</strong> — one account per person, fair for everyone'},{icon:'🎁',text:'Founding members earn <strong>225 TRIBE Tokens</strong> on launch day'}];
 const tk=document.getElementById('ticker');
 [...tItems,...tItems].forEach(item=>{const d=document.createElement('div');d.className='t-item';d.innerHTML=`<span>${item.icon}</span><span>${item.text}</span>`;tk.appendChild(d);});
 

@@ -179,7 +179,8 @@ h1 .gold{background:linear-gradient(135deg,#7a5c1e,var(--gold),var(--gold2));-we
 
 <nav>
   <a href="/" style="text-decoration:none;">
-    <img src="logo-gold.png" alt="Million Tribe" class="logo-img" id="nav-logo">
+    <img src="logo-gold.png" alt="Million Tribe" class="logo-img logo-dark" id="nav-logo">
+    <img src="logo-black.png" alt="Million Tribe" class="logo-img logo-light" style="display:none;" id="nav-logo-light">
   </a>
   <div style="display:flex;align-items:center;gap:12px;">
     <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn">🌙 Dark</button>
@@ -321,7 +322,8 @@ h1 .gold{background:linear-gradient(135deg,#7a5c1e,var(--gold),var(--gold2));-we
 <!-- FOOTER SOCIAL -->
 <div style="position:relative;z-index:1;background:rgba(4,12,30,.95);border-top:1px solid rgba(201,168,76,.12);padding:28px 24px 80px;text-align:center;">
   <a href="/" style="text-decoration:none;display:inline-block;margin-bottom:16px;">
-    <img src="logo-gold.png" alt="Million Tribe" class="logo-img" id="footer-logo" style="margin:0 auto;">
+    <img src="logo-gold.png" alt="Million Tribe" class="logo-img logo-dark" id="footer-logo"
+    style="margin:0 auto;"><img src="logo-black.png" alt="Million Tribe" class="logo-img logo-light" id="footer-logo-light" style="display:none;margin:0 auto;" style="margin:0 auto;">
   </a>
   <p style="font-size:.65rem;color:var(--gray2);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">Follow Us</p>
   <div class="footer-social">
@@ -553,16 +555,11 @@ function toggleTheme() {
   const btn = document.getElementById('theme-btn');
   if(btn) btn.textContent = newTheme === 'light' ? '🌙 Dark' : '☀️ Light';
   // Dark mode = gold logos | Light mode = black logos
-  const logoSrc      = newTheme === 'light' ? 'logo-black.png'        : 'logo-gold.png';
-  const tribeSrc     = newTheme === 'light' ? 'tribe-token-black.png'  : 'tribe-token-gold.png';
-  const navLogo      = document.getElementById('nav-logo');
-  const footLogo     = document.getElementById('footer-logo');
-  const tribeFeat    = document.getElementById('tribe-feat-logo');
-  if(navLogo)   navLogo.src   = logoSrc;
-  if(footLogo)  footLogo.src  = logoSrc;
+  const tribeSrc = newTheme === 'light' ? 'tribe-token-black.png' : 'tribe-token-gold.png';
+  const tribeFeat = document.getElementById('tribe-feat-logo');
   if(tribeFeat) tribeFeat.src = tribeSrc;
-  // Swap all tribe-token-img class images
   document.querySelectorAll('.tribe-token-img').forEach(img => img.src = tribeSrc);
+  // Logo show/hide handled by CSS classes via data-theme
   localStorage.setItem('mt-theme', newTheme);
 }
 // Load saved theme on page load

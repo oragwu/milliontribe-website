@@ -209,12 +209,19 @@ nav a:hover { color: var(--gold); }
 .token-header { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 60px; }
 .token-coin {
   width: 160px; height: 160px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--gold3), var(--gold), var(--gold2));
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900;
-  color: var(--navy); box-shadow: 0 0 60px rgba(201,168,76,.4);
+  box-shadow: 0 0 60px rgba(201,168,76,.4);
   animation: coinSpin 8s linear infinite; margin: 0 auto;
+  overflow: hidden; background: transparent;
 }
+.token-coin img {
+  width: 160px; height: 160px; object-fit: contain;
+  border-radius: 50%;
+  transition: opacity .3s;
+}
+[data-theme="light"] .token-coin img.tribe-dark { display: none; }
+[data-theme="light"] .token-coin img.tribe-light { display: block !important; }
+.token-coin img.tribe-light { display: none; }
 @keyframes coinSpin { 0%,100% { box-shadow: 0 0 40px rgba(201,168,76,.4); } 50% { box-shadow: 0 0 80px rgba(201,168,76,.7); } }
 .token-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 30px; }
 .token-stat {
@@ -467,7 +474,10 @@ footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,
 
     <div class="token-header">
       <div>
-        <div class="token-coin">T</div>
+        <div class="token-coin">
+          <img src="tribe-token-gold.png" alt="TRIBE Token" class="tribe-dark" id="tribe-logo-main">
+          <img src="tribe-token-black.png" alt="TRIBE Token" class="tribe-light" id="tribe-logo-light" style="display:none;">
+        </div>
         <div class="token-stats">
           <div class="token-stat"><div class="ts-val">TRIBE</div><div class="ts-lbl">Symbol</div></div>
           <div class="token-stat"><div class="ts-val">1B</div><div class="ts-lbl">Fixed Supply</div></div>
@@ -830,15 +840,23 @@ function toggleTheme() {
   const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
   document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
   document.getElementById('theme-btn').textContent = isDark ? '🌙 Dark' : '☀️ Light';
-  // Swap logos
+  // Swap nav + footer logos
   const navLogo = document.getElementById('nav-logo');
   const footerLogo = document.getElementById('footer-logo');
+  const tribeMain = document.getElementById('tribe-logo-main');
+  const tribeLight = document.getElementById('tribe-logo-light');
   if (isDark) {
-    navLogo.src = 'logo-black.png';
-    footerLogo.src = 'logo-black.png';
+    // Switching to light mode
+    if(navLogo) navLogo.src = 'logo-black.png';
+    if(footerLogo) footerLogo.src = 'logo-black.png';
+    if(tribeMain) tribeMain.style.display = 'none';
+    if(tribeLight) tribeLight.style.display = 'block';
   } else {
-    navLogo.src = 'logo-gold.png';
-    footerLogo.src = 'logo-gold.png';
+    // Switching to dark mode
+    if(navLogo) navLogo.src = 'logo-gold.png';
+    if(footerLogo) footerLogo.src = 'logo-gold.png';
+    if(tribeMain) tribeMain.style.display = 'block';
+    if(tribeLight) tribeLight.style.display = 'none';
   }
   localStorage.setItem('mt-theme', isDark ? 'light' : 'dark');
 }
@@ -847,9 +865,18 @@ function toggleTheme() {
   const saved = localStorage.getItem('mt-theme');
   if (saved === 'light') {
     document.documentElement.setAttribute('data-theme', 'light');
-    document.getElementById('theme-btn').textContent = '🌙 Dark';
-    document.getElementById('nav-logo').src = 'logo-black.png';
-    document.getElementById('footer-logo').src = 'logo-black.png';
+    setTimeout(() => {
+      const btn = document.getElementById('theme-btn');
+      const nav = document.getElementById('nav-logo');
+      const foot = document.getElementById('footer-logo');
+      const tMain = document.getElementById('tribe-logo-main');
+      const tLight = document.getElementById('tribe-logo-light');
+      if(btn) btn.textContent = '🌙 Dark';
+      if(nav) nav.src = 'logo-black.png';
+      if(foot) foot.src = 'logo-black.png';
+      if(tMain) tMain.style.display = 'none';
+      if(tLight) tLight.style.display = 'block';
+    }, 50);
   }
 })();
 </script>

@@ -48,6 +48,12 @@
 [data-theme="light"] #stars { opacity: 0.08; }
 [data-theme="light"] .glow-bg { opacity: 0.15; }
 
+
+/* THEME LOGO SWITCHING */
+[data-theme="light"] .logo-dark { display: none !important; }
+[data-theme="light"] .logo-light { display: block !important; }
+.logo-light { display: none; }
+.logo-dark { display: block; }
 /* THEME TOGGLE */
 .theme-toggle {
   background: none;
@@ -374,7 +380,8 @@ footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,
 <!-- NAV -->
 <nav>
   <a href="/" style="text-decoration:none;">
-    <img src="logo-gold.png" alt="Million Tribe" class="logo-img" id="nav-logo">
+    <img src="logo-gold.png" alt="Million Tribe" class="logo-img logo-dark" id="nav-logo">
+    <img src="logo-black.png" alt="Million Tribe" class="logo-img logo-light" style="display:none;" id="nav-logo-light">
   </a>
   <ul>
     <li><a href="#how">How It Works</a></li>
@@ -711,7 +718,8 @@ footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,
 <!-- FOOTER -->
 <footer>
   <a href="/" style="text-decoration:none;">
-    <img src="logo-gold.png" alt="Million Tribe" class="logo-img" id="footer-logo" style="margin:0 auto 20px;">
+    <img src="logo-gold.png" alt="Million Tribe" class="logo-img logo-dark" id="footer-logo"
+    style="margin:0 auto;"><img src="logo-black.png" alt="Million Tribe" class="logo-img logo-light" id="footer-logo-light" style="display:none;margin:0 auto;" style="margin:0 auto 20px;">
   </a>
 
   <!-- SOCIAL LINKS -->
@@ -845,18 +853,15 @@ function toggleTheme() {
   const footerLogo = document.getElementById('footer-logo');
   const tribeMain = document.getElementById('tribe-logo-main');
   const tribeLight = document.getElementById('tribe-logo-light');
+  // Logo switching handled by CSS classes via data-theme attribute
+  const tribeMain  = document.getElementById('tribe-logo-main');
+  const tribeLight2 = document.getElementById('tribe-logo-light');
   if (isDark) {
-    // Switching to light mode
-    if(navLogo) navLogo.src = 'logo-black.png';
-    if(footerLogo) footerLogo.src = 'logo-black.png';
-    if(tribeMain) tribeMain.style.display = 'none';
-    if(tribeLight) tribeLight.style.display = 'block';
+    if(tribeMain)   tribeMain.style.display = 'none';
+    if(tribeLight2) tribeLight2.style.display = 'block';
   } else {
-    // Switching to dark mode
-    if(navLogo) navLogo.src = 'logo-gold.png';
-    if(footerLogo) footerLogo.src = 'logo-gold.png';
-    if(tribeMain) tribeMain.style.display = 'block';
-    if(tribeLight) tribeLight.style.display = 'none';
+    if(tribeMain)   tribeMain.style.display = 'block';
+    if(tribeLight2) tribeLight2.style.display = 'none';
   }
   localStorage.setItem('mt-theme', isDark ? 'light' : 'dark');
 }
@@ -872,8 +877,7 @@ function toggleTheme() {
       const tMain = document.getElementById('tribe-logo-main');
       const tLight = document.getElementById('tribe-logo-light');
       if(btn) btn.textContent = '🌙 Dark';
-      if(nav) nav.src = 'logo-black.png';
-      if(foot) foot.src = 'logo-black.png';
+      // Logo switching handled by CSS [data-theme="light"] classes
       if(tMain) tMain.style.display = 'none';
       if(tLight) tLight.style.display = 'block';
     }, 50);

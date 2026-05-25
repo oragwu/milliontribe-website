@@ -905,43 +905,31 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 
 <script>
 // THEME TOGGLE
-function toggleTheme() {
-  const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-  document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  document.getElementById('theme-btn').textContent = isDark ? '🌙 Dark' : '☀️ Light';
-  // Swap nav + footer logos
-  const navLogo = document.getElementById('nav-logo');
-  const footerLogo = document.getElementById('footer-logo');
-  const tribeMain = document.getElementById('tribe-logo-main');
-  const tribeLight = document.getElementById('tribe-logo-light');
-  // Logo switching handled by CSS classes via data-theme attribute
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  const isLight = theme === 'light';
+  // Button label
+  const btn = document.getElementById('theme-btn');
+  if(btn) btn.textContent = isLight ? '🌙 Dark' : '☀️ Light';
+  // TRIBE token logo swap
   const tribeMain  = document.getElementById('tribe-logo-main');
-  const tribeLight2 = document.getElementById('tribe-logo-light');
-  if (isDark) {
-    if(tribeMain)   tribeMain.style.display = 'none';
-    if(tribeLight2) tribeLight2.style.display = 'block';
-  } else {
-    if(tribeMain)   tribeMain.style.display = 'block';
-    if(tribeLight2) tribeLight2.style.display = 'none';
-  }
-  localStorage.setItem('mt-theme', isDark ? 'light' : 'dark');
+  const tribeLight = document.getElementById('tribe-logo-light');
+  if(tribeMain)  tribeMain.style.display  = isLight ? 'none'  : 'block';
+  if(tribeLight) tribeLight.style.display = isLight ? 'block' : 'none';
+  // Save preference
+  localStorage.setItem('mt-theme', theme);
 }
-// Load saved theme
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'dark';
+  applyTheme(current === 'light' ? 'dark' : 'light');
+}
+
+// Load saved theme on page load
 (function() {
   const saved = localStorage.getItem('mt-theme');
   if (saved === 'light') {
-    document.documentElement.setAttribute('data-theme', 'light');
-    setTimeout(() => {
-      const btn = document.getElementById('theme-btn');
-      const nav = document.getElementById('nav-logo');
-      const foot = document.getElementById('footer-logo');
-      const tMain = document.getElementById('tribe-logo-main');
-      const tLight = document.getElementById('tribe-logo-light');
-      if(btn) btn.textContent = '🌙 Dark';
-      // Logo switching handled by CSS [data-theme="light"] classes
-      if(tMain) tMain.style.display = 'none';
-      if(tLight) tLight.style.display = 'block';
-    }, 50);
+    setTimeout(() => applyTheme('light'), 50);
   }
 })();
 </script>

@@ -449,6 +449,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,
     <li><a href="#token">TRIBE Token</a></li>
     <li><a href="#badges">Badges</a></li>
     <li><a href="#winners">Winners</a></li>
+    <li><a href="about.html">About</a></li>
     <li><a href="waitlist.html" class="nav-cta">Join $1/mo</a></li>
   </ul>
   <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn">🌙 Dark</button>
@@ -456,19 +457,19 @@ footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">🚀 Launching in <span id="hero-days">—</span> · <span style="color:var(--white)">January 1, 2027</span> 🏆</div>
+  <div class="hero-badge">📖 Monthly E-Magazine + Community · <span style="color:var(--white)">$1/Month</span> 🏆</div>
   <h1>Build Wealth.<br><span class="gold">Win Big.</span><br><span class="outline">Belong.</span></h1>
-  <p class="hero-sub">The world's most rewarding $1/month membership. Financial empowerment, TRIBE token rewards, global community access — and as a member bonus, automatic entry into our monthly $1,000,000 sweepstakes draw.</p>
+  <p class="hero-sub">Subscribe for $1/month and receive our monthly Wealth Builder e-magazine packed with financial empowerment, wealth strategies, and entrepreneurship insights — plus community access, TRIBE token rewards, and as a bonus member perk, automatic entry into our monthly $1,000,000 sweepstakes draw.</p>
 
   <!-- INLINE SIGNUP FORM -->
   <div class="hero-signup" id="hero-signup-form">
     <div class="hs-row">
       <input class="hs-input" type="text" id="hs-name" placeholder="First & Last Name" autocomplete="name">
       <input class="hs-input" type="email" id="hs-email" placeholder="Email Address" autocomplete="email" onkeydown="if(event.key==='Enter')heroJoin()">
-      <button class="btn-primary hs-btn" onclick="heroJoin()" id="hs-btn">Join the Tribe — Free →</button>
+      <button class="btn-primary hs-btn" onclick="heroJoin()" id="hs-btn">Get My First Issue — $1/Month →</button>
     </div>
     <div class="hs-error" id="hs-error"></div>
-    <p class="hs-note">🔒 No spam · No credit card · 225 TRIBE tokens on launch day</p>
+    <p class="hs-note">📖 Monthly Wealth Builder e-magazine · Community access · 225 TRIBE tokens on launch day · Cancel anytime</p>
   </div>
 
   <!-- SUCCESS STATE -->
@@ -493,7 +494,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,
 
   <div class="prize-display">
     <div class="prize-amount" id="prize-counter">$1,000,000</div>
-    <div class="prize-label">Monthly Member Sweepstakes Draw</div>
+    <div class="prize-label">Monthly Member Bonus Sweepstakes Draw</div>
   </div>
 </section>
 
@@ -513,10 +514,10 @@ footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,
   <span class="sec-tag">Simple as 1, 2, 3</span>
   <h2 class="sec-title">How <em>Million Tribe</em> Works</h2>
   <div class="card-grid">
-    <div class="card"><div class="card-num">01</div><div class="card-icon">✍️</div><div class="card-title">Subscribe for $1/Month</div><div class="card-desc">Create your verified account and subscribe. No hidden fees. Cancel anytime. You're automatically entered in every monthly draw.</div></div>
-    <div class="card"><div class="card-num">02</div><div class="card-icon">🎟️</div><div class="card-title">Get Your Ticket</div><div class="card-desc">Receive a unique ticket number each month. Earn bonus entries by referring friends. One draw, one million dollars.</div></div>
+    <div class="card"><div class="card-num">01</div><div class="card-icon">📖</div><div class="card-title">Subscribe for $1/Month</div><div class="card-desc">Create your verified account and subscribe to receive our monthly Wealth Builder e-magazine. No hidden fees. Cancel anytime.</div></div>
+    <div class="card"><div class="card-num">02</div><div class="card-icon">📚</div><div class="card-title">Read Your E-Magazine</div><div class="card-desc">Every month receive your Wealth Builder digital magazine — financial tips, wealth strategies, entrepreneurship guides, and community spotlights.</div></div>
     <div class="card"><div class="card-num">03</div><div class="card-icon">🪙</div><div class="card-title">Earn TRIBE Tokens</div><div class="card-desc">Every action earns you TRIBE — subscribing, referring, posting, streaks. Spend tokens on bonus entries, badges, and community features.</div></div>
-    <div class="card"><div class="card-num">04</div><div class="card-icon">🏆</div><div class="card-title">Win $1,000,000</div><div class="card-desc">Last day of every month, one verified member wins one million dollars. Live draw. Independent audit. Transparent and fair.</div></div>
+    <div class="card"><div class="card-num">04</div><div class="card-icon">🏆</div><div class="card-title">Bonus — Win $1,000,000</div><div class="card-desc">As a member bonus, every active subscriber receives automatic entry into our monthly $1,000,000 sweepstakes draw. Live draw. Independent audit. No purchase necessary to win.</div></div>
     <div class="card"><div class="card-num">05</div><div class="card-icon">🌍</div><div class="card-title">Join the Community</div><div class="card-desc">Connect with millions of Tribe members. Share your story, celebrate winners, tip each other in TRIBE tokens, and unlock exclusive badges.</div></div>
     <div class="card"><div class="card-num">06</div><div class="card-icon">👑</div><div class="card-title">Win Once — Alumni Forever</div><div class="card-desc">Winners step aside so others get their chance. Former winners become Tribe Alumni — free lifetime community access and a legacy badge.</div></div>
   </div>
@@ -543,7 +544,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,
     <div class="token-header">
       <div>
         <div class="token-coin">
-          <img src="tribe-token-gold.png" alt="TRIBE Token" class="tribe-dark" id="tribe-logo-main">
+          <img src="tribe-token-white.png" alt="TRIBE Token" class="tribe-dark" id="tribe-logo-main">
           <img src="tribe-token-black.png" alt="TRIBE Token" class="tribe-light" id="tribe-logo-light" style="display:none;">
         </div>
         <div class="token-stats">
@@ -751,7 +752,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,
 <!-- PRICING -->
 <section class="section" id="join" style="text-align:center;">
   <span class="sec-tag">Get Started Today</span>
-  <h2 class="sec-title">One Membership. <em>Unlimited</em> Possibilities.</h2>
+  <h2 class="sec-title">One Membership. <em>Everything</em> Included.</h2>
   <div class="pricing-card">
     <div class="p-badge">Most Popular</div>
     <div class="p-price">$1</div>

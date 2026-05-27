@@ -171,6 +171,7 @@ h1 .gold{background:linear-gradient(135deg,#7a5c1e,var(--gold),var(--gold2));-we
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 @media(max-width:600px){nav{padding:12px 16px;}.hero{padding:50px 16px 80px;}.lb-wrap,.pos-wrap{padding:24px 16px 80px;}.ptab{padding:12px 18px;font-size:.78rem;}}
 </style>
+<script src="fraud-prevention.js"></script>
 </head>
 <body>
 <div id="stars"></div>
@@ -259,7 +260,7 @@ h1 .gold{background:linear-gradient(135deg,#7a5c1e,var(--gold),var(--gold2));-we
   <div class="features-row">
     <div class="feat">🎟️ $1M Monthly Draw</div>
     <div class="feat">
-  <img src="tribe-token-gold.png" alt="TRIBE" id="tribe-feat-logo" style="height:18px;width:18px;object-fit:contain;vertical-align:middle;margin-right:4px;">
+  <img src="tribe-token-white.png" alt="TRIBE" id="tribe-feat-logo" style="height:18px;width:18px;object-fit:contain;vertical-align:middle;margin-right:4px;">
   TRIBE Tokens
 </div>
     <div class="feat">🏅 Badge System</div>
@@ -405,7 +406,27 @@ async function doJoin(){
   if(!name){document.getElementById('inp-name').classList.add('error');errEl.textContent='Please enter your name.';errEl.style.display='block';return;}
   if(!email||!email.includes('@')||!email.includes('.')){document.getElementById('inp-email').classList.add('error');errEl.textContent='Please enter a valid email address.';errEl.style.display='block';return;}
   const btn=document.getElementById('join-btn');
-  btn.textContent='Joining...';btn.disabled=true;
+  btn.textContent='Checking...';btn.disabled=true;
+
+  // 🔐 FRAUD PREVENTION CHECK
+  try {
+    if(window.FraudPrevention) {
+      const fraudCheck = await FraudPrevention.checkRegistration(name, email);
+      if(fraudCheck.blocked) {
+        errEl.textContent='We were unable to process your registration. Please contact support@milliontribe.com if you believe this is an error.';
+        errEl.style.display='block';
+        btn.textContent='Join the Waitlist — Get My Spot →';
+        btn.disabled=false;
+        return;
+      }
+      // Store device hash for later use
+      window._deviceHash = fraudCheck.deviceHash;
+    }
+  } catch(e) {
+    console.log('Fraud check skipped:', e.message);
+  }
+
+  btn.textContent='Joining...';
   const code=genCode();
   const tokens=225+(refFromUrl?25:0);
   const pos=memberCount+1;
@@ -555,7 +576,7 @@ function toggleTheme() {
   const btn = document.getElementById('theme-btn');
   if(btn) btn.textContent = newTheme === 'light' ? '🌙 Dark' : '☀️ Light';
   // Dark mode = gold logos | Light mode = black logos
-  const tribeSrc = newTheme === 'light' ? 'tribe-token-black.png' : 'tribe-token-gold.png';
+  const tribeSrc = newTheme === 'light' ? 'tribe-token-black.png' : 'tribe-token-white.png';
   const tribeFeat = document.getElementById('tribe-feat-logo');
   if(tribeFeat) tribeFeat.src = tribeSrc;
   document.querySelectorAll('.tribe-token-img').forEach(img => img.src = tribeSrc);
@@ -576,7 +597,7 @@ function toggleTheme() {
       if(nav)       nav.src         = 'logo-black.png';
       if(foot)      foot.src        = 'logo-black.png';
       if(tribeFeat) tribeFeat.src   = 'tribe-token-black.png';
-      document.querySelectorAll('.tribe-token-img').forEach(img => img.src = 'tribe-token-black.png');
+      document.querySelectorAll('.tribe-token-img').forEach(img => img.src = 'tribe-token-black.png'); // light mode
     }, 50);
   }
 })();

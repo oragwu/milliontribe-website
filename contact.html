@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — Million Tribe</title>
+<meta name="description" content="Get in touch with Million Tribe. We'd love to hear from you — whether you're a member, investor, sponsor, or media professional.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#040C1E">
+<style>
+:root{--navy:#040C1E;--navy2:#0B1A38;--navy3:#0F2040;--gold:#C9A84C;--gold2:#F0D080;--white:#F5F0E8;--gray:#8A99B3;--gray2:#4B5E7A;--green:#48BB78;--red:#E84040;}
+[data-theme="light"]{--navy:#F5F0E8;--navy2:#FFFFFF;--navy3:#EEE9E0;--white:#1A1208;--gray:#5A4A2A;--gray2:#8A7A5A;--gold:#A07830;}
+[data-theme="light"] body{background:#F5F0E8!important;color:#1A1208!important;}
+[data-theme="light"] nav{background:rgba(245,240,232,.97)!important;border-bottom:1px solid rgba(160,120,48,.2)!important;}
+[data-theme="light"] nav ul li a{color:#5A4A2A!important;}
+[data-theme="light"] nav ul li a:hover{color:#A07830!important;}
+[data-theme="light"] .contact-card{background:#FFFFFF!important;border-color:rgba(160,120,48,.15)!important;}
+[data-theme="light"] .form-field{background:rgba(0,0,0,.04)!important;border-color:rgba(0,0,0,.12)!important;color:#1A1208!important;}
+[data-theme="light"] .form-field:focus{border-color:#A07830!important;}
+[data-theme="light"] .form-field::placeholder{color:#8A7A5A!important;}
+[data-theme="light"] .email-card{background:#FFFFFF!important;border-color:rgba(160,120,48,.15)!important;}
+[data-theme="light"] .dept-btn{background:rgba(160,120,48,.08)!important;border-color:rgba(160,120,48,.2)!important;color:#5A4A2A!important;}
+[data-theme="light"] .dept-btn.active,.dept-btn:hover{background:rgba(160,120,48,.2)!important;border-color:#A07830!important;color:#A07830!important;}
+[data-theme="light"] .select-field{background:rgba(0,0,0,.04)!important;border-color:rgba(0,0,0,.12)!important;color:#1A1208!important;}
+[data-theme="light"] footer{background:#E8E2D8!important;}
+[data-theme="light"] .footer-links a{color:#8A7A5A!important;}
+[data-theme="light"] .footer-legal{color:#8A7A5A!important;}
+[data-theme="light"] .social-link{background:rgba(160,120,48,.08)!important;border-color:rgba(160,120,48,.2)!important;color:#A07830!important;}
+[data-theme="light"] .theme-toggle{color:#A07830!important;border-color:rgba(160,120,48,.35)!important;}
+[data-theme="light"] #stars{opacity:.04;}
+[data-theme="light"] .logo-dark{display:none!important;}
+[data-theme="light"] .logo-light{display:block!important;}
+.logo-light{display:none!important;}
+.logo-dark{display:block!important;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
+#stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.star{position:absolute;border-radius:50%;background:white;animation:twinkle var(--d) ease-in-out infinite alternate;opacity:0;}
+@keyframes twinkle{to{opacity:var(--o);transform:scale(1.5);}}
+.glow{position:fixed;top:35%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(201,168,76,.06) 0%,transparent 70%);pointer-events:none;z-index:0;}
+.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(201,168,76,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.04) 1px,transparent 1px);background-size:60px 60px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:rgba(4,12,30,.97);border-bottom:1px solid rgba(201,168,76,.1);backdrop-filter:blur(8px);}
+.logo-img{height:36px;width:auto;display:block;}
+nav ul{display:flex;gap:28px;list-style:none;}
+nav ul li a{color:var(--gray);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .2s;}
+nav ul li a:hover{color:var(--gold);}
+.nav-cta{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy)!important;padding:8px 20px;border-radius:50px;font-weight:700!important;}
+.theme-toggle{background:none;border:1px solid rgba(201,168,76,.35);border-radius:50px;padding:6px 14px;cursor:pointer;font-size:.78rem;font-weight:600;color:var(--gold);font-family:'DM Sans',sans-serif;transition:all .3s;white-space:nowrap;}
+.theme-toggle:hover{background:rgba(201,168,76,.12);}
+
+/* PAGE */
+.page-wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:130px 40px 80px;}
+
+/* HERO */
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--gold);padding:7px 18px;border-radius:50px;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;}
+.page-title{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.6rem);font-weight:900;line-height:1.1;margin-bottom:14px;}
+.page-title em{color:var(--gold);font-style:normal;}
+.page-sub{color:var(--gray);font-size:1rem;line-height:1.75;max-width:580px;margin-bottom:48px;}
+
+/* LAYOUT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:48px;}
+
+/* CONTACT FORM */
+.contact-card{background:rgba(11,26,56,.8);border:1px solid rgba(201,168,76,.15);border-radius:20px;padding:36px;}
+.card-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:var(--gold);margin-bottom:6px;}
+.card-sub{font-size:.85rem;color:var(--gray);margin-bottom:24px;line-height:1.6;}
+
+/* DEPARTMENT SELECTOR */
+.dept-label{font-size:.72rem;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+.dept-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+.dept-btn{padding:7px 14px;border-radius:50px;border:1px solid rgba(201,168,76,.2);background:rgba(201,168,76,.06);color:var(--gray);font-size:.78rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;}
+.dept-btn:hover,.dept-btn.active{background:rgba(201,168,76,.15);border-color:var(--gold);color:var(--gold);}
+
+/* FORM FIELDS */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.form-group{margin-bottom:12px;}
+.form-label{display:block;font-size:.75rem;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.form-field{width:100%;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:12px;padding:13px 16px;color:var(--white);font-size:.9rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .3s;}
+.form-field::placeholder{color:var(--gray2);}
+.form-field:focus{border-color:var(--gold);}
+.form-field.error{border-color:var(--red);}
+textarea.form-field{resize:vertical;min-height:130px;}
+.select-field{width:100%;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:12px;padding:13px 16px;color:var(--white);font-size:.9rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .3s;appearance:none;cursor:pointer;}
+.select-field:focus{border-color:var(--gold);}
+.select-field option{background:#0B1A38;color:var(--white);}
+.submit-btn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);padding:15px;border-radius:12px;font-size:.95rem;font-weight:700;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:transform .2s,box-shadow .2s;margin-top:4px;}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.3);}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+.form-error{color:var(--red);font-size:.78rem;margin-top:8px;text-align:center;display:none;}
+.form-note{font-size:.72rem;color:var(--gray2);text-align:center;margin-top:10px;}
+
+/* SUCCESS */
+.success-msg{display:none;text-align:center;padding:32px 20px;}
+.success-msg.visible{display:block;animation:fadeUp .5s ease both;}
+.success-icon{font-size:3rem;margin-bottom:12px;}
+.success-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:var(--gold);margin-bottom:8px;}
+.success-sub{color:var(--gray);font-size:.88rem;line-height:1.6;}
+
+/* EMAIL CARDS */
+.email-cards{display:flex;flex-direction:column;gap:14px;}
+.email-card{background:rgba(11,26,56,.8);border:1px solid rgba(201,168,76,.12);border-radius:16px;padding:22px 24px;display:flex;align-items:center;gap:18px;text-decoration:none;transition:border-color .3s,transform .2s;}
+.email-card:hover{border-color:rgba(201,168,76,.4);transform:translateX(4px);}
+.email-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
+.email-info{}
+.email-dept{font-size:.68rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+.email-addr{font-size:.9rem;color:var(--white);font-weight:600;margin-bottom:4px;}
+.email-desc{font-size:.78rem;color:var(--gray);line-height:1.5;}
+.email-arrow{margin-left:auto;color:var(--gold);font-size:1.1rem;opacity:.6;}
+
+/* RESPONSE TIME */
+.response-box{background:rgba(72,187,120,.06);border:1px solid rgba(72,187,120,.2);border-radius:14px;padding:20px 24px;margin-top:20px;display:flex;align-items:center;gap:14px;}
+.response-icon{font-size:1.5rem;flex-shrink:0;}
+.response-text h3{font-size:.88rem;font-weight:700;color:var(--green);margin-bottom:4px;}
+.response-text p{font-size:.8rem;color:var(--gray);line-height:1.5;}
+
+/* SOCIAL */
+.social-section{text-align:center;margin-bottom:48px;}
+.social-section h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--white);margin-bottom:8px;}
+.social-section p{color:var(--gray);font-size:.88rem;margin-bottom:24px;}
+.social-links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.social-link{display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:50px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);color:var(--gold);text-decoration:none;font-size:.82rem;font-weight:600;transition:all .25s;}
+.social-link:hover{background:rgba(201,168,76,.2);transform:translateY(-2px);}
+
+/* FAQ */
+.faq-section{margin-bottom:48px;}
+.faq-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--white);margin-bottom:24px;}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.faq-item{background:rgba(11,26,56,.6);border:1px solid rgba(201,168,76,.1);border-radius:14px;padding:20px 22px;}
+.faq-q{font-weight:700;color:var(--gold);font-size:.88rem;margin-bottom:8px;}
+.faq-a{font-size:.82rem;color:var(--gray);line-height:1.65;}
+
+/* FOOTER */
+footer{position:relative;z-index:1;background:rgba(4,12,30,.95);border-top:1px solid rgba(201,168,76,.12);padding:48px 40px 32px;text-align:center;}
+.footer-social{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px 0 24px;}
+.footer-social a{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);color:var(--gold);text-decoration:none;transition:all .25s;}
+.footer-social a:hover{background:rgba(201,168,76,.2);transform:translateY(-2px);}
+.footer-links{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:center;margin-bottom:20px;}
+.footer-links a{color:var(--gray2);text-decoration:none;font-size:.8rem;transition:color .2s;}
+.footer-links a:hover{color:var(--gold);}
+.footer-legal{font-size:.72rem;color:var(--gray2);line-height:1.6;max-width:780px;margin:0 auto;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@media(max-width:768px){
+  nav{padding:12px 16px;}nav ul{display:none;}
+  .page-wrap{padding:110px 20px 60px;}
+  .contact-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .faq-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div id="stars"></div>
+<div class="grid-bg"></div>
+<div class="glow"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="/" style="text-decoration:none;display:flex;align-items:center;">
+    <img src="logo-gold.png" alt="Million Tribe" class="logo-img logo-dark" id="nav-logo">
+    <img src="logo-black.png" alt="Million Tribe" class="logo-img logo-light" id="nav-logo-light">
+  </a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="rules.html">Official Rules</a></li>
+    <li><a href="no-purchase.html">No Purchase Necessary</a></li>
+    <li><a href="waitlist.html" class="nav-cta">Join $1/mo</a></li>
+  </ul>
+  <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn">🌙 Dark</button>
+</nav>
+
+<!-- PAGE -->
+<div class="page-wrap">
+
+  <!-- HERO -->
+  <div class="hero-badge">💬 We'd Love to Hear From You</div>
+  <h1 class="page-title">Get in <em>Touch</em></h1>
+  <p class="page-sub">Whether you're a future member, investor, sponsor, media professional, or just curious about Million Tribe — we are here and happy to help.</p>
+
+  <!-- MAIN GRID -->
+  <div class="contact-grid">
+
+    <!-- LEFT — CONTACT FORM -->
+    <div class="contact-card">
+      <div class="card-title">Send Us a Message</div>
+      <div class="card-sub">Fill in the form below and we'll get back to you within 48 hours.</div>
+
+      <!-- DEPARTMENT SELECTOR -->
+      <div class="dept-label">I am contacting about:</div>
+      <div class="dept-row">
+        <button class="dept-btn active" onclick="setDept(this,'General')">💬 General</button>
+        <button class="dept-btn" onclick="setDept(this,'Membership')">🎟️ Membership</button>
+        <button class="dept-btn" onclick="setDept(this,'Investment')">💰 Investment</button>
+        <button class="dept-btn" onclick="setDept(this,'Sponsorship')">🤝 Sponsorship</button>
+        <button class="dept-btn" onclick="setDept(this,'Media & Press')">📰 Media & Press</button>
+        <button class="dept-btn" onclick="setDept(this,'Legal')">⚖️ Legal</button>
+        <button class="dept-btn" onclick="setDept(this,'Technical Support')">🔧 Support</button>
+        <button class="dept-btn" onclick="setDept(this,'TRIBE Token')">🪙 TRIBE Token</button>
+      </div>
+
+      <!-- FORM -->
+      <div id="form-wrap">
+        <input type="hidden" id="dept-field" value="General">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name *</label>
+            <input class="form-field" type="text" id="f-first" placeholder="First name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name *</label>
+            <input class="form-field" type="text" id="f-last" placeholder="Last name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address *</label>
+          <input class="form-field" type="email" id="f-email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number (Optional)</label>
+          <input class="form-field" type="tel" id="f-phone" placeholder="+1 (000) 000-0000">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Subject *</label>
+          <input class="form-field" type="text" id="f-subject" placeholder="How can we help you?">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message *</label>
+          <textarea class="form-field" id="f-message" placeholder="Tell us more about your inquiry..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">How did you hear about us?</label>
+          <select class="select-field" id="f-source">
+            <option value="">Select an option</option>
+            <option>Social Media</option>
+            <option>Search Engine</option>
+            <option>Friend or Referral</option>
+            <option>News or Media</option>
+            <option>Email</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <button class="submit-btn" id="submit-btn" onclick="submitForm()">Send Message →</button>
+        <div class="form-error" id="form-err"></div>
+        <p class="form-note">🔒 Your information is kept confidential and never shared with third parties.</p>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="success-msg" id="success-msg">
+        <div class="success-icon">🎉</div>
+        <div class="success-title">Message Sent!</div>
+        <div class="success-sub">Thank you for reaching out. A member of the Million Tribe team will get back to you within 48 hours at the email address you provided.</div>
+        <br>
+        <a href="waitlist.html" style="display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);padding:12px 28px;border-radius:50px;font-size:.88rem;font-weight:700;text-decoration:none;margin-top:12px;">Join the Waitlist While You Wait →</a>
+      </div>
+    </div>
+
+    <!-- RIGHT — EMAIL OPTIONS + INFO -->
+    <div>
+      <div class="contact-card" style="margin-bottom:20px;">
+        <div class="card-title">Direct Email</div>
+        <div class="card-sub">Prefer to email us directly? Reach the right team using the addresses below.</div>
+        <div class="email-cards">
+
+          <a href="mailto:hello@milliontribe.com" class="email-card">
+            <div class="email-icon" style="background:rgba(201,168,76,.1);">👋</div>
+            <div class="email-info">
+              <div class="email-dept">General Enquiries</div>
+              <div class="email-addr">hello@milliontribe.com</div>
+              <div class="email-desc">Questions about membership, the platform, or anything else</div>
+            </div>
+            <div class="email-arrow">→</div>
+          </a>
+
+          <a href="mailto:support@milliontribe.com" class="email-card">
+            <div class="email-icon" style="background:rgba(72,187,120,.1);">🔧</div>
+            <div class="email-info">
+              <div class="email-dept">Member Support</div>
+              <div class="email-addr">support@milliontribe.com</div>
+              <div class="email-desc">Account issues, technical support, billing questions</div>
+            </div>
+            <div class="email-arrow">→</div>
+          </a>
+
+          <a href="mailto:investors@milliontribe.com" class="email-card">
+            <div class="email-icon" style="background:rgba(124,92,252,.1);">💰</div>
+            <div class="email-info">
+              <div class="email-dept">Investors</div>
+              <div class="email-addr">investors@milliontribe.com</div>
+              <div class="email-desc">Investment opportunities, seed round, strategic partnerships</div>
+            </div>
+            <div class="email-arrow">→</div>
+          </a>
+
+          <a href="mailto:sponsors@milliontribe.com" class="email-card">
+            <div class="email-icon" style="background:rgba(59,130,246,.1);">🤝</div>
+            <div class="email-info">
+              <div class="email-dept">Sponsorships</div>
+              <div class="email-addr">sponsors@milliontribe.com</div>
+              <div class="email-desc">Brand partnerships, sponsorship packages, co-marketing</div>
+            </div>
+            <div class="email-arrow">→</div>
+          </a>
+
+          <a href="mailto:press@milliontribe.com" class="email-card">
+            <div class="email-icon" style="background:rgba(232,64,64,.1);">📰</div>
+            <div class="email-info">
+              <div class="email-dept">Media & Press</div>
+              <div class="email-addr">press@milliontribe.com</div>
+              <div class="email-desc">Press enquiries, interviews, media kit requests</div>
+            </div>
+            <div class="email-arrow">→</div>
+          </a>
+
+          <a href="mailto:legal@milliontribe.com" class="email-card">
+            <div class="email-icon" style="background:rgba(201,168,76,.1);">⚖️</div>
+            <div class="email-info">
+              <div class="email-dept">Legal</div>
+              <div class="email-addr">legal@milliontribe.com</div>
+              <div class="email-desc">Legal enquiries, compliance, Official Rules questions</div>
+            </div>
+            <div class="email-arrow">→</div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- RESPONSE TIME -->
+      <div class="response-box">
+        <div class="response-icon">⏱️</div>
+        <div class="response-text">
+          <h3>Response Time</h3>
+          <p>We aim to respond to all enquiries within <strong style="color:var(--white);">48 hours</strong> Monday to Friday. For urgent matters please email <strong style="color:var(--gold);">hello@milliontribe.com</strong> directly.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SOCIAL SECTION -->
+  <div class="social-section">
+    <h2>Find Us on Social Media</h2>
+    <p>Follow us for updates, draw night announcements, and community highlights.</p>
+    <div class="social-links">
+      <a href="https://facebook.com/MillionTribe" target="_blank" class="social-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Facebook
+      </a>
+      <a href="https://instagram.com/million_tribe" target="_blank" class="social-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        Instagram
+      </a>
+      <a href="https://twitter.com/Million_Tribe" target="_blank" class="social-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        X / Twitter
+      </a>
+      <a href="https://tiktok.com/@milliontribe" target="_blank" class="social-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.77a4.85 4.85 0 01-1.01-.08z"/></svg>
+        TikTok
+      </a>
+      <a href="https://discord.gg/milliontribe" target="_blank" class="social-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.045.03.06a19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+        Discord
+      </a>
+      <a href="https://t.me/MillionTribe" target="_blank" class="social-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Telegram
+      </a>
+      <a href="https://linkedin.com/company/milliontribe" target="_blank" class="social-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-section">
+    <h2 class="faq-title">Frequently Asked Questions</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q">When does Million Tribe launch?</div>
+        <div class="faq-a">Million Tribe officially launches on January 1, 2027. Join the waitlist now to secure your spot and receive 225 TRIBE Tokens on launch day.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How much does membership cost?</div>
+        <div class="faq-a">$1 per month. This gives you access to the monthly Wealth Builder e-magazine, TRIBE token rewards, community access, and a complimentary $1M sweepstakes draw entry.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do I need to purchase to win?</div>
+        <div class="faq-a">No. No purchase is necessary to enter or win. A free alternative mail-in method of entry is available. See our No Purchase Necessary page for details.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">When does the TRIBE Token launch?</div>
+        <div class="faq-a">TRIBE Token launches no earlier than 6 months after our January 2027 launch, or upon reaching 1,500,000 active subscribers — whichever comes first.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How do I become an investor or sponsor?</div>
+        <div class="faq-a">Email investors@milliontribe.com or sponsors@milliontribe.com with your details and we will be in touch within 48 hours.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Where is Million Tribe based?</div>
+        <div class="faq-a">Million Tribe Inc. is a Delaware C-Corporation headquartered in Houston, Texas, USA. We operate globally across 183 countries.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/" style="text-decoration:none;display:inline-block;margin-bottom:16px;">
+    <img src="logo-gold.png" alt="Million Tribe" class="logo-img logo-dark" id="footer-logo" style="margin:0 auto;">
+    <img src="logo-black.png" alt="Million Tribe" class="logo-img logo-light" id="footer-logo-light" style="margin:0 auto;">
+  </a>
+  <p style="font-size:.65rem;color:var(--gray2);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">Follow Us</p>
+  <div class="footer-social">
+    <a href="https://facebook.com/MillionTribe" target="_blank" title="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+    <a href="https://instagram.com/million_tribe" target="_blank" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+    <a href="https://twitter.com/Million_Tribe" target="_blank" title="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    <a href="https://tiktok.com/@milliontribe" target="_blank" title="TikTok"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.77a4.85 4.85 0 01-1.01-.08z"/></svg></a>
+    <a href="https://discord.gg/milliontribe" target="_blank" title="Discord"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.045.03.06a19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+    <a href="https://t.me/MillionTribe" target="_blank" title="Telegram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+    <a href="https://linkedin.com/company/milliontribe" target="_blank" title="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+  </div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="about.html">About</a>
+    <a href="rules.html">Official Rules</a>
+    <a href="no-purchase.html">No Purchase Necessary</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="waitlist.html">Join Waitlist</a>
+    <a href="contact.html" style="color:var(--gold);">Contact</a>
+  </div>
+  <div class="footer-legal">
+    © 2026 Million Tribe Inc. · Delaware C-Corporation · Houston, Texas · milliontribe.com · No purchase necessary to enter or win.
+  </div>
+</footer>
+
+<script>
+// STARS
+const sc=document.getElementById('stars');
+for(let i=0;i<120;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2+.4;s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;--d:${Math.random()*5+2}s;--o:${Math.random()*.4+.1};animation-delay:${Math.random()*6}s;`;sc.appendChild(s);}
+
+// THEME
+function applyTheme(t){document.documentElement.setAttribute('data-theme',t);const btn=document.getElementById('theme-btn');if(btn)btn.textContent=t==='light'?'🌙 Dark':'☀️ Light';localStorage.setItem('mt-theme',t);}
+function toggleTheme(){const c=document.documentElement.getAttribute('data-theme')||'dark';applyTheme(c==='light'?'dark':'light');}
+(function(){const s=localStorage.getItem('mt-theme');if(s==='light')setTimeout(()=>applyTheme('light'),50);})();
+
+// DEPARTMENT SELECTOR
+function setDept(btn, dept) {
+  document.querySelectorAll('.dept-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('dept-field').value = dept;
+  // Pre-fill subject based on department
+  const subjects = {
+    'General': '',
+    'Membership': 'Membership Enquiry',
+    'Investment': 'Investment Opportunity',
+    'Sponsorship': 'Sponsorship Enquiry',
+    'Media & Press': 'Media / Press Enquiry',
+    'Legal': 'Legal Enquiry',
+    'Technical Support': 'Technical Support Request',
+    'TRIBE Token': 'TRIBE Token Enquiry',
+  };
+  const subjectField = document.getElementById('f-subject');
+  if(subjects[dept] && !subjectField.value) subjectField.value = subjects[dept];
+}
+
+// FORM SUBMISSION
+async function submitForm() {
+  const first   = document.getElementById('f-first').value.trim();
+  const last    = document.getElementById('f-last').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const subject = document.getElementById('f-subject').value.trim();
+  const message = document.getElementById('f-message').value.trim();
+  const dept    = document.getElementById('dept-field').value;
+  const errEl   = document.getElementById('form-err');
+
+  // Reset errors
+  errEl.style.display = 'none';
+  document.querySelectorAll('.form-field').forEach(f => f.classList.remove('error'));
+
+  // Validate
+  if(!first){ document.getElementById('f-first').classList.add('error'); errEl.textContent='Please enter your first name.'; errEl.style.display='block'; return; }
+  if(!last){  document.getElementById('f-last').classList.add('error');  errEl.textContent='Please enter your last name.';  errEl.style.display='block'; return; }
+  if(!email || !email.includes('@')){ document.getElementById('f-email').classList.add('error'); errEl.textContent='Please enter a valid email address.'; errEl.style.display='block'; return; }
+  if(!subject){ document.getElementById('f-subject').classList.add('error'); errEl.textContent='Please enter a subject.'; errEl.style.display='block'; return; }
+  if(!message){ document.getElementById('f-message').classList.add('error'); errEl.textContent='Please enter your message.'; errEl.style.display='block'; return; }
+
+  const btn = document.getElementById('submit-btn');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  // Build mailto link as fallback
+  const body = `Name: ${first} ${last}\nEmail: ${email}\nDepartment: ${dept}\nPhone: ${document.getElementById('f-phone').value || 'Not provided'}\nSource: ${document.getElementById('f-source').value || 'Not specified'}\n\nMessage:\n${message}`;
+  const mailtoLink = `mailto:hello@milliontribe.com?subject=[${dept}] ${subject}&body=${encodeURIComponent(body)}`;
+
+  // Try to send via Supabase edge function if available
+  try {
+    const SUPABASE_URL = window.SUPABASE_URL || 'YOUR_SUPABASE_URL';
+    if(SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
+      // Log contact form submission to Supabase
+      await fetch(`${SUPABASE_URL}/rest/v1/contact_submissions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': window.SUPABASE_KEY || '',
+          'Authorization': `Bearer ${window.SUPABASE_KEY || ''}`,
+          'Prefer': 'return=minimal',
+        },
+        body: JSON.stringify({ name: `${first} ${last}`, email, subject, message, department: dept, source: document.getElementById('f-source').value })
+      });
+    }
+  } catch(e) { console.log('Supabase log failed:', e.message); }
+
+  // Open mailto as primary send mechanism
+  window.location.href = mailtoLink;
+
+  // Show success after short delay
+  setTimeout(() => {
+    document.getElementById('form-wrap').style.display = 'none';
+    document.getElementById('success-msg').classList.add('visible');
+    btn.textContent = 'Send Message →';
+    btn.disabled = false;
+  }, 800);
+}
+</script>
+</body>
+</html>

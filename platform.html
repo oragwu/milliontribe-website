@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Million Tribe — Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#040C1E;--navy2:#0B1A38;--navy3:#0F2040;
+  --gold:#C9A84C;--gold2:#F0D080;
+  --white:#F5F0E8;--gray:#8A99B3;--gray2:#4B5E7A;
+  --green:#48BB78;--red:#E84040;--purple:#7C5CFC;--blue:#3B82F6;
+  --sidebar-w:260px;--topbar-h:60px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;}
+body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-serif;display:flex;flex-direction:column;}
+
+/* ── AUTH SCREENS ── */
+.auth-screen{position:fixed;inset:0;background:var(--navy);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;}
+.auth-screen.hidden{display:none;}
+.auth-card{background:var(--navy2);border:1px solid rgba(201,168,76,.2);border-radius:24px;padding:40px;width:100%;max-width:440px;}
+.auth-logo{text-align:center;margin-bottom:28px;}
+.auth-logo img{height:48px;}
+.auth-logo-text{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--gold);}
+.auth-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;text-align:center;margin-bottom:6px;}
+.auth-sub{color:var(--gray);font-size:.85rem;text-align:center;margin-bottom:28px;}
+.auth-field{width:100%;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:12px;padding:13px 16px;color:var(--white);font-size:.9rem;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:12px;transition:border-color .3s;}
+.auth-field::placeholder{color:var(--gray2);}
+.auth-field:focus{border-color:var(--gold);}
+.auth-btn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);padding:14px;border-radius:12px;font-size:.95rem;font-weight:700;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:4px;transition:transform .2s;}
+.auth-btn:hover{transform:translateY(-1px);}
+.auth-switch{text-align:center;margin-top:16px;font-size:.82rem;color:var(--gray);}
+.auth-switch a{color:var(--gold);cursor:pointer;text-decoration:none;font-weight:600;}
+.auth-error{color:var(--red);font-size:.78rem;text-align:center;margin-top:8px;display:none;}
+.auth-divider{display:flex;align-items:center;gap:12px;margin:16px 0;}
+.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.1);}
+.auth-divider span{color:var(--gray);font-size:.75rem;}
+.google-btn{width:100%;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--white);padding:12px;border-radius:12px;font-size:.88rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;transition:border-color .3s;}
+.google-btn:hover{border-color:var(--gold);}
+
+/* ── LAYOUT ── */
+.app{display:flex;height:100vh;overflow:hidden;}
+
+/* ── SIDEBAR ── */
+.sidebar{width:var(--sidebar-w);background:var(--navy2);border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto;}
+.sidebar-logo{padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.06);}
+.sidebar-logo img{height:36px;}
+.sidebar-logo-text{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--gold);}
+.sidebar-user{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:12px;}
+.user-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;color:var(--navy);flex-shrink:0;overflow:hidden;}
+.user-avatar img{width:100%;height:100%;object-fit:cover;}
+.user-name{font-weight:600;font-size:.88rem;}
+.user-handle{font-size:.72rem;color:var(--gray);}
+.sidebar-tribe{padding:12px 20px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:10px;background:rgba(201,168,76,.04);}
+.tribe-icon{width:28px;height:28px;border-radius:50%;overflow:hidden;flex-shrink:0;}
+.tribe-icon img{width:100%;height:100%;object-fit:cover;}
+.tribe-balance{font-size:.82rem;font-weight:700;color:var(--gold);}
+.tribe-label{font-size:.65rem;color:var(--gray);}
+.sidebar-nav{padding:12px 0;flex:1;}
+.nav-item{display:flex;align-items:center;gap:12px;padding:11px 20px;cursor:pointer;transition:background .2s;border-radius:0;color:var(--gray);font-size:.88rem;font-weight:500;text-decoration:none;}
+.nav-item:hover{background:rgba(255,255,255,.04);color:var(--white);}
+.nav-item.active{background:rgba(201,168,76,.1);color:var(--gold);border-right:3px solid var(--gold);}
+.nav-icon{font-size:1.1rem;width:22px;text-align:center;}
+.nav-badge{margin-left:auto;background:var(--gold);color:var(--navy);font-size:.6rem;font-weight:700;padding:2px 7px;border-radius:20px;}
+.sidebar-bottom{padding:16px 20px;border-top:1px solid rgba(255,255,255,.06);}
+.logout-btn{width:100%;background:none;border:1px solid rgba(255,255,255,.1);color:var(--gray);padding:10px;border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.82rem;transition:all .2s;}
+.logout-btn:hover{border-color:var(--red);color:var(--red);}
+
+/* ── MAIN CONTENT ── */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.topbar{height:var(--topbar-h);background:var(--navy2);border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;padding:0 24px;gap:16px;flex-shrink:0;}
+.topbar-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--white);}
+.topbar-search{flex:1;max-width:400px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:50px;padding:8px 16px;color:var(--white);font-size:.85rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .3s;}
+.topbar-search::placeholder{color:var(--gray2);}
+.topbar-search:focus{border-color:var(--gold);}
+.topbar-actions{display:flex;align-items:center;gap:12px;margin-left:auto;}
+.icon-btn{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;position:relative;transition:border-color .2s;}
+.icon-btn:hover{border-color:var(--gold);}
+.notif-dot{position:absolute;top:6px;right:6px;width:8px;height:8px;border-radius:50%;background:var(--red);border:2px solid var(--navy2);}
+
+/* ── FEED ── */
+.content-area{flex:1;overflow-y:auto;padding:0;}
+.feed-layout{display:grid;grid-template-columns:1fr 320px;gap:0;height:100%;}
+.feed-col{overflow-y:auto;padding:20px 24px;}
+.right-col{overflow-y:auto;padding:20px 16px 20px 0;border-left:1px solid rgba(255,255,255,.06);}
+
+/* ── CREATE POST ── */
+.create-post{background:var(--navy2);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:18px;margin-bottom:16px;}
+.create-post-row{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.create-post textarea{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 14px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.9rem;resize:none;outline:none;min-height:70px;transition:border-color .3s;}
+.create-post textarea:focus{border-color:var(--gold);}
+.create-post textarea::placeholder{color:var(--gray2);}
+.post-actions-row{display:flex;align-items:center;gap:10px;}
+.post-action-btn{background:none;border:none;color:var(--gray);cursor:pointer;font-size:1.1rem;padding:6px;border-radius:8px;transition:color .2s,background .2s;}
+.post-action-btn:hover{color:var(--gold);background:rgba(201,168,76,.1);}
+.post-submit{margin-left:auto;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);padding:9px 20px;border-radius:50px;font-size:.82rem;font-weight:700;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:transform .2s;}
+.post-submit:hover{transform:translateY(-1px);}
+
+/* ── POSTS ── */
+.post-card{background:var(--navy2);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:18px;margin-bottom:14px;transition:border-color .2s;}
+.post-card:hover{border-color:rgba(201,168,76,.2);}
+.post-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.post-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:var(--navy);flex-shrink:0;overflow:hidden;}
+.post-avatar img{width:100%;height:100%;object-fit:cover;}
+.post-name{font-weight:600;font-size:.9rem;}
+.post-handle{font-size:.72rem;color:var(--gray);margin-top:1px;}
+.post-time{margin-left:auto;font-size:.72rem;color:var(--gray2);}
+.post-badge-pill{display:inline-flex;align-items:center;gap:4px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);color:var(--gold);padding:2px 8px;border-radius:20px;font-size:.62rem;font-weight:700;margin-left:6px;}
+.post-content{font-size:.9rem;line-height:1.65;margin-bottom:14px;color:var(--white);}
+.post-content .hashtag{color:var(--gold);cursor:pointer;}
+.post-content .mention{color:var(--blue);cursor:pointer;}
+.post-image{width:100%;border-radius:12px;margin-bottom:14px;max-height:400px;object-fit:cover;}
+.post-footer{display:flex;align-items:center;gap:18px;}
+.post-btn{display:flex;align-items:center;gap:6px;background:none;border:none;color:var(--gray);cursor:pointer;font-size:.8rem;font-family:'DM Sans',sans-serif;padding:6px 10px;border-radius:8px;transition:all .2s;}
+.post-btn:hover{background:rgba(255,255,255,.05);}
+.post-btn.liked{color:var(--red);}
+.post-btn.liked .btn-icon{color:var(--red);}
+.post-btn .btn-icon{font-size:1rem;}
+.tribe-earn{margin-left:auto;display:flex;align-items:center;gap:5px;font-size:.72rem;color:var(--gold);background:rgba(201,168,76,.08);padding:4px 10px;border-radius:20px;}
+
+/* ── RIGHT SIDEBAR ── */
+.widget{background:var(--navy2);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:18px;margin-bottom:14px;}
+.widget-title{font-weight:700;font-size:.82rem;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;}
+.draw-countdown{text-align:center;}
+.countdown-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--gold);line-height:1;}
+.countdown-label{font-size:.65rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px;}
+.countdown-row{display:flex;gap:12px;justify-content:center;margin-bottom:12px;}
+.countdown-box{text-align:center;}
+.prize-display{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:var(--gold);text-align:center;margin-bottom:4px;}
+.suggest-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.suggest-item:last-child{border-bottom:none;}
+.suggest-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--blue));display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:white;flex-shrink:0;}
+.suggest-name{font-size:.82rem;font-weight:600;}
+.suggest-handle{font-size:.68rem;color:var(--gray);}
+.follow-btn{margin-left:auto;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--gold);padding:5px 12px;border-radius:20px;font-size:.72rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;white-space:nowrap;}
+.follow-btn:hover{background:rgba(201,168,76,.25);}
+.trend-item{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer;}
+.trend-item:last-child{border-bottom:none;}
+.trend-tag{font-weight:700;font-size:.85rem;color:var(--gold);}
+.trend-count{font-size:.7rem;color:var(--gray);margin-top:2px;}
+
+/* ── TRIBE STATS ── */
+.tribe-stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.tribe-stat{background:rgba(201,168,76,.05);border-radius:10px;padding:10px;text-align:center;}
+.ts-val{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--gold);}
+.ts-lbl{font-size:.6rem;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;margin-top:2px;}
+
+/* ── NOTIFICATIONS PANEL ── */
+.notif-panel{position:fixed;top:var(--topbar-h);right:0;width:360px;height:calc(100vh - var(--topbar-h));background:var(--navy2);border-left:1px solid rgba(255,255,255,.08);z-index:50;transform:translateX(100%);transition:transform .3s;overflow-y:auto;padding:16px;}
+.notif-panel.open{transform:none;}
+.notif-item{display:flex;gap:12px;padding:12px;border-radius:12px;margin-bottom:8px;cursor:pointer;transition:background .2s;}
+.notif-item:hover{background:rgba(255,255,255,.04);}
+.notif-item.unread{background:rgba(201,168,76,.06);}
+.notif-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:var(--navy);flex-shrink:0;}
+.notif-text{font-size:.82rem;line-height:1.5;color:var(--gray);}
+.notif-text strong{color:var(--white);}
+.notif-time{font-size:.68rem;color:var(--gray2);margin-top:3px;}
+
+/* ── PROFILE PAGE ── */
+.profile-cover{height:180px;background:linear-gradient(135deg,var(--navy3),var(--navy2));border-radius:16px 16px 0 0;margin:-20px -24px 0;position:relative;}
+.profile-avatar-wrap{position:absolute;bottom:-40px;left:24px;}
+.profile-avatar-lg{width:80px;height:80px;border-radius:50%;border:4px solid var(--navy2);background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:700;color:var(--navy);}
+.profile-info{padding:52px 0 20px;}
+.profile-name{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;}
+.profile-handle{color:var(--gray);font-size:.85rem;margin-bottom:10px;}
+.profile-bio{font-size:.88rem;color:var(--gray);line-height:1.6;margin-bottom:14px;}
+.profile-stats{display:flex;gap:24px;margin-bottom:16px;}
+.pstat-val{font-weight:700;font-size:.95rem;}
+.pstat-lbl{font-size:.72rem;color:var(--gray);}
+.edit-profile-btn{background:none;border:1px solid rgba(201,168,76,.3);color:var(--gold);padding:8px 20px;border-radius:50px;font-size:.82rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;}
+.edit-profile-btn:hover{background:rgba(201,168,76,.1);}
+
+/* ── PAGES ── */
+.page{display:none;}
+.page.active{display:block;}
+
+/* ── LOADING ── */
+.loading{text-align:center;padding:40px;color:var(--gray);}
+.spinner{width:28px;height:28px;border:3px solid rgba(201,168,76,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 12px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── MOBILE ── */
+.mobile-nav{display:none;}
+@media(max-width:768px){
+  .sidebar{display:none;}
+  .right-col{display:none;}
+  .feed-layout{grid-template-columns:1fr;}
+  .mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;background:var(--navy2);border-top:1px solid rgba(255,255,255,.08);z-index:50;padding:8px 0;}
+  .mobile-nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px;cursor:pointer;color:var(--gray);font-size:.55rem;font-weight:600;}
+  .mobile-nav-item.active{color:var(--gold);}
+  .mobile-nav-icon{font-size:1.3rem;}
+  .content-area{padding-bottom:60px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ AUTH SCREEN ══ -->
+<div class="auth-screen" id="auth-screen">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <img src="logo-gold.png" alt="Million Tribe" onerror="this.style.display='none';document.getElementById('auth-logo-text').style.display='block'">
+      <div class="auth-logo-text" id="auth-logo-text" style="display:none;">MillionTribe</div>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div id="login-form">
+      <div class="auth-title">Welcome Back</div>
+      <div class="auth-sub">Sign in to your Million Tribe account</div>
+      <button class="google-btn" onclick="MTAuth.signInWithGoogle()">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        Continue with Google
+      </button>
+      <div class="auth-divider"><span>or sign in with email</span></div>
+      <input class="auth-field" type="email" id="login-email" placeholder="Email address">
+      <input class="auth-field" type="password" id="login-password" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
+      <button class="auth-btn" onclick="doLogin()" id="login-btn">Sign In →</button>
+      <div class="auth-error" id="login-error"></div>
+      <div class="auth-switch">
+        <a onclick="forgotPassword()">Forgot password?</a> &nbsp;·&nbsp;
+        Don't have an account? <a onclick="showSignup()">Sign up free</a>
+      </div>
+    </div>
+
+    <!-- SIGNUP FORM -->
+    <div id="signup-form" style="display:none;">
+      <div class="auth-title">Join the Tribe</div>
+      <div class="auth-sub">Create your Million Tribe account</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <input class="auth-field" type="text" id="signup-firstname" placeholder="First name" style="margin-bottom:0;">
+        <input class="auth-field" type="text" id="signup-lastname" placeholder="Last name" style="margin-bottom:0;">
+      </div>
+      <br>
+      <input class="auth-field" type="text" id="signup-username" placeholder="Username (e.g. johntribe)">
+      <input class="auth-field" type="email" id="signup-email" placeholder="Email address">
+      <input class="auth-field" type="password" id="signup-password" placeholder="Password (min 8 characters)">
+      <input class="auth-field" type="text" id="signup-referral" placeholder="Referral code (optional)">
+      <button class="auth-btn" onclick="doSignup()" id="signup-btn">Create Account — Get 225 TRIBE →</button>
+      <div class="auth-error" id="signup-error"></div>
+      <div class="auth-switch">Already have an account? <a onclick="showLogin()">Sign in</a></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ MAIN APP ══ -->
+<div class="app" id="app" style="display:none;">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <img src="logo-gold.png" alt="Million Tribe" height="36" onerror="this.style.display='none'">
+    </div>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="sb-avatar">?</div>
+      <div>
+        <div class="user-name" id="sb-name">Loading...</div>
+        <div class="user-handle" id="sb-handle">@loading</div>
+      </div>
+    </div>
+    <div class="sidebar-tribe">
+      <div class="tribe-icon"><img src="tribe-token-gold.png" alt="TRIBE" onerror="this.style.fontSize='1rem';this.textContent='🪙'"></div>
+      <div>
+        <div class="tribe-balance" id="sb-tribe">225 TRIBE</div>
+        <div class="tribe-label">Token Balance</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="nav-item active" onclick="showPage('feed',this)"><span class="nav-icon">🏠</span> Home Feed</a>
+      <a class="nav-item" onclick="showPage('explore',this)"><span class="nav-icon">🔍</span> Explore</a>
+      <a class="nav-item" onclick="showPage('notifications',this)"><span class="nav-icon">🔔</span> Notifications <span class="nav-badge" id="notif-count">3</span></a>
+      <a class="nav-item" onclick="showPage('messages',this)"><span class="nav-icon">💬</span> Messages</a>
+      <a class="nav-item" onclick="showPage('tribe',this)"><span class="nav-icon">🪙</span> TRIBE Tokens</a>
+      <a class="nav-item" onclick="showPage('draw',this)"><span class="nav-icon">🏆</span> Draw</a>
+      <a class="nav-item" onclick="showPage('badges',this)"><span class="nav-icon">🏅</span> Badges</a>
+      <a class="nav-item" onclick="showPage('referrals',this)"><span class="nav-icon">👥</span> Referrals</a>
+      <a class="nav-item" onclick="showPage('profile',this)"><span class="nav-icon">👤</span> My Profile</a>
+      <a class="nav-item" onclick="showPage('settings',this)"><span class="nav-icon">⚙️</span> Settings</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <button class="logout-btn" onclick="doLogout()">Sign Out</button>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title" id="topbar-title">Home Feed</div>
+      <input class="topbar-search" placeholder="🔍  Search the Tribe...">
+      <div class="topbar-actions">
+        <div class="icon-btn" onclick="toggleNotifPanel()">🔔<div class="notif-dot"></div></div>
+        <div class="icon-btn">⚙️</div>
+        <div class="user-avatar" id="topbar-avatar" style="width:34px;height:34px;font-size:.8rem;cursor:pointer;" onclick="showPage('profile')">?</div>
+      </div>
+    </div>
+
+    <div class="content-area">
+
+      <!-- ── FEED PAGE ── -->
+      <div class="page active" id="page-feed">
+        <div class="feed-layout">
+          <div class="feed-col">
+            <!-- Create Post -->
+            <div class="create-post">
+              <div class="create-post-row">
+                <div class="user-avatar" id="create-avatar" style="width:38px;height:38px;font-size:.82rem;flex-shrink:0;">?</div>
+                <textarea id="post-text" placeholder="What's on your mind? Share with the Tribe... 🏆"></textarea>
+              </div>
+              <div class="post-actions-row">
+                <button class="post-action-btn" title="Add photo">📷</button>
+                <button class="post-action-btn" title="Add video">🎥</button>
+                <button class="post-action-btn" title="Add hashtag">#️⃣</button>
+                <button class="post-action-btn" title="Add GIF">GIF</button>
+                <button class="post-submit" onclick="createPost()">Post · Earn 10 🪙</button>
+              </div>
+            </div>
+
+            <!-- Feed Posts -->
+            <div id="feed-posts">
+              <div class="loading"><div class="spinner"></div>Loading your feed...</div>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="right-col">
+            <!-- Draw Countdown -->
+            <div class="widget draw-countdown">
+              <div class="widget-title">🏆 Next Draw</div>
+              <div class="prize-display">$1,000,000</div>
+              <div style="font-size:.7rem;color:var(--gray);margin-bottom:14px;">Monthly Member Bonus Draw</div>
+              <div class="countdown-row" id="countdown-row">
+                <div class="countdown-box"><div class="countdown-num" id="cd-days">--</div><div class="countdown-label">Days</div></div>
+                <div class="countdown-box"><div class="countdown-num" id="cd-hours">--</div><div class="countdown-label">Hours</div></div>
+                <div class="countdown-box"><div class="countdown-num" id="cd-mins">--</div><div class="countdown-label">Mins</div></div>
+              </div>
+              <div style="font-size:.72rem;color:var(--gray2);">Until January 1, 2027 Launch</div>
+            </div>
+
+            <!-- TRIBE Stats -->
+            <div class="widget">
+              <div class="widget-title">🪙 My TRIBE</div>
+              <div class="tribe-stats-grid">
+                <div class="tribe-stat"><div class="ts-val" id="w-tribe-bal">225</div><div class="ts-lbl">Balance</div></div>
+                <div class="tribe-stat"><div class="ts-val" id="w-tribe-earned">225</div><div class="ts-lbl">Earned</div></div>
+                <div class="tribe-stat"><div class="ts-val" id="w-refs">0</div><div class="ts-lbl">Referrals</div></div>
+                <div class="tribe-stat"><div class="ts-val" id="w-badge">None</div><div class="ts-lbl">Badge</div></div>
+              </div>
+            </div>
+
+            <!-- Who to Follow -->
+            <div class="widget">
+              <div class="widget-title">👥 Who to Follow</div>
+              <div id="suggestions-list">
+                <div class="loading"><div class="spinner"></div></div>
+              </div>
+            </div>
+
+            <!-- Trending -->
+            <div class="widget">
+              <div class="widget-title">🔥 Trending</div>
+              <div class="trend-item"><div class="trend-tag">#MillionTribe</div><div class="trend-count">2.4K posts</div></div>
+              <div class="trend-item"><div class="trend-tag">#BuildWealth</div><div class="trend-count">1.8K posts</div></div>
+              <div class="trend-item"><div class="trend-tag">#TRIBEToken</div><div class="trend-count">1.2K posts</div></div>
+              <div class="trend-item"><div class="trend-tag">#WealthBuilder</div><div class="trend-count">987 posts</div></div>
+              <div class="trend-item"><div class="trend-tag">#WinBig</div><div class="trend-count">743 posts</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── OTHER PAGES ── -->
+      <div class="page" id="page-explore"><div style="padding:40px;text-align:center;color:var(--gray);">🔍 <br><br>Explore page coming soon.<br>Discover trending posts, members, and hashtags.</div></div>
+      <div class="page" id="page-notifications"><div style="padding:40px;text-align:center;color:var(--gray);">🔔 <br><br>Notifications page coming soon.</div></div>
+      <div class="page" id="page-messages"><div style="padding:40px;text-align:center;color:var(--gray);">💬 <br><br>Direct messages coming soon.</div></div>
+      <div class="page" id="page-tribe">
+        <div style="padding:24px;">
+          <h2 style="font-family:'Playfair Display',serif;color:var(--gold);margin-bottom:20px;">🪙 TRIBE Token Dashboard</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px;">
+            <div class="widget" style="text-align:center;"><div style="font-size:2rem;font-weight:900;color:var(--gold);" id="tribe-page-bal">225</div><div style="font-size:.72rem;color:var(--gray);text-transform:uppercase;">Current Balance</div></div>
+            <div class="widget" style="text-align:center;"><div style="font-size:2rem;font-weight:900;color:var(--green);" id="tribe-page-earned">225</div><div style="font-size:.72rem;color:var(--gray);text-transform:uppercase;">Total Earned</div></div>
+            <div class="widget" style="text-align:center;"><div style="font-size:2rem;font-weight:900;color:var(--purple);">0</div><div style="font-size:.72rem;color:var(--gray);text-transform:uppercase;">Total Spent</div></div>
+          </div>
+          <div class="widget">
+            <div class="widget-title">How to Earn TRIBE</div>
+            ${[['🎟️','Subscribe $1/month','225 tokens'],['👥','Refer a friend','100 tokens each'],['📖','Read e-magazine','10 tokens/month'],['💬','Post content','10 tokens/post'],['❤️','Get likes on post','2 tokens/like'],['🏅','Unlock a badge','Bonus tokens']].map(([icon,action,reward])=>`
+            <div style="display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);">
+              <span style="font-size:1.2rem;">${icon}</span>
+              <span style="font-size:.88rem;flex:1;">${action}</span>
+              <span style="font-size:.82rem;color:var(--gold);font-weight:700;">${reward}</span>
+            </div>`).join('')}
+          </div>
+        </div>
+      </div>
+      <div class="page" id="page-draw">
+        <div style="padding:24px;text-align:center;">
+          <h2 style="font-family:'Playfair Display',serif;color:var(--gold);margin-bottom:8px;">🏆 Monthly Draw</h2>
+          <div style="font-size:3rem;font-weight:900;font-family:'Playfair Display',serif;color:var(--gold);margin:20px 0;">$1,000,000</div>
+          <div style="color:var(--gray);margin-bottom:24px;">Monthly Member Bonus Sweepstakes Draw</div>
+          <div class="widget" style="max-width:400px;margin:0 auto;">
+            <div class="widget-title">Your Draw Status</div>
+            <div style="font-size:.9rem;color:var(--gray);line-height:1.7;">
+              ✅ Active membership — draw entry included<br>
+              🎟️ Your ticket is automatically assigned each month<br>
+              👑 One-Time Winner Rule applies<br>
+              📋 No purchase necessary to win
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page" id="page-badges">
+        <div style="padding:24px;">
+          <h2 style="font-family:'Playfair Display',serif;color:var(--gold);margin-bottom:20px;">🏅 Badge System</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+            ${[['🥈','Silver','Tribe Member','1,000 TRIBE','#C0C0C0'],['🥇','Gold','Tribe Elder','5,000 TRIBE','#C9A84C'],['💎','Diamond','Tribe Diamond','25,000 TRIBE','#64B4FF'],['👑','Legend','Tribe Legend','100 Referrals','#9B7CFC'],['🏆','Alumni','Grand Prize Winner','$1M Winner','#FF6B6B']].map(([emoji,tier,name,cost,color])=>`
+            <div class="widget" style="text-align:center;border-color:${color}22;">
+              <div style="font-size:2.5rem;margin-bottom:10px;">${emoji}</div>
+              <div style="font-weight:700;color:${color};margin-bottom:4px;">${tier}</div>
+              <div style="font-size:.78rem;color:var(--gray);margin-bottom:10px;">${name}</div>
+              <div style="font-size:.72rem;background:rgba(255,255,255,.05);padding:6px;border-radius:8px;color:${color};">${cost}</div>
+            </div>`).join('')}
+          </div>
+        </div>
+      </div>
+      <div class="page" id="page-referrals">
+        <div style="padding:24px;">
+          <h2 style="font-family:'Playfair Display',serif;color:var(--gold);margin-bottom:20px;">👥 Referrals</h2>
+          <div class="widget" style="max-width:560px;">
+            <div class="widget-title">Your Referral Link</div>
+            <div style="background:rgba(255,255,255,.05);border-radius:10px;padding:12px 14px;font-family:'DM Mono',monospace;font-size:.82rem;color:var(--gold);margin-bottom:12px;" id="ref-link-display">milliontribe.com/waitlist.html?ref=LOADING...</div>
+            <button onclick="copyRefLink()" style="background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);border:none;padding:10px 24px;border-radius:50px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">📋 Copy Link</button>
+            <div style="margin-top:16px;font-size:.82rem;color:var(--gray);">Every referral earns you <strong style="color:var(--gold);">100 TRIBE tokens</strong></div>
+          </div>
+          <div class="widget" style="max-width:560px;margin-top:16px;">
+            <div class="widget-title">Referral Stats</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div class="tribe-stat"><div class="ts-val" id="ref-count">0</div><div class="ts-lbl">Total Referrals</div></div>
+              <div class="tribe-stat"><div class="ts-val" id="ref-tokens">0</div><div class="ts-lbl">TRIBE Earned</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page" id="page-profile">
+        <div style="padding:20px 24px;">
+          <div class="profile-cover" id="profile-cover"></div>
+          <div class="profile-avatar-wrap">
+            <div class="profile-avatar-lg" id="profile-avatar-lg">?</div>
+          </div>
+          <div class="profile-info">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;">
+              <div class="profile-name" id="profile-display-name">Loading...</div>
+              <button class="edit-profile-btn">Edit Profile</button>
+            </div>
+            <div class="profile-handle" id="profile-username">@loading</div>
+            <div class="profile-bio" id="profile-bio">Member of the Million Tribe community 🏆</div>
+            <div class="profile-stats">
+              <div><div class="pstat-val" id="profile-posts">0</div><div class="pstat-lbl">Posts</div></div>
+              <div><div class="pstat-val" id="profile-followers">0</div><div class="pstat-lbl">Followers</div></div>
+              <div><div class="pstat-val" id="profile-following">0</div><div class="pstat-lbl">Following</div></div>
+              <div><div class="pstat-val" id="profile-tribe">225</div><div class="pstat-lbl">TRIBE</div></div>
+            </div>
+          </div>
+          <div id="profile-posts-feed"><div class="loading"><div class="spinner"></div>Loading posts...</div></div>
+        </div>
+      </div>
+      <div class="page" id="page-settings"><div style="padding:40px;text-align:center;color:var(--gray);">⚙️ <br><br>Settings coming soon.</div></div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- NOTIFICATIONS PANEL -->
+<div class="notif-panel" id="notif-panel">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+    <div style="font-weight:700;font-size:.95rem;">Notifications</div>
+    <button onclick="toggleNotifPanel()" style="background:none;border:none;color:var(--gray);cursor:pointer;font-size:1.2rem;">✕</button>
+  </div>
+  <div id="notif-list">
+    <div class="notif-item unread"><div class="notif-avatar">🏆</div><div><div class="notif-text"><strong>Million Tribe</strong> — Welcome to the Tribe! Your 225 TRIBE tokens are reserved.</div><div class="notif-time">Just now</div></div></div>
+    <div class="notif-item unread"><div class="notif-avatar">🪙</div><div><div class="notif-text"><strong>TRIBE Bonus</strong> — You earned 225 TRIBE tokens as a founding member!</div><div class="notif-time">Today</div></div></div>
+    <div class="notif-item unread"><div class="notif-avatar">🎟️</div><div><div class="notif-text"><strong>Draw Entry</strong> — You're entered in the January 2027 $1,000,000 draw!</div><div class="notif-time">Today</div></div></div>
+  </div>
+</div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+  <div class="mobile-nav-item active" onclick="showPage('feed',this)"><div class="mobile-nav-icon">🏠</div>Home</div>
+  <div class="mobile-nav-item" onclick="showPage('explore',this)"><div class="mobile-nav-icon">🔍</div>Explore</div>
+  <div class="mobile-nav-item" onclick="showPage('draw',this)"><div class="mobile-nav-icon">🏆</div>Draw</div>
+  <div class="mobile-nav-item" onclick="showPage('tribe',this)"><div class="mobile-nav-icon">🪙</div>TRIBE</div>
+  <div class="mobile-nav-item" onclick="showPage('profile',this)"><div class="mobile-nav-icon">👤</div>Profile</div>
+</div>
+
+<script>
+// ══════════════════════════════════════
+// CONFIG
+// ══════════════════════════════════════
+const SUPABASE_URL = 'https://mkcrexrulbwyyewvkmqj.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rY3JleHJ1bGJ3eXlld3ZrbXFqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzODEyNzAsImV4cCI6MjA5NDk1NzI3MH0.UvAe1GHSS_JNusJ2AICOoQCVb-Xf2J4k-3Si3-9IrrE';
+const SITE_URL = 'https://milliontribe.com';
+window.MT_SUPABASE_URL = SUPABASE_URL;
+window.MT_SUPABASE_KEY = SUPABASE_KEY;
+const isReady = SUPABASE_URL !== 'YOUR_SUPABASE_URL';
+
+// DB helper
+const DB = {
+  h: { 'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Prefer':'return=representation' },
+  async get(t,q=''){try{const r=await fetch(`${SUPABASE_URL}/rest/v1/${t}?${q}`,{headers:this.h});return r.ok?await r.json():[];}catch(e){return [];}},
+  async post(t,b){try{const r=await fetch(`${SUPABASE_URL}/rest/v1/${t}`,{method:'POST',headers:this.h,body:JSON.stringify(b)});return r.ok?await r.json():null;}catch(e){return null;}},
+  async patch(t,q,b){try{await fetch(`${SUPABASE_URL}/rest/v1/${t}?${q}`,{method:'PATCH',headers:{...this.h,'Prefer':'return=minimal'},body:JSON.stringify(b)});}catch(e){}}
+};
+
+// ══════════════════════════════════════
+// DEMO USER (used when Supabase not connected)
+// ══════════════════════════════════════
+const DEMO_USER = {
+  id: 'demo-user',
+  display_name: 'Demo Member',
+  username: 'demomember',
+  tribe_balance: 225,
+  tribe_earned_total: 225,
+  referral_count: 0,
+  badge_level: 'none',
+  referral_code: 'TRIBEDEMO1',
+  post_count: 0,
+  follower_count: 0,
+  following_count: 0,
+};
+
+let currentUser = null;
+
+// ══════════════════════════════════════
+// DEMO POSTS
+// ══════════════════════════════════════
+const DEMO_POSTS = [
+  {id:'1',display_name:'James Tribe',username:'jamestribe',avatar:'JT',badge:'🥈',content:'Just joined Million Tribe and I\'m already earning TRIBE tokens! The Wealth Builder e-magazine is packed with real financial tips. #MillionTribe #BuildWealth 🏆',time:'2 mins ago',likes:24,comments:5,shares:3,tribe:10,liked:false},
+  {id:'2',display_name:'Sarah K.',username:'sarahk',avatar:'SK',badge:'🥇',content:'Month 3 of my wealth building journey with Million Tribe. My TRIBE token balance is growing every day. Can\'t wait for the official token launch! 🪙 #TRIBEToken #WealthBuilder',time:'15 mins ago',likes:48,comments:12,shares:7,tribe:10,liked:false},
+  {id:'3',display_name:'Million Tribe',username:'milliontribe',avatar:'MT',badge:'✅',content:'🏆 ANNOUNCEMENT: Our monthly Wealth Builder e-magazine is almost ready for Volume 1! Founding members will be the first to receive it on January 1, 2027.\n\nKeep referring friends — each referral earns you 100 TRIBE tokens! 🪙\n\n#MillionTribe #WealthBuilder #TRIBEToken',time:'1 hour ago',likes:312,comments:87,shares:56,tribe:0,liked:false,pinned:true},
+  {id:'4',display_name:'Marcus R.',username:'marcusr',avatar:'MR',badge:'',content:'The One-Time Winner Rule is what sets Million Tribe apart from everything else. Every winner steps aside permanently — so the rest of us have a better shot every single month. That\'s fairness. 👑 #MillionTribe #OneTimeWinnerRule',time:'2 hours ago',likes:156,comments:34,shares:21,tribe:10,liked:false},
+  {id:'5',display_name:'Lisa M.',username:'lisam',avatar:'LM',badge:'💎',content:'Just referred my 10th friend to Million Tribe! 1,000 extra TRIBE tokens heading my way 🎉 The referral system is so easy to use. Who else is building their TRIBE community? 👥 #Referrals #TRIBEToken',time:'3 hours ago',likes:89,comments:28,shares:15,tribe:10,liked:false},
+];
+
+// ══════════════════════════════════════
+// AUTH FUNCTIONS
+// ══════════════════════════════════════
+function showLogin(){ document.getElementById('login-form').style.display='block'; document.getElementById('signup-form').style.display='none'; }
+function showSignup(){ document.getElementById('login-form').style.display='none'; document.getElementById('signup-form').style.display='block'; }
+
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass  = document.getElementById('login-password').value;
+  const errEl = document.getElementById('login-error');
+  const btn   = document.getElementById('login-btn');
+  errEl.style.display='none';
+  if(!email||!pass){ errEl.textContent='Please enter email and password.'; errEl.style.display='block'; return; }
+  btn.textContent='Signing in...'; btn.disabled=true;
+  if(!isReady) { enterDemoMode(); return; }
+  // Real login via Supabase
+  const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+    method:'POST', headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY},
+    body: JSON.stringify({email, password:pass})
+  });
+  const data = await res.json();
+  if(!res.ok){ errEl.textContent = data.error_description || 'Invalid email or password.'; errEl.style.display='block'; btn.textContent='Sign In →'; btn.disabled=false; return; }
+  localStorage.setItem('mt_session', JSON.stringify({access_token:data.access_token,refresh_token:data.refresh_token,expires_at:Date.now()+(data.expires_in*1000),user:data.user}));
+  await loadUserProfile(data.user.id);
+  enterApp();
+  btn.textContent='Sign In →'; btn.disabled=false;
+}
+
+async function doSignup() {
+  const first = document.getElementById('signup-firstname').value.trim();
+  const last  = document.getElementById('signup-lastname').value.trim();
+  const uname = document.getElementById('signup-username').value.trim().toLowerCase();
+  const email = document.getElementById('signup-email').value.trim();
+  const pass  = document.getElementById('signup-password').value;
+  const ref   = document.getElementById('signup-referral').value.trim();
+  const errEl = document.getElementById('signup-error');
+  const btn   = document.getElementById('signup-btn');
+  errEl.style.display='none';
+  if(!first||!last){ errEl.textContent='Please enter your name.'; errEl.style.display='block'; return; }
+  if(!uname){ errEl.textContent='Please choose a username.'; errEl.style.display='block'; return; }
+  if(!email||!email.includes('@')){ errEl.textContent='Please enter a valid email.'; errEl.style.display='block'; return; }
+  if(pass.length<8){ errEl.textContent='Password must be at least 8 characters.'; errEl.style.display='block'; return; }
+  btn.textContent='Creating account...'; btn.disabled=true;
+  if(!isReady){ enterDemoMode(); return; }
+  const res = await fetch(`${SUPABASE_URL}/auth/v1/signup`, {
+    method:'POST', headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY},
+    body: JSON.stringify({email, password:pass})
+  });
+  const data = await res.json();
+  if(!res.ok){ errEl.textContent = data.msg || 'Signup failed. Please try again.'; errEl.style.display='block'; btn.textContent='Create Account →'; btn.disabled=false; return; }
+  const refCode = 'MT'+Math.random().toString(36).substr(2,8).toUpperCase();
+  await DB.post('profiles',{id:data.user.id,username:uname,display_name:`${first} ${last}`,referral_code:refCode,referred_by:ref||null,tribe_balance:225,tribe_earned_total:225,subscription_status:'waitlist'});
+  localStorage.setItem('mt_session', JSON.stringify({access_token:data.access_token||'',refresh_token:'',expires_at:Date.now()+3600000,user:data.user}));
+  await loadUserProfile(data.user.id);
+  enterApp();
+  btn.textContent='Create Account →'; btn.disabled=false;
+}
+
+async function doLogout() {
+  localStorage.removeItem('mt_session');
+  currentUser = null;
+  document.getElementById('app').style.display='none';
+  document.getElementById('auth-screen').classList.remove('hidden');
+}
+
+function enterDemoMode() {
+  currentUser = DEMO_USER;
+  document.getElementById('auth-screen').classList.add('hidden');
+  document.getElementById('app').style.display='flex';
+  populateUI();
+  loadFeed();
+  loadSuggestions();
+  startCountdown();
+}
+
+async function loadUserProfile(userId) {
+  const profiles = await DB.get('profiles',`id=eq.${userId}&limit=1`);
+  currentUser = profiles[0] || DEMO_USER;
+}
+
+function enterApp() {
+  document.getElementById('auth-screen').classList.add('hidden');
+  document.getElementById('app').style.display='flex';
+  populateUI();
+  loadFeed();
+  loadSuggestions();
+  startCountdown();
+}
+
+// ══════════════════════════════════════
+// POPULATE UI WITH USER DATA
+// ══════════════════════════════════════
+function populateUI() {
+  const u = currentUser;
+  if(!u) return;
+  const initials = u.display_name?.split(' ').map(n=>n[0]).join('').substring(0,2).toUpperCase() || '?';
+  // Sidebar
+  document.getElementById('sb-name').textContent = u.display_name || 'Tribe Member';
+  document.getElementById('sb-handle').textContent = '@'+(u.username||'member');
+  document.getElementById('sb-avatar').textContent = initials;
+  document.getElementById('sb-tribe').textContent = Number(u.tribe_balance||225).toLocaleString()+' TRIBE';
+  // Topbar
+  document.getElementById('topbar-avatar').textContent = initials;
+  // Create post
+  document.getElementById('create-avatar').textContent = initials;
+  // Widgets
+  document.getElementById('w-tribe-bal').textContent = Number(u.tribe_balance||225).toLocaleString();
+  document.getElementById('w-tribe-earned').textContent = Number(u.tribe_earned_total||225).toLocaleString();
+  document.getElementById('w-refs').textContent = u.referral_count||0;
+  document.getElementById('w-badge').textContent = u.badge_level==='none'?'None':u.badge_level||'None';
+  // Profile page
+  document.getElementById('profile-avatar-lg').textContent = initials;
+  document.getElementById('profile-display-name').textContent = u.display_name||'Tribe Member';
+  document.getElementById('profile-username').textContent = '@'+(u.username||'member');
+  document.getElementById('profile-posts').textContent = u.post_count||0;
+  document.getElementById('profile-followers').textContent = u.follower_count||0;
+  document.getElementById('profile-following').textContent = u.following_count||0;
+  document.getElementById('profile-tribe').textContent = Number(u.tribe_balance||225).toLocaleString();
+  // TRIBE page
+  document.getElementById('tribe-page-bal').textContent = Number(u.tribe_balance||225).toLocaleString();
+  document.getElementById('tribe-page-earned').textContent = Number(u.tribe_earned_total||225).toLocaleString();
+  // Referrals page
+  document.getElementById('ref-link-display').textContent = `${SITE_URL}/waitlist.html?ref=${u.referral_code||'LOADING'}`;
+  document.getElementById('ref-count').textContent = u.referral_count||0;
+  document.getElementById('ref-tokens').textContent = ((u.referral_count||0)*100).toLocaleString();
+}
+
+// ══════════════════════════════════════
+// LOAD FEED
+// ══════════════════════════════════════
+async function loadFeed() {
+  const container = document.getElementById('feed-posts');
+  const posts = isReady ? await DB.get('posts','visibility=eq.public&is_deleted=eq.false&order=created_at.desc&limit=20') : [];
+  const displayPosts = posts.length > 0 ? posts : DEMO_POSTS;
+  container.innerHTML = displayPosts.map(p => renderPost(p)).join('');
+}
+
+function renderPost(p) {
+  const initials = p.avatar || (p.display_name?.split(' ').map(n=>n[0]).join('').substring(0,2)||'??');
+  const content = (p.content||'').replace(/#(\w+)/g,'<span class="hashtag">#$1</span>').replace(/@(\w+)/g,'<span class="mention">@$1</span>');
+  return `<div class="post-card" id="post-${p.id}">
+    ${p.pinned?`<div style="font-size:.72rem;color:var(--gold);margin-bottom:10px;font-weight:700;">📌 Pinned Post</div>`:''}
+    <div class="post-header">
+      <div class="post-avatar">${initials}</div>
+      <div>
+        <div style="display:flex;align-items:center;">
+          <div class="post-name">${p.display_name||'Tribe Member'}</div>
+          ${p.badge?`<span class="post-badge-pill">${p.badge}</span>`:''}
+          ${p.username==='milliontribe'?`<span class="post-badge-pill" style="background:rgba(72,187,120,.1);border-color:rgba(72,187,120,.3);color:var(--green);">✅ Official</span>`:''}
+        </div>
+        <div class="post-handle">@${p.username||'member'}</div>
+      </div>
+      <div class="post-time">${p.time||formatTime(p.created_at)}</div>
+    </div>
+    <div class="post-content">${content}</div>
+    ${p.media_urls?.length?`<img class="post-image" src="${p.media_urls[0]}" alt="Post image">`:''}
+    <div class="post-footer">
+      <button class="post-btn ${p.liked?'liked':''}" onclick="toggleLike('${p.id}',this)">
+        <span class="btn-icon">${p.liked?'❤️':'🤍'}</span> ${p.likes||p.like_count||0}
+      </button>
+      <button class="post-btn"><span class="btn-icon">💬</span> ${p.comments||p.comment_count||0}</button>
+      <button class="post-btn"><span class="btn-icon">🔁</span> ${p.shares||p.share_count||0}</button>
+      ${p.tribe?`<div class="tribe-earn">🪙 +${p.tribe} TRIBE</div>`:''}
+    </div>
+  </div>`;
+}
+
+function formatTime(ts) {
+  if(!ts) return 'Just now';
+  const diff = (Date.now()-new Date(ts).getTime())/1000;
+  if(diff<60) return 'Just now';
+  if(diff<3600) return Math.floor(diff/60)+'m ago';
+  if(diff<86400) return Math.floor(diff/3600)+'h ago';
+  return Math.floor(diff/86400)+'d ago';
+}
+
+// ══════════════════════════════════════
+// CREATE POST
+// ══════════════════════════════════════
+async function createPost() {
+  const text = document.getElementById('post-text').value.trim();
+  if(!text) return;
+  const newPost = {
+    id: 'new-'+Date.now(),
+    display_name: currentUser?.display_name||'You',
+    username: currentUser?.username||'you',
+    avatar: currentUser?.display_name?.split(' ').map(n=>n[0]).join('')||'?',
+    content: text,
+    time: 'Just now',
+    likes: 0, comments: 0, shares: 0, tribe: 10, liked: false
+  };
+  document.getElementById('post-text').value='';
+  document.getElementById('feed-posts').insertAdjacentHTML('afterbegin', renderPost(newPost));
+  // Save to DB if connected
+  if(isReady && currentUser?.id !== 'demo-user') {
+    await DB.post('posts',{user_id:currentUser.id,content:text,visibility:'public'});
+  }
+  // Show TRIBE earned toast
+  showToast('🪙 +10 TRIBE tokens earned for posting!');
+}
+
+// ══════════════════════════════════════
+// LIKE
+// ══════════════════════════════════════
+function toggleLike(postId, btn) {
+  const liked = btn.classList.toggle('liked');
+  const icon = btn.querySelector('.btn-icon');
+  const countEl = btn;
+  const currentCount = parseInt(btn.textContent.trim()) || 0;
+  icon.textContent = liked ? '❤️' : '🤍';
+  btn.childNodes[1].textContent = ' '+(liked ? currentCount+1 : currentCount-1);
+  if(liked) showToast('🪙 +2 TRIBE tokens for getting a like!');
+}
+
+// ══════════════════════════════════════
+// LOAD SUGGESTIONS
+// ══════════════════════════════════════
+async function loadSuggestions() {
+  const container = document.getElementById('suggestions-list');
+  const suggestions = [
+    {name:'Alex T.',handle:'@alextribe',avatar:'AT',color:'#7C5CFC'},
+    {name:'Maria S.',handle:'@marias',avatar:'MS',color:'#48BB78'},
+    {name:'David O.',handle:'@davido',avatar:'DO',color:'#3B82F6'},
+  ];
+  container.innerHTML = suggestions.map(s=>`
+    <div class="suggest-item">
+      <div class="suggest-avatar" style="background:linear-gradient(135deg,${s.color},${s.color}88);">${s.avatar}</div>
+      <div><div class="suggest-name">${s.name}</div><div class="suggest-handle">${s.handle}</div></div>
+      <button class="follow-btn" onclick="this.textContent='Following ✓';this.style.opacity='.6';">Follow</button>
+    </div>`).join('');
+}
+
+// ══════════════════════════════════════
+// COUNTDOWN TO LAUNCH
+// ══════════════════════════════════════
+function startCountdown() {
+  const target = new Date('2027-01-01T00:00:00Z');
+  const update = () => {
+    const diff = target - Date.now();
+    if(diff <= 0) return;
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    document.getElementById('cd-days').textContent = d;
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+  };
+  update();
+  setInterval(update, 60000);
+}
+
+// ══════════════════════════════════════
+// PAGE NAVIGATION
+// ══════════════════════════════════════
+const pageTitles = {feed:'Home Feed',explore:'Explore',notifications:'Notifications',messages:'Messages',tribe:'TRIBE Tokens',draw:'Monthly Draw',badges:'Badges',referrals:'Referrals',profile:'My Profile',settings:'Settings'};
+
+function showPage(id, navEl) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelectorAll('.mobile-nav-item').forEach(n=>n.classList.remove('active'));
+  const page = document.getElementById('page-'+id);
+  if(page) page.classList.add('active');
+  if(navEl) navEl.classList.add('active');
+  document.getElementById('topbar-title').textContent = pageTitles[id]||id;
+}
+
+// ══════════════════════════════════════
+// NOTIFICATIONS PANEL
+// ══════════════════════════════════════
+function toggleNotifPanel() {
+  document.getElementById('notif-panel').classList.toggle('open');
+  document.getElementById('notif-count').style.display='none';
+}
+
+// ══════════════════════════════════════
+// COPY REFERRAL LINK
+// ══════════════════════════════════════
+function copyRefLink() {
+  const link = document.getElementById('ref-link-display').textContent;
+  navigator.clipboard.writeText(link).then(()=>showToast('✅ Referral link copied!'));
+}
+
+// ══════════════════════════════════════
+// TOAST NOTIFICATION
+// ══════════════════════════════════════
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--navy2);border:1px solid var(--gold);color:var(--white);padding:10px 20px;border-radius:50px;font-size:.82rem;font-weight:600;z-index:9999;animation:fadeUp .3s ease;white-space:nowrap;';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(), 3000);
+}
+
+// ══════════════════════════════════════
+// INIT
+// ══════════════════════════════════════
+window.addEventListener('load', () => {
+  const session = localStorage.getItem('mt_session');
+  if(session) {
+    try {
+      const s = JSON.parse(session);
+      if(s.expires_at > Date.now()) {
+        if(isReady && s.user?.id) {
+          loadUserProfile(s.user.id).then(()=>enterApp());
+        } else {
+          enterDemoMode();
+        }
+        return;
+      }
+    } catch(e) {}
+  }
+  // Show auth screen
+  document.getElementById('auth-screen').classList.remove('hidden');
+});
+</script>
+</body>
+</html>
